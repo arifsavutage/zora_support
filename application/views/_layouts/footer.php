@@ -45,7 +45,22 @@
 <script src="<?= base_url(); ?>template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            "processing": true, //Feature control the processing indicator.
+            "serverSide": true, //Feature control DataTables' server-side processing mode.
+            "ordering": true, // Set true agar bisa di sorting
+
+            // Load data for the table's content from an Ajax source
+            "ajax": {
+                "url": '<?php echo site_url('admin/json_suplier'); ?>',
+                "type": "POST"
+            },
+            "deferRender": true,
+            "aLengthMenu": [
+                [5, 10, 50],
+                [5, 10, 50]
+            ]
+        });
     });
 </script>
 </body>
