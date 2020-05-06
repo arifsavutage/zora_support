@@ -46,6 +46,50 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
+
+        $('#provinsi').change(function() {
+            var id = $(this).val();
+            $.ajax({
+                url: "<?php echo site_url('admin/getKabkota'); ?>",
+                method: "POST",
+                data: {
+                    provinsi: id
+                },
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option value=' + data[i].id + '>' + data[i].city_name + ' - ' + data[i].type + '</option>';
+                    }
+                    $('#kabkota').html(html);
+                }
+            });
+            return false;
+        });
+
+        $('#kabkota').change(function() {
+            var id = $(this).val();
+            $.ajax({
+                url: "<?php echo site_url('admin/getKec'); ?>",
+                method: "POST",
+                data: {
+                    kabkota: id
+                },
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option value=' + data[i].id + '>' + data[i].subdistrict_name + '</option>';
+                    }
+                    $('#areasubagen').html(html);
+                }
+            });
+            return false;
+        });
     });
 </script>
 </body>
