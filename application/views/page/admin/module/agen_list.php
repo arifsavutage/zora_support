@@ -6,8 +6,8 @@
 <div class="row">
     <div class="col-md-12">
 
-        <a href="<?= site_url('admin/master/marketing/add'); ?>" class="btn btn-primary btn-sm mb-2">
-            Tambah Marketing
+        <a href="<?= site_url('admin/master/agen/add'); ?>" class="btn btn-primary btn-sm mb-2">
+            Tambah Agen
         </a>
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
@@ -22,9 +22,11 @@
                             <tr>
                                 <th>No.</th>
                                 <th>No. KTP</th>
-                                <th>Nama Marketing</th>
-                                <th>Alamat Marketing</th>
+                                <th>Nama Agen</th>
+                                <th>Alamat Agen</th>
                                 <th>No. Telp</th>
+                                <th>Area</th>
+                                <th>Marketing</th>
                                 <th>Foto Profile</th>
                                 <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
@@ -35,9 +37,11 @@
                             <tr>
                                 <th>No.</th>
                                 <th>No. KTP</th>
-                                <th>Nama Marketing</th>
-                                <th>Alamat Marketing</th>
+                                <th>Nama Agen</th>
+                                <th>Alamat Agen</th>
                                 <th>No. Telp</th>
+                                <th>Area</th>
+                                <th>Marketing</th>
                                 <th>Foto Profile</th>
                                 <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
@@ -46,19 +50,21 @@
                         </tfoot>
                         <tbody>
                             <?php $no = 1;
-                            foreach ($marketing as $m) : ?>
+                            foreach ($agen as $a) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $m->ID_CARD ?></td>
-                                    <td><?= $m->MARKETING_NAME ?></td>
-                                    <td><?= $m->MARKETING_ADDRESS ?></td>
-                                    <td><?= $m->MARKETING_PHONE ?></td>
-                                    <td><?= $m->PHOTO ?></td>
-                                    <td><?= $m->SCAN_ID ?></td>
-                                    <td><?= $m->JOIN_DATE ?></td>
+                                    <td><?= $a->ID_CARD ?></td>
+                                    <td><?= $a->AGEN_NAME ?></td>
+                                    <td><?= $a->AGEN_ADDRESS ?></td>
+                                    <td><?= $a->AGEN_PHONE ?></td>
+                                    <td><?= $a->AREA ?></td>
+                                    <td><?= $a->MARKETING_ID ?></td>
+                                    <td><?= $a->PHOTO ?></td>
+                                    <td><?= $a->SCAN_ID_CARD ?></td>
+                                    <td><?= $a->JOIN_DATE ?></td>
                                     <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $m->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $m->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
+                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $a->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
+                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $a->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php $no++;

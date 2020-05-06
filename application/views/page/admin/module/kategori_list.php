@@ -6,8 +6,8 @@
 <div class="row">
     <div class="col-md-12">
 
-        <a href="<?= site_url('admin/master/suplier/add'); ?>" class="btn btn-primary btn-sm mb-2">
-            Tambah Suplier
+        <a href="<?= site_url('admin/master/kategori/add'); ?>" class="btn btn-primary btn-sm mb-2">
+            Tambah Kategori
         </a>
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
@@ -21,32 +21,26 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Suplier</th>
-                                <th>Alamat</th>
-                                <th>Telp.</th>
+                                <th>Kategori</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Suplier</th>
-                                <th>Alamat</th>
-                                <th>Telp.</th>
+                                <th>Kategori</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <?php $no = 1;
-                            foreach ($suplier as $s) : ?>
+                            foreach ($kategori as $k) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $s->SUPLIER_NAME ?></td>
-                                    <td><?= $s->SUPLIER_ADDRESS ?></td>
-                                    <td><?= $s->SUPLIER_PHONE ?></td>
+                                    <td><?= $k->CATEGORY_NAME ?></td>
                                     <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $s->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $s->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
+                                        <a href="<?= site_url('admin/master/kategori/edit/') . $k->ID ?>" class='btn btn-warning mr-1'>Edit</a>
+                                        <a href="<?= site_url('admin/master/kategori/del/') . $k->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')">Delete</a>
                                     </td>
                                 </tr>
                             <?php $no++;

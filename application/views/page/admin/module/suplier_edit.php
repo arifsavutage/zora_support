@@ -12,20 +12,21 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addsuplier" method="post" action="">
+                <form name="editsuplier" method="post" action="">
+                    <input type="hidden" name="id" value="<?= $suplier->ID ?>">
                     <div class="form-group">
                         <label for="supliername">Nama Supier</label>
-                        <input type="text" value="<?= $this->input->post('supliername') ?>" class="form-control" id="supliername" name="supliername" placeholder="nama suplier">
+                        <input type="text" value="<?= $suplier->SUPLIER_NAME ?>" class="form-control" id="supliername" name="supliername" placeholder="nama suplier">
                         <small class="form-text text-danger"><?= form_error('supliername') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="suplieraddress">Alamat Suplier</label>
-                        <textarea class="form-control" name="suplieraddress" placeholder="alamat suplier"><?= $this->input->post('suplieraddress') ?></textarea>
+                        <textarea class="form-control" name="suplieraddress" placeholder="alamat suplier"><?= $suplier->SUPLIER_ADDRESS ?></textarea>
                         <small class="form-text text-danger"><?= form_error('suplieraddress') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="suplierphone">No. Telp</label>
-                        <input type="text" class="form-control" id="suplierphone" name="suplierphone" placeholder="No. Telp">
+                        <input type="text" value="<?= $suplier->SUPLIER_PHONE ?>" class="form-control" id="suplierphone" name="suplierphone" placeholder="No. Telp">
                         <small class="form-text text-danger"><?= form_error('suplierphone') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/suplier/list') ?>" class="btn btn-secondary">Back</a>
