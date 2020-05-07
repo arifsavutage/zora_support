@@ -15,10 +15,10 @@ class SubAgen_model extends CI_Model
             "SUBAGEN_NAME" => $this->input->post('namasubagen', true),
             "SUBAGEN_ADDRESS" => $this->input->post('alamatsubagen', true),
             "SUBAGEN_PHONE" => $this->input->post('telpsubagen', true),
-            "AREA" => $this->input->post('areasubagen', true)
+            "AREA" => $this->input->post('areasubagen', true),
+            "JOIN_DATE" => date("Y-m-d")
             // "PHOTO" => $this->input->post('suplierphone', true),
             // "SCAN_ID" => $this->input->post('suplierphone', true),
-            // "JOIN_DATE" => $this->input->post('suplierphone', true)
         );
 
         $this->db->insert('marketing_subagen',  $data);

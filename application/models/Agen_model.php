@@ -15,10 +15,10 @@ class Agen_model extends CI_Model
             "AGEN_ADDRESS" => $this->input->post('alamatagen', true),
             "AGEN_PHONE" => $this->input->post('telpagen', true),
             "AREA" => $this->input->post('kabkota', true),
-            "MARKETING_ID" => $this->input->post('marketingid', true)
+            "MARKETING_ID" => $this->input->post('marketingid', true),
+            "JOIN_DATE" => date("Y-m-d")
             // "PHOTO" => $this->input->post('suplierphone', true),
             // "SCAN_ID" => $this->input->post('suplierphone', true),
-            // "JOIN_DATE" => $this->input->post('suplierphone', true)
         );
 
         $this->db->insert('marketing_agen',  $data);
