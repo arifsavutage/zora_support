@@ -57,8 +57,8 @@
                                     <td><?= $m->SCAN_ID ?></td>
                                     <td><?= $m->JOIN_DATE ?></td>
                                     <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $m->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $m->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
+                                        <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
+                                        <a title="Hapus" href="<?= site_url('admin/master/marketing/del/') . $m->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php $no++;
