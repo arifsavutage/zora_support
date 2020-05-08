@@ -165,14 +165,6 @@ class Admin extends CI_Controller
                         'page'       => 'page/admin/module/agen_list',
                         'agen'       => $this->Agen_model->getAllAgen()
                     ];
-                    // replace id marketing menjadi nama marketing
-                    foreach ($data_page['agen'] as $agen) {
-                        $agen->MARKETING_ID = $this->Marketing_model->getMarketingById($agen->MARKETING_ID)->MARKETING_NAME;
-                    }
-                    // replace area menjadi nama kota
-                    foreach ($data_page['agen'] as $agen) {
-                        $agen->AREA = $this->Area_model->getCityById($agen->AREA)->city_name;
-                    }
                 } else if ($para2 == 'add') {
                     $data_page = [
                         'page_title' => 'Agen',
@@ -242,14 +234,6 @@ class Admin extends CI_Controller
                         'page'       => 'page/admin/module/subagen_list',
                         'subagen'    => $this->SubAgen_model->getAllSubAgen()
                     ];
-                    // replace id agen menjadi nama agen
-                    foreach ($data_page['subagen'] as $sa) {
-                        $sa->AGEN_ID = $this->Agen_model->getAgenById($sa->AGEN_ID)->AGEN_NAME;
-                    }
-                    // replace area menjadi nama kota
-                    foreach ($data_page['subagen'] as $subagen) {
-                        $subagen->AREA = $this->Area_model->getSubdistById($subagen->AREA)->subdistrict_name;
-                    }
                 } else if ($para2 == 'add') {
                     $data_page = [
                         'page_title' => 'Sub Agen',

@@ -53,12 +53,12 @@
                             foreach ($subagen as $sa) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $sa->AGEN_ID ?></td>
+                                    <td><?= $sa->AGEN_NAME ?></td>
                                     <td><?= $sa->ID_CARD ?></td>
                                     <td><?= $sa->SUBAGEN_NAME ?></td>
                                     <td><?= $sa->SUBAGEN_ADDRESS ?></td>
                                     <td><?= $sa->SUBAGEN_PHONE ?></td>
-                                    <td><?= $sa->AREA ?></td>
+                                    <td><?= $sa->subdistrict_name ?></td>
                                     <td><?= $sa->PHOTO ?></td>
                                     <td><?= $sa->SCAN_ID_CARD ?></td>
                                     <td><?= $sa->JOIN_DATE ?></td>

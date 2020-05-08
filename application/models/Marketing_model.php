@@ -13,10 +13,10 @@ class Marketing_model extends CI_Model
             "ID_CARD" => $this->input->post('ktpmarketing', true),
             "MARKETING_NAME" => $this->input->post('marketingname', true),
             "MARKETING_ADDRESS" => $this->input->post('alamatmarketing', true),
-            "MARKETING_PHONE" => $this->input->post('telpmarketing', true)
+            "MARKETING_PHONE" => $this->input->post('telpmarketing', true),
+            "JOIN_DATE" => date("Y-m-d")
             // "PHOTO" => $this->input->post('suplierphone', true),
             // "SCAN_ID" => $this->input->post('suplierphone', true),
-            // "JOIN_DATE" => $this->input->post('suplierphone', true)
         );
 
         $this->db->insert('marketing',  $data);
