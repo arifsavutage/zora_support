@@ -43,6 +43,16 @@
 <!-- Page level plugins -->
 <script src="<?= base_url(); ?>template/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url(); ?>template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- DatePicker JS -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.date1').datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable();

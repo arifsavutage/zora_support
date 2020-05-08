@@ -4,6 +4,7 @@ class Suplier_model extends CI_Model
 {
     public function getAllSuplier()
     {
+        $this->db->order_by('SUPLIER_NAME', 'ASC');
         return $this->db->get('suplier')->result();
     }
 
@@ -40,5 +41,4 @@ class Suplier_model extends CI_Model
         $this->db->where('ID', $this->input->post('id'));
         $this->db->update('suplier',  $data);
     }
-
 }

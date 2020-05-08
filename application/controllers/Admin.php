@@ -157,6 +157,7 @@ class Admin extends CI_Controller
                 $this->load->model('Agen_model');
                 $this->load->model('Marketing_model');
                 $this->load->model('Area_model');
+
                 $data_page['agen']['marketing'] = '';
                 if ($para2 == 'list') {
                     $data_page = [
@@ -406,17 +407,74 @@ class Admin extends CI_Controller
                 }
                 break;
             case 'purchasing':
+                $this->load->model('purchase_model');
+                $this->load->model('suplier_model');
+                $this->load->model('produk_model');
+
                 if ($para2 == 'list') {
                     $data_page = [
                         'page_title' => 'Pemesanan',
                         'card_name'  => 'Pemesanan Produk',
+                        'purchase'   => $this->purchase_model->getAll(),
                         'page'       => 'page/admin/module/purchasing_list',
                     ];
                 } else if ($para2 == 'add') {
+
+                    $validation = $this->form_validation;
+                    $purchase   = $this->purchase_model;
+
+                    $validation->set_rules($purchase->rules());
+
+                    if ($validation->run()) {
+                        $purchase->save();
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Pembuatan PO Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/purchasing/list'));
+                    }
+
                     $data_page = [
                         'page_title' => 'Buat PO',
                         'card_name'  => 'Form PO',
+                        'suplier'    => $this->suplier_model->getAllSuplier(),
+                        'produk'     => $this->produk_model->getAllProduk(),
                         'page'       => 'page/admin/module/purchasing_add',
+                    ];
+                } else if ($para2 == 'edit') {
+
+                    $validation = $this->form_validation;
+                    $purchase   = $this->purchase_model;
+
+                    $validation->set_rules($purchase->rules());
+
+                    if ($validation->run()) {
+                        $purchase->edit();
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Edit PO Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/purchasing/list'));
+                    }
+
+                    $nofaktur = $this->uri->segment(5);
+                    $data_page = [
+                        'page_title' => 'Edit PO',
+                        'card_name'  => 'Form Edit PO',
+                        'suplier'    => $this->suplier_model->getAllSuplier(),
+                        'produk'     => $this->produk_model->getAllProduk(),
+                        'detail'     => $this->purchase_model->getDataById($nofaktur),
+                        'page'       => 'page/admin/module/purchasing_edit',
                     ];
                 }
                 break;

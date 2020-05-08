@@ -12,15 +12,18 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addpurchasing" method="post" action="">
+                <form name="editpurchasing" method="post" action="" onsubmit="return beware()">
 
+                    <input type="hidden" name="nofaktur" value="<?= $detail['NOFAKTUR'] ?>" />
                     <div class="form-row">
                         <div class="col">
                             <label for="suplier">Suplier</label>
                             <select class="form-control" id="suplier" name="suplier">
                                 <option value="">Pilih</option>
                                 <?php foreach ($suplier as $row) : ?>
-                                    <option value="<?= $row->ID ?>"><?= $row->SUPLIER_NAME ?></option>
+                                    <option value="<?= $row->ID ?>" <?php
+                                                                    if ($row->ID == $detail['supID']) echo "selected='selected'";
+                                                                    ?>><?= $row->SUPLIER_NAME ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="form-text text-danger"></small>
@@ -30,7 +33,9 @@
                             <select class="form-control" id="product" name="product">
                                 <option value="">Pilih</option>
                                 <?php foreach ($produk as $p) : ?>
-                                    <option value="<?= $p->ID ?>"><?= $p->PRODUCT_NAME ?></option>
+                                    <option value="<?= $p->ID ?>" <?php
+                                                                    if ($p->ID == $detail['productID']) echo "selected='selected'";
+                                                                    ?>><?= $p->PRODUCT_NAME ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="form-text text-danger"></small>
@@ -40,12 +45,12 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="qty">Qty</label>
-                            <input type="text" class="form-control" id="qty" name="qty" placeholder="qty">
+                            <input type="text" class="form-control" id="qty" name="qty" value="<?= $detail['QTY'] ?>" placeholder="qty">
                             <small class="form-text text-danger"></small>
                         </div>
                         <div class="col">
                             <label for="hargabeli">Harga Beli</label>
-                            <input type="text" class="form-control" id="hargabeli" name="hargabeli" placeholder="harga beli per item">
+                            <input type="text" class="form-control" id="hargabeli" name="hargabeli" value="<?= $detail['PURCHASE_PRICE'] ?>" placeholder="harga beli per item">
                             <small class="form-text text-danger"></small>
                         </div>
                     </div>
@@ -53,24 +58,36 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="tglpo">Tgl PO</label>
-                            <input type="text" class="form-control date1" id="tglpo" name="tglpo" placeholder="tgl po" readonly="true">
+                            <input type="text" class="form-control date1" id="tglpo" name="tglpo" value="<?= $detail['PURCHASE_DATE'] ?>" placeholder="tgl po" readonly="true">
                             <small class="form-text text-danger"></small>
                         </div>
                         <div class="col">
                             <label for="tglkirim">Tgl Kirim</label>
-                            <input type="text" class="form-control date1" id="tglkirim" name="tglkirim" placeholder="tgl kirim" readonly="true">
+                            <input type="text" class="form-control date1" id="tglkirim" name="tglkirim" value="<?= $detail['DELIVERY_DATE'] ?>" placeholder="tgl kirim" readonly="true">
                             <small class="form-text text-danger"></small>
                         </div>
                         <div class="col">
                             <label for="tglsampai">Tgl Sampai</label>
-                            <input type="text" class="form-control date1" id="tglsampai" name="tglsampai" placeholder="tgl sampai" readonly="true">
+                            <input type="text" class="form-control date1" id="tglsampai" name="tglsampai" value="<?= $detail['ARRIVAL_DATE'] ?>" placeholder="tgl sampai" readonly="true">
                             <small class="form-text text-danger"></small>
                         </div>
                     </div>
 
                     <a href="<?= site_url('admin/master/purchasing/list') ?>" class="btn btn-secondary">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Save changes</button>
+                    <button type="submit" class="btn btn-warning float-right">Save changes</button>
                 </form>
+
+                <script>
+                    function beware() {
+                        var x = confirm("Yakin akan dirubah?,\nPerubahan data akan brpengaruh pada sebagian atau keseluruhan data ..");
+
+                        if (x == true) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                </script>
             </div>
         </div>
     </div>
