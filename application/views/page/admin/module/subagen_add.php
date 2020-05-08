@@ -25,22 +25,22 @@
                     </div>
                     <div class="form-group">
                         <label for="ktpsubagen">No. KTP</label>
-                        <input type="text" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
+                        <input type="text" value="<?= set_value('ktpsubagen') ?>" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
                         <small class="form-text text-danger"><?= form_error('ktpsubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="namasubagen">Nama Sub Agen</label>
-                        <input type="text" class="form-control" id="namasubagen" name="namasubagen" placeholder="nama Lengkap">
+                        <input type="text" value="<?= set_value('namasubagen') ?>" class="form-control" id="namasubagen" name="namasubagen" placeholder="nama Lengkap">
                         <small class="form-text text-danger"><?= form_error('namasubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="alamatsubagen">Alamat Sub Agen</label>
-                        <textarea class="form-control" name="alamatsubagen" placeholder="alamat sub agen"></textarea>
+                        <textarea class="form-control" name="alamatsubagen" placeholder="alamat sub agen"><?= set_value('alamatsubagen') ?></textarea>
                         <small class="form-text text-danger"><?= form_error('alamatsubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="telpsubagen">No. Telp</label>
-                        <input type="text" class="form-control" id="telpsubagen" name="telpsubagen" placeholder="No. Telp / HP">
+                        <input type="text" value="<?= set_value('telpsubagen') ?>" class="form-control" id="telpsubagen" name="telpsubagen" placeholder="No. Telp / HP">
                         <small class="form-text text-danger"><?= form_error('telpsubagen') ?></small>
                     </div>
                     <div class="form-group mb-1">

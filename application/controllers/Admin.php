@@ -40,6 +40,25 @@ class Admin extends CI_Controller
         echo json_encode($data);
     }
 
+    function getCityProvinceByAgenId() {
+        $this->load->model('Agen_model');
+        $this->load->model('Area_model');
+        $id = $this->input->post('agenid');
+        $this->db->select('marketing_agen.ID');
+        $this->db->select('marketing_agen.AREA');
+        $this->db->select('a_city.city_name');
+        $this->db->select('a_city.type');
+        $this->db->select('a_city.province_id');
+        $this->db->from('marketing_agen');
+        $this->db->join('a_city', 'a_city.id = marketing_agen.AREA', 'left');
+        $this->db->where('marketing_agen.ID', $id);
+        $data = $this->db->get()->row();
+        $kec = $this->Area_model->getSubdistByCity($data->AREA);
+        $data->areasubagen = $kec;
+        header('Content-type: Application/json');
+        echo json_encode($data);
+    }
+
     public function master($para1 = '', $para2 = '')
     {
 
