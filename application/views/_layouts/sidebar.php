@@ -47,10 +47,8 @@
         </a>
         <div id="masterproduct" class="collapse <?= in_array($this->uri->segment(3), array("kategori", "produk")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item <?= $this->uri->segment(3) == 'kategori' ? 'active' : '' ?>" 
-                href="<?= base_url('index.php/admin/master/kategori/list'); ?>">Produk Kategori</a>
-                <a class="collapse-item <?= $this->uri->segment(3) == 'produk' ? 'active' : '' ?>" 
-                href="<?= base_url('index.php/admin/master/produk/list'); ?>">Produk Item</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'kategori' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/kategori/list'); ?>">Produk Kategori</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'produk' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/produk/list'); ?>">Produk Item</a>
             </div>
         </div>
     </li>
@@ -62,7 +60,7 @@
         </a>
         <div id="mastertransaksi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Pemesanan</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'purchasing' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/purchasing/list'); ?>">Pemesanan</a>
                 <a class="collapse-item" href="">Penjualan</a>
                 <a class="collapse-item" href="">Konfirmasi Pembayaran</a>
                 <a class="collapse-item" href="">Retur Barang</a>
