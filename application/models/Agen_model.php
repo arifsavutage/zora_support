@@ -4,7 +4,13 @@ class Agen_model extends CI_Model
 {
     public function getAllAgen()
     {
-        return $this->db->get('marketing_agen')->result();
+        $this->db->select('marketing_agen.*');
+        $this->db->select('marketing.MARKETING_NAME');
+        $this->db->select('a_city.city_name');
+        $this->db->from('marketing_agen');
+        $this->db->join('marketing', 'marketing.ID = marketing_agen.MARKETING_ID', 'left');
+        $this->db->join('a_city', 'a_city.id = marketing_agen.AREA', 'left');
+        return $query = $this->db->get()->result();
     }
 
     public function addAgen()

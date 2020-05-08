@@ -57,14 +57,14 @@
                                     <td><?= $a->AGEN_NAME ?></td>
                                     <td><?= $a->AGEN_ADDRESS ?></td>
                                     <td><?= $a->AGEN_PHONE ?></td>
-                                    <td><?= $a->AREA ?></td>
-                                    <td><?= $a->MARKETING_ID ?></td>
+                                    <td><?= $a->city_name ?></td>
+                                    <td><?= $a->MARKETING_NAME ?></td>
                                     <td><?= $a->PHOTO ?></td>
                                     <td><?= $a->SCAN_ID_CARD ?></td>
                                     <td><?= $a->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/agen/edit/') . $a->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/agen/del/') . $a->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
+                                        <a title="Hapus" href="<?= site_url('admin/master/agen/del/') . $a->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?\nJika anda menghapus data ini pastikan anda segera mengubah sub agen terkait.')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php $no++;
