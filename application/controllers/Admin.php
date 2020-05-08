@@ -53,8 +53,6 @@ class Admin extends CI_Controller
                         'page'       => 'page/admin/module/suplier_list',
                         'suplier'    => $this->Suplier_model->getAllSuplier()
                     ];
-
-
                 } else if ($para2 == 'add') {
                     $data_page = [
                         'page_title' => 'Suplier',
@@ -405,6 +403,21 @@ class Admin extends CI_Controller
                     $id = $this->uri->segment(5);
                     $this->Produk_model->delProduk($id);
                     redirect('admin/master/produk/list');
+                }
+                break;
+            case 'purchasing':
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Pemesanan',
+                        'card_name'  => 'Pemesanan Produk',
+                        'page'       => 'page/admin/module/purchasing_list',
+                    ];
+                } else if ($para2 == 'add') {
+                    $data_page = [
+                        'page_title' => 'Buat PO',
+                        'card_name'  => 'Form PO',
+                        'page'       => 'page/admin/module/purchasing_add',
+                    ];
                 }
                 break;
         }
