@@ -101,6 +101,33 @@
             });
             return false;
         });
+
+        $('#agenid').change(function(){
+            var agenid = $(this).val();
+            $.ajax({
+                url: "<?php echo site_url('admin/getCityProvinceByAgenId'); ?>",
+                method: "POST",
+                data: {
+                    agenid: agenid
+                },
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    $('#provinsi').val(data.province_id);
+                    $('#provinsi').prop('disabled', 'disabled');
+                    $('#kabkota').html('<option value=' + data.AREA + '>' + data.city_name + ' - ' + data.type + '</option>');
+                    $('#kabkota').prop('disabled', 'disabled');
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.areasubagen.length; i++) {
+                        html += '<option value=' + data.areasubagen[i].id + '>' + data.areasubagen[i].subdistrict_name + '</option>';
+                    }
+                    $('#areasubagen').html(html);
+                }
+            });
+            return false;
+        });
     });
 </script>
 </body>

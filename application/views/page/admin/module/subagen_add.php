@@ -12,7 +12,8 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addsubagen" method="post" action="">
+                <form name="addsubagen" method="post" action="" enctype="multipart/form-data">
+                <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
                     <div class="form-group">
                         <label for="agenid">Agen</label>
                         <select class="form-control" id="agenid" name="agenid">
@@ -25,22 +26,22 @@
                     </div>
                     <div class="form-group">
                         <label for="ktpsubagen">No. KTP</label>
-                        <input type="text" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
+                        <input type="text" value="<?= set_value('ktpsubagen') ?>" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
                         <small class="form-text text-danger"><?= form_error('ktpsubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="namasubagen">Nama Sub Agen</label>
-                        <input type="text" class="form-control" id="namasubagen" name="namasubagen" placeholder="nama Lengkap">
+                        <input type="text" value="<?= set_value('namasubagen') ?>" class="form-control" id="namasubagen" name="namasubagen" placeholder="nama Lengkap">
                         <small class="form-text text-danger"><?= form_error('namasubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="alamatsubagen">Alamat Sub Agen</label>
-                        <textarea class="form-control" name="alamatsubagen" placeholder="alamat sub agen"></textarea>
+                        <textarea class="form-control" name="alamatsubagen" placeholder="alamat sub agen"><?= set_value('alamatsubagen') ?></textarea>
                         <small class="form-text text-danger"><?= form_error('alamatsubagen') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="telpsubagen">No. Telp</label>
-                        <input type="text" class="form-control" id="telpsubagen" name="telpsubagen" placeholder="No. Telp / HP">
+                        <input type="text" value="<?= set_value('telpsubagen') ?>" class="form-control" id="telpsubagen" name="telpsubagen" placeholder="No. Telp / HP">
                         <small class="form-text text-danger"><?= form_error('telpsubagen') ?></small>
                     </div>
                     <div class="form-group mb-1">
@@ -66,12 +67,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fotoprofile">Foto Profile</label>
-                        <input type="file" class="form-control" id="fotoprofile" name="fotoprofile">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoprofile" name="fotoprofile">
                         <small class="form-text text-danger"><?= form_error('fotoprofile') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="fotoktp">Scan KTP</label>
-                        <input type="file" class="form-control" id="fotoktp" name="fotoktp">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoktp" name="fotoktp">
                         <small class="form-text text-danger"><?= form_error('fotoktp') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/subagen/list') ?>" class="btn btn-secondary">Back</a>

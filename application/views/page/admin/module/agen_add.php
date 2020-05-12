@@ -12,7 +12,8 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addagen" method="post" action="">
+                <form name="addagen" method="post" action="" enctype="multipart/form-data">
+                <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
                     <div class="form-group">
                         <label for="ktpagen">No. KTP</label>
                         <input type="text" value="<?= set_value('ktpagen') ?>" class="form-control" id="ktpagen" name="ktpagen" placeholder="no. KTP">
@@ -49,10 +50,6 @@
                             <select class="form-control" id="kabkota" name="kabkota"></select>
                             <small class="form-text text-danger"><?= form_error('kabkota') ?></small>
                         </div>
-                        <div class="form-group col-md-3">
-                            <select class="form-control" id="areasubagen" name="areasubagen"></select>
-                            <small class="form-text text-danger"><?= form_error('areasubagen') ?></small>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label for="marketingid">Marketing</label>
@@ -66,12 +63,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fotoprofile">Foto Profile</label>
-                        <input type="file" class="form-control" id="fotoprofile" name="fotoprofile">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoprofile" name="fotoprofile">
                         <small class="form-text text-danger"><?= form_error('fotoprofile') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="fotoktp">Scan KTP</label>
-                        <input type="file" class="form-control" id="fotoktp" name="fotoktp">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoktp" name="fotoktp">
                         <small class="form-text text-danger"><?= form_error('fotoktp') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/agen/list') ?>" class="btn btn-secondary">Back</a>
