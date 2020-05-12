@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <select class="form-control" id="provinsi" name="provinsi">
+                            <select disabled class="form-control" id="provinsi" name="provinsi">
                                 <option value="">Provinsi</option>
                                 <?php foreach ($provinsi as $p) : ?>
                                     <option <?= $p->id == $area->province_id ? 'selected' : '' ?> value="<?= $p->id ?>"><?= $p->province_name ?></option>
@@ -57,7 +57,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <select class="form-control" id="kabkota" name="kabkota">
+                            <select disabled class="form-control" id="kabkota" name="kabkota">
                                 <?php foreach ($kabkota as $p) : ?>
                                     <option <?= $p->id == $area->city_id ? 'selected' : '' ?> value="<?= $p->id ?>"><?= $p->city_name . ' - ' . $p->type ?></option>
                                 <?php endforeach; ?>

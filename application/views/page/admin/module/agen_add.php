@@ -49,10 +49,6 @@
                             <select class="form-control" id="kabkota" name="kabkota"></select>
                             <small class="form-text text-danger"><?= form_error('kabkota') ?></small>
                         </div>
-                        <div class="form-group col-md-3">
-                            <select class="form-control" id="areasubagen" name="areasubagen"></select>
-                            <small class="form-text text-danger"><?= form_error('areasubagen') ?></small>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label for="marketingid">Marketing</label>
