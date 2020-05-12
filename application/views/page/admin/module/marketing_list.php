@@ -53,8 +53,8 @@
                                     <td><?= $m->MARKETING_NAME ?></td>
                                     <td><?= $m->MARKETING_ADDRESS ?></td>
                                     <td><?= $m->MARKETING_PHONE ?></td>
-                                    <td><?= $m->PHOTO ?></td>
-                                    <td><?= $m->SCAN_ID ?></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->PHOTO != null ? $m->PHOTO : '0.png' ?>" /></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->SCAN_ID != null ? $m->SCAN_ID : '0.png' ?>" /></td>
                                     <td><?= $m->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
