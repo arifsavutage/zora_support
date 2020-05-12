@@ -478,6 +478,26 @@ class Admin extends CI_Controller
                     ];
                 }
                 break;
+            case 'selling':
+                $this->load->model('agen_model');
+                $this->load->model('subagen_model');
+
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Daftar Pembelian',
+                        'card_name'  => 'Daftar Pembelian',
+                        'page'       => 'page/admin/module/selling_list',
+                    ];
+                } else if ($para2 == 'add') {
+                    $data_page = [
+                        'page_title' => 'Pembelian',
+                        'card_name'  => 'Form Pembelian',
+                        'agen'       => $this->agen_model->getAllAgen(),
+                        'subagen'    => $this->subagen_model->getAllSubAgen(),
+                        'page'       => 'page/admin/module/selling_add',
+                    ];
+                }
+                break;
         }
 
         $this->load->view('index', $data_page);

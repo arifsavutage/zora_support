@@ -56,6 +56,7 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
+        $('#example1').DataTable();
 
         $('#provinsi').change(function() {
             var id = $(this).val();

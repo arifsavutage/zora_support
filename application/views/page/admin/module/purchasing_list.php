@@ -65,16 +65,19 @@
                             ?>
                         </tbody>
                         <tfoot>
-                            <th>No.</th>
-                            <th>No. Faktur</th>
-                            <th>Suplier</th>
-                            <th>Produk.</th>
-                            <th>Qty.</th>
-                            <th>Hrg. Beli</th>
-                            <th>Tgl. PO</th>
-                            <th>Tgl. Kirim</th>
-                            <th>Tgl. Datang</th>
-                            <th><i class="fas fa-cog"></i></th>
+                            <tr>
+                                <th>No.</th>
+                                <th>No. Faktur</th>
+                                <th>Suplier</th>
+                                <th>Produk.</th>
+                                <th>Qty.</th>
+                                <th>Hrg. Beli</th>
+                                <th>Tgl. PO</th>
+                                <th>Tgl. Kirim</th>
+                                <th>Tgl. Datang</th>
+                                <th><i class="fas fa-cog"></i></th>
+                            </tr>
+
                         </tfoot>
                     </table>
                 </div>

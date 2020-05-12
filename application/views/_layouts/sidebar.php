@@ -61,7 +61,7 @@
         <div id="mastertransaksi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item <?= $this->uri->segment(3) == 'purchasing' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/purchasing/list'); ?>">Pemesanan</a>
-                <a class="collapse-item" href="">Penjualan</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'selling' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/selling/list'); ?>">Penjualan</a>
                 <a class="collapse-item" href="">Konfirmasi Pembayaran</a>
                 <a class="collapse-item" href="">Retur Barang</a>
                 <a class="collapse-item" href="">Operasional</a>
