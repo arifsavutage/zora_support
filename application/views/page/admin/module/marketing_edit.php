@@ -12,11 +12,12 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addmarketing" method="post" action="">
+                <form name="addmarketing" method="post" action="" enctype="multipart/form-data">
+                <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
                     <input type="hidden" name="id" value="<?= $marketing->ID ?>">
                     <div class="form-group">
                         <label for="ktpmarketing">No. KTP</label>
-                        <input type="text" value="<?= $marketing->ID_CARD ?>" class="form-control" id="ktpmarketing" name="ktpmarketing" placeholder="no. KTP" disabled>
+                        <input type="text" readonly value="<?= $marketing->ID_CARD ?>" class="form-control" id="ktpmarketing" name="ktpmarketing" placeholder="no. KTP">
                         <small class="form-text text-danger"><?= form_error('ktpmarketing') ?></small>
                     </div>
                     <div class="form-group">
@@ -36,12 +37,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fotoprofile">Foto Profile</label>
-                        <input type="file" class="form-control" id="fotoprofile" name="fotoprofile">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoprofile" name="fotoprofile">
                         <small class="form-text text-danger"><?= form_error('fotoprofile') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="fotoktp">Scan KTP</label>
-                        <input type="file" class="form-control" id="fotoktp" name="fotoktp">
+                        <input type="file" accept="image/jpeg" class="form-control" id="fotoktp" name="fotoktp">
                         <small class="form-text text-danger"><?= form_error('fotoktp') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/marketing/list') ?>" class="btn btn-secondary">Back</a>

@@ -7,18 +7,8 @@ class Marketing_model extends CI_Model
         return $this->db->get('marketing')->result();
     }
 
-    public function addMarketing()
+    public function addMarketing($data)
     {
-        $data = array(
-            "ID_CARD" => $this->input->post('ktpmarketing', true),
-            "MARKETING_NAME" => $this->input->post('marketingname', true),
-            "MARKETING_ADDRESS" => $this->input->post('alamatmarketing', true),
-            "MARKETING_PHONE" => $this->input->post('telpmarketing', true),
-            "JOIN_DATE" => date("Y-m-d")
-            // "PHOTO" => $this->input->post('suplierphone', true),
-            // "SCAN_ID" => $this->input->post('suplierphone', true),
-        );
-
         $this->db->insert('marketing',  $data);
     }
 
@@ -33,18 +23,9 @@ class Marketing_model extends CI_Model
         return $this->db->get_where('marketing', ['ID' => $id])->row();
     }
 
-    public function editMarketing()
+    public function editMarketing($data)
     {
-        $data = array(
-            // "ID_CARD" => $this->input->post('ktpmarketing', true),
-            "MARKETING_NAME" => $this->input->post('marketingname', true),
-            "MARKETING_ADDRESS" => $this->input->post('alamatmarketing', true),
-            "MARKETING_PHONE" => $this->input->post('telpmarketing', true)
-            // "PHOTO" => $this->input->post('', true),
-            // "SCAN_ID" => $this->input->post('', true)
-        );
-
-        $this->db->where('ID', $this->input->post('id'));
+        $this->db->where('ID', $data['ID']);
         $this->db->update('marketing',  $data);
     }
 

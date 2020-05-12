@@ -17,7 +17,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered nowrap" id="example" width="100%" cellspacing="0">
+                    <table class="table table-bordered nowrap" id="example" width="100%" cellspacing="0" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -59,12 +59,12 @@
                                     <td><?= $sa->SUBAGEN_ADDRESS ?></td>
                                     <td><?= $sa->SUBAGEN_PHONE ?></td>
                                     <td><?= $sa->subdistrict_name ?></td>
-                                    <td><?= $sa->PHOTO ?></td>
-                                    <td><?= $sa->SCAN_ID_CARD ?></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->PHOTO != null ? $sa->PHOTO : '0.png' ?>" /></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->SCAN_ID_CARD != null ? $sa->SCAN_ID_CARD : '0.png' ?>" /></td>
                                     <td><?= $sa->JOIN_DATE ?></td>
                                     <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $sa->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $sa->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
+                                        <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $sa->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>
+                                        <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $sa->ID ?>" class='btn btn-danger btn-sm mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php $no++;

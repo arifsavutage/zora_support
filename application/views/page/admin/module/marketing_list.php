@@ -17,7 +17,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="example" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="example" width="100%" cellspacing="0" style="font-size:12px;">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -53,12 +53,12 @@
                                     <td><?= $m->MARKETING_NAME ?></td>
                                     <td><?= $m->MARKETING_ADDRESS ?></td>
                                     <td><?= $m->MARKETING_PHONE ?></td>
-                                    <td><?= $m->PHOTO ?></td>
-                                    <td><?= $m->SCAN_ID ?></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->PHOTO != null ? $m->PHOTO : '0.png' ?>" /></td>
+                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->SCAN_ID != null ? $m->SCAN_ID : '0.png' ?>" /></td>
                                     <td><?= $m->JOIN_DATE ?></td>
                                     <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
-                                        <a title="Hapus" href="<?= site_url('admin/master/marketing/del/') . $m->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?\nJika anda menghapus data ini, pastikan anda mengubah data agen yang terkait dengan marketing ini.')"><i class="fas fa-trash"></i></a>
+                                        <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>
+                                        <a title="Hapus" href="<?= site_url('admin/master/marketing/del/') . $m->ID ?>" class='btn btn-danger btn-sm mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?\nJika anda menghapus data ini, pastikan anda mengubah data agen yang terkait dengan marketing ini.')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php $no++;

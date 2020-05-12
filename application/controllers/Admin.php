@@ -40,7 +40,8 @@ class Admin extends CI_Controller
         echo json_encode($data);
     }
 
-    function getCityProvinceByAgenId() {
+    function getCityProvinceByAgenId()
+    {
         $this->load->model('Agen_model');
         $this->load->model('Area_model');
         $id = $this->input->post('agenid');
@@ -141,9 +142,50 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/marketing_add';
                     } else {
-                        // simpan ke db
-                        $this->Marketing_model->addMarketing();
-                        redirect('admin/master/marketing/list');
+                        // ambil data dari form post
+                        $data = array(
+                            "ID_CARD"           => $this->input->post('ktpmarketing', true),
+                            "MARKETING_NAME"    => $this->input->post('marketingname', true),
+                            "MARKETING_ADDRESS" => $this->input->post('alamatmarketing', true),
+                            "MARKETING_PHONE"   => $this->input->post('telpmarketing', true),
+                            "JOIN_DATE"         => date("Y-m-d")
+                        );
+
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'M-FP' . $this->input->post('ktpmarketing', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID']       = 'M-KTP' . $this->input->post('ktpmarketing', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']    = FCPATH . 'uploads/';
+                            $KTP['allowed_types']  = 'jpg';
+                            $KTP['max_size']       = 200;
+                            $KTP['overwrite']      = true;
+                            $KTP['file_name']      = $data['SCAN_ID'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->Marketing_model->addMarketing($data);
+                            redirect('admin/master/marketing/list');
+                        }
                     }
                 } else if ($para2 == 'edit') {
                     $id = $this->uri->segment(5);
@@ -162,9 +204,48 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/marketing_edit';
                     } else {
-                        // simpan ke db
-                        $this->Marketing_model->editMarketing();
-                        redirect('admin/master/marketing/list');
+                        // ambil data dari form post
+                        $data = array(
+                            "ID"                => $this->input->post('id', true),
+                            "MARKETING_NAME"    => $this->input->post('marketingname', true),
+                            "MARKETING_ADDRESS" => $this->input->post('alamatmarketing', true),
+                            "MARKETING_PHONE"   => $this->input->post('telpmarketing', true)
+                        );
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'M-FP' . $this->input->post('ktpmarketing', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID']       = 'M-KTP' . $this->input->post('ktpmarketing', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']    = FCPATH . 'uploads/';
+                            $KTP['allowed_types']  = 'jpg';
+                            $KTP['max_size']       = 200;
+                            $KTP['overwrite']      = true;
+                            $KTP['file_name']      = $data['SCAN_ID'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->Marketing_model->editMarketing($data);
+                            redirect('admin/master/marketing/list');
+                        }
                     }
                 } else if ($para2 == 'del') {
                     $id = $this->uri->segment(5);
@@ -204,9 +285,50 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/agen_add';
                     } else {
-                        // simpan ke db
-                        $this->Agen_model->addAgen();
-                        redirect('admin/master/agen/list');
+                        $data = array(
+                            "ID_CARD"       => $this->input->post('ktpagen', true),
+                            "AGEN_NAME"     => $this->input->post('namaagen', true),
+                            "AGEN_ADDRESS"  => $this->input->post('alamatagen', true),
+                            "AGEN_PHONE"    => $this->input->post('telpagen', true),
+                            "AREA"          => $this->input->post('kabkota', true),
+                            "MARKETING_ID"  => $this->input->post('marketingid', true),
+                            "JOIN_DATE"     => date("Y-m-d")
+                        );
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'A-FP' . $this->input->post('ktpagen', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID_CARD']   = 'A-KTP' . $this->input->post('ktpagen', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']     = FCPATH . 'uploads/';
+                            $KTP['allowed_types']   = 'jpg';
+                            $KTP['max_size']        = 200;
+                            $KTP['overwrite']       = true;
+                            $KTP['file_name']       = $data['SCAN_ID_CARD'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->Agen_model->addAgen($data);
+                            redirect('admin/master/agen/list');
+                        }
                     }
                 } else if ($para2 == 'edit') {
                     $id = $this->uri->segment(5);
@@ -232,9 +354,49 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/agen_edit';
                     } else {
-                        // simpan ke db
-                        $this->Agen_model->editAgen();
-                        redirect('admin/master/agen/list');
+                        $data = array(
+                            "ID"            => $this->input->post('id', true),
+                            "AGEN_NAME"     => $this->input->post('namaagen', true),
+                            "AGEN_ADDRESS"  => $this->input->post('alamatagen', true),
+                            "AGEN_PHONE"    => $this->input->post('telpagen', true),
+                            "AREA"          => $this->input->post('kabkota', true),
+                            "MARKETING_ID"  => $this->input->post('marketingid', true)
+                        );
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'A-FP' . $this->input->post('ktpagen', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID_CARD']   = 'A-KTP' . $this->input->post('ktpagen', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']     = FCPATH . 'uploads/';
+                            $KTP['allowed_types']   = 'jpg';
+                            $KTP['max_size']        = 200;
+                            $KTP['overwrite']       = true;
+                            $KTP['file_name']       = $data['SCAN_ID_CARD'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->Agen_model->editAgen($data);
+                            redirect('admin/master/agen/list');
+                        }
                     }
                 } else if ($para2 == 'del') {
                     $id = $this->uri->segment(5);
@@ -273,9 +435,51 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/subagen_add';
                     } else {
-                        // simpan ke db
-                        $this->SubAgen_model->addSubAgen();
-                        redirect('admin/master/subagen/list');
+                        $data = array(
+                            "AGEN_ID"         => $this->input->post('agenid', true),
+                            "ID_CARD"         => $this->input->post('ktpsubagen', true),
+                            "SUBAGEN_NAME"    => $this->input->post('namasubagen', true),
+                            "SUBAGEN_ADDRESS" => $this->input->post('alamatsubagen', true),
+                            "SUBAGEN_PHONE"   => $this->input->post('telpsubagen', true),
+                            "AREA"            => $this->input->post('areasubagen', true),
+                            "JOIN_DATE"       => date("Y-m-d")
+                        );
+
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'S-FP' . $this->input->post('ktpsubagen', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID_CARD']   = 'S-KTP' . $this->input->post('ktpsubagen', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']     = FCPATH . 'uploads/';
+                            $KTP['allowed_types']   = 'jpg';
+                            $KTP['max_size']        = 200;
+                            $KTP['overwrite']       = true;
+                            $KTP['file_name']       = $data['SCAN_ID_CARD'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->SubAgen_model->addSubAgen($data);
+                            redirect('admin/master/subagen/list');
+                        }
                     }
                 } else if ($para2 == 'edit') {
                     $id = $this->uri->segment(5);
@@ -303,9 +507,49 @@ class Admin extends CI_Controller
                         // tetap disini
                         $data_page['page'] = 'page/admin/module/subagen_edit';
                     } else {
-                        // simpan ke db
-                        $this->SubAgen_model->editSubAgen();
-                        redirect('admin/master/subagen/list');
+                        $data = array(
+                            "ID"              => $this->input->post('id', true),
+                            "AGEN_ID"         => $this->input->post('agenid', true),
+                            "SUBAGEN_NAME"    => $this->input->post('namasubagen', true),
+                            "SUBAGEN_ADDRESS" => $this->input->post('alamatsubagen', true),
+                            "SUBAGEN_PHONE"   => $this->input->post('telpsubagen', true),
+                            "AREA"            => $this->input->post('areasubagen', true)
+                        );
+                        $data_page['errors'] = '';
+                        $this->load->library('upload');
+                        if ($_FILES['fotoprofile']['error'] == 0) {
+                            $data['PHOTO']         = 'S-FP' . $this->input->post('ktpsubagen', true) . '.jpg';
+                            //set file upload settings 
+                            $FP['upload_path']     = FCPATH . 'uploads/';
+                            $FP['allowed_types']   = 'jpg';
+                            $FP['max_size']        = 200;
+                            $FP['overwrite']       = true;
+                            $FP['file_name']       = $data['PHOTO'];
+
+                            $this->upload->initialize($FP);
+                            $this->upload->do_upload('fotoprofile');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($_FILES['fotoktp']['error'] == 0) {
+                            $data['SCAN_ID_CARD']   = 'S-KTP' . $this->input->post('ktpsubagen', true) . '.jpg';
+                            //set file upload settings 
+                            $KTP['upload_path']     = FCPATH . 'uploads/';
+                            $KTP['allowed_types']   = 'jpg';
+                            $KTP['max_size']        = 200;
+                            $KTP['overwrite']       = true;
+                            $KTP['file_name']       = $data['SCAN_ID_CARD'];
+
+                            $this->upload->initialize($KTP);
+                            $this->upload->do_upload('fotoktp');
+
+                            $data_page['errors'] = $this->upload->display_errors();
+                        }
+                        if ($data_page['errors'] == '') {
+                            // simpan ke db
+                            $this->SubAgen_model->editSubAgen($data);
+                            redirect('admin/master/subagen/list');
+                        }
                     }
                 } else if ($para2 == 'del') {
                     $id = $this->uri->segment(5);
