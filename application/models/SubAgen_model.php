@@ -13,8 +13,20 @@ class SubAgen_model extends CI_Model
         return $query = $this->db->get()->result();
     }
 
-    public function addSubAgen($data)
+    public function addSubAgen()
     {
+        $data = array(
+            "AGEN_ID" => $this->input->post('agenid', true),
+            "ID_CARD" => $this->input->post('ktpsubagen', true),
+            "SUBAGEN_NAME" => $this->input->post('namasubagen', true),
+            "SUBAGEN_ADDRESS" => $this->input->post('alamatsubagen', true),
+            "SUBAGEN_PHONE" => $this->input->post('telpsubagen', true),
+            "AREA" => $this->input->post('areasubagen', true),
+            "JOIN_DATE" => date("Y-m-d")
+            // "PHOTO" => $this->input->post('suplierphone', true),
+            // "SCAN_ID" => $this->input->post('suplierphone', true),
+        );
+
         $this->db->insert('marketing_subagen',  $data);
     }
 
@@ -29,9 +41,20 @@ class SubAgen_model extends CI_Model
         return $this->db->get_where('marketing_subagen', ['ID' => $id])->row();
     }
 
-    public function editSubAgen($data)
+    public function editSubAgen()
     {
-        $this->db->where('ID', $data['ID']);
+        $data = array(
+            "AGEN_ID" => $this->input->post('agenid', true),
+            // "ID_CARD" => $this->input->post('ktpsubagen', true),
+            "SUBAGEN_NAME" => $this->input->post('namasubagen', true),
+            "SUBAGEN_ADDRESS" => $this->input->post('alamatsubagen', true),
+            "SUBAGEN_PHONE" => $this->input->post('telpsubagen', true),
+            "AREA" => $this->input->post('areasubagen', true)
+            // "PHOTO" => $this->input->post('', true),
+            // "SCAN_ID" => $this->input->post('', true)
+        );
+
+        $this->db->where('ID', $this->input->post('id'));
         $this->db->update('marketing_subagen',  $data);
     }
 

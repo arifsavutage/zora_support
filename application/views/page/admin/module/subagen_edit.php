@@ -12,8 +12,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addsubagen" method="post" action="" enctype="multipart/form-data">
-                <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
+                <form name="addsubagen" method="post" action="">
                     <input type="hidden" name="id" value="<?= $subagen->ID ?>">
                     <div class="form-group">
                         <label for="agenid">Agen</label>
@@ -27,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="ktpsubagen">No. KTP</label>
-                        <input type="text" readonly value="<?= $subagen->ID_CARD ?>" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
+                        <input type="text" disabled value="<?= $subagen->ID_CARD ?>" class="form-control" id="ktpsubagen" name="ktpsubagen" placeholder="no. KTP">
                         <small class="form-text text-danger"><?= form_error('ktpsubagen') ?></small>
                     </div>
                     <div class="form-group">
@@ -76,12 +75,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fotoprofile">Foto Profile</label>
-                        <input type="file" accept="image/jpeg" class="form-control" id="fotoprofile" name="fotoprofile">
+                        <input type="file" class="form-control" id="fotoprofile" name="fotoprofile">
                         <small class="form-text text-danger"><?= form_error('fotoprofile') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="fotoktp">Scan KTP</label>
-                        <input type="file" accept="image/jpeg" class="form-control" id="fotoktp" name="fotoktp">
+                        <input type="file" class="form-control" id="fotoktp" name="fotoktp">
                         <small class="form-text text-danger"><?= form_error('fotoktp') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/subagen/list') ?>" class="btn btn-secondary">Back</a>

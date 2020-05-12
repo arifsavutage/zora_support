@@ -59,8 +59,8 @@
                                     <td><?= $sa->SUBAGEN_ADDRESS ?></td>
                                     <td><?= $sa->SUBAGEN_PHONE ?></td>
                                     <td><?= $sa->subdistrict_name ?></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->PHOTO != null ? $sa->PHOTO : '0.png' ?>" /></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->SCAN_ID_CARD != null ? $sa->SCAN_ID_CARD : '0.png' ?>" /></td>
+                                    <td><?= $sa->PHOTO ?></td>
+                                    <td><?= $sa->SCAN_ID_CARD ?></td>
                                     <td><?= $sa->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $sa->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>

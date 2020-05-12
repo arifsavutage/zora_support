@@ -12,8 +12,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form name="addagen" method="post" action="" enctype="multipart/form-data">
-                <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
+                <form name="addagen" method="post" action="">
                     <div class="form-group">
                         <label for="ktpagen">No. KTP</label>
                         <input type="text" value="<?= set_value('ktpagen') ?>" class="form-control" id="ktpagen" name="ktpagen" placeholder="no. KTP">
@@ -63,12 +62,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fotoprofile">Foto Profile</label>
-                        <input type="file" accept="image/jpeg" class="form-control" id="fotoprofile" name="fotoprofile">
+                        <input type="file" class="form-control" id="fotoprofile" name="fotoprofile">
                         <small class="form-text text-danger"><?= form_error('fotoprofile') ?></small>
                     </div>
                     <div class="form-group">
                         <label for="fotoktp">Scan KTP</label>
-                        <input type="file" accept="image/jpeg" class="form-control" id="fotoktp" name="fotoktp">
+                        <input type="file" class="form-control" id="fotoktp" name="fotoktp">
                         <small class="form-text text-danger"><?= form_error('fotoktp') ?></small>
                     </div>
                     <a href="<?= site_url('admin/master/agen/list') ?>" class="btn btn-secondary">Back</a>
