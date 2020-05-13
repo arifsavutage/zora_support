@@ -744,19 +744,24 @@ class Admin extends CI_Controller
             case 'selling':
                 $this->load->model('agen_model');
                 $this->load->model('subagen_model');
+                $this->load->model('produk_model');
+                $this->load->model('selling_model');
 
                 if ($para2 == 'list') {
                     $data_page = [
                         'page_title' => 'Daftar Pembelian',
                         'card_name'  => 'Daftar Pembelian',
+                        'penjualan'  => $this->selling_model->getAll(),
                         'page'       => 'page/admin/module/selling_list',
                     ];
                 } else if ($para2 == 'add') {
+
                     $data_page = [
                         'page_title' => 'Pembelian',
                         'card_name'  => 'Form Pembelian',
                         'agen'       => $this->agen_model->getAllAgen(),
                         'subagen'    => $this->subagen_model->getAllSubAgen(),
+                        'products'   => $this->produk_model->getAllProduk(),
                         'page'       => 'page/admin/module/selling_add',
                     ];
                 }

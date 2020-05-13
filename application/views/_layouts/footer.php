@@ -46,6 +46,115 @@
 
 <!-- DatePicker JS -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.add_cart').click(function() {
+            var product_id = $('#idproduk').val();
+            var product_name = $('#item').val();
+            var product_price = $('#harga').val();
+            var quantity = $('#qty').val();
+
+            $.ajax({
+                url: "<?php echo site_url('sell/add_to_cart'); ?>",
+                method: "POST",
+                data: {
+                    product_id: product_id,
+                    product_name: product_name,
+                    product_price: product_price,
+                    quantity: quantity
+                },
+                success: function(data) {
+                    $('#detail_cart').html(data);
+                }
+            });
+        });
+
+        $('#detail_cart').load("<?php echo site_url('sell/load_cart'); ?>");
+
+
+        $(document).on('click', '.romove_cart', function() {
+            var row_id = $(this).attr("id");
+            $.ajax({
+                url: "<?php echo site_url('sell/delete_cart'); ?>",
+                method: "POST",
+                data: {
+                    row_id: row_id
+                },
+                success: function(data) {
+                    $('#detail_cart').html(data);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#metode').change(function() {
+            var metode = $(this).val();
+
+            if (metode == 'tunai') {
+                $('#jmlcicilan').attr("readonly", true);
+                $('#jmlcicilan').val(0);
+            } else {
+                $('#jmlcicilan').attr("readonly", false);
+                $('#jmlcicilan').val('');
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#examples').on('click', '.select', function() {
+            var currentRow = $(this).closest('tr');
+
+            var col1 = currentRow.find("td:eq(0)").text();
+            var col2 = currentRow.find("td:eq(1)").text();
+            var col3 = currentRow.find("td:eq(2)").text();
+
+            //var data = col1 + "\n" + col2;
+            $('#idpembeli').val(col1);
+            $('#namapembeli').val(col2);
+            $('#sellertype').val(col3);
+
+            alert("Pembeli sudah dipilih");
+        });
+
+        //subagen
+        $('#exampless').on('click', '.select', function() {
+            var currentRow = $(this).closest('tr');
+
+            var col1 = currentRow.find("td:eq(0)").text();
+            var col2 = currentRow.find("td:eq(1)").text();
+            var col3 = currentRow.find("td:eq(2)").text();
+
+            //var data = col1 + "\n" + col2;
+            $('#idpembeli').val(col1);
+            $('#namapembeli').val(col2);
+            $('#sellertype').val(col3);
+
+            alert("Pembeli sudah dipilih");
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#examplesss').on('click', '.select-item', function() {
+            var currentRow = $(this).closest('tr');
+
+            var col1 = currentRow.find("td:eq(0)").text();
+            var col2 = currentRow.find("td:eq(1)").text();
+            var col3 = currentRow.find("td:eq(2)").text();
+
+            //var data = col1 + "\n" + col2;
+            $('#idproduk').val(col1);
+            $('#item').val(col2);
+            $('#harga').val(col3);
+
+            alert("Item produk sudah dipilih");
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('.date1').datepicker({
@@ -56,7 +165,9 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
-        $('#example1').DataTable();
+        $('#examples').DataTable();
+        $('#exampless').DataTable();
+        $('#examplesss').DataTable();
 
         $('#provinsi').change(function() {
             var id = $(this).val();
@@ -102,7 +213,7 @@
             return false;
         });
 
-        $('#agenid').change(function(){
+        $('#agenid').change(function() {
             var agenid = $(this).val();
             $.ajax({
                 url: "<?php echo site_url('admin/getCityProvinceByAgenId'); ?>",

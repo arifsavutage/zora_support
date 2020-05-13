@@ -45,4 +45,9 @@ class Produk_model extends CI_Model
         $this->db->update('product_item',  $data);
     }
 
+    public function updateStock($data)
+    {
+        $this->db->where('ID', $data['ID']);
+        return $this->db->update('product_item', $data);
+    }
 }
