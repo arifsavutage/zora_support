@@ -25,8 +25,6 @@
                                 <th>Nama Marketing</th>
                                 <th>Alamat Marketing</th>
                                 <th>No. Telp</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -38,8 +36,6 @@
                                 <th>Nama Marketing</th>
                                 <th>Alamat Marketing</th>
                                 <th>No. Telp</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -53,8 +49,6 @@
                                     <td><?= $m->MARKETING_NAME ?></td>
                                     <td><?= $m->MARKETING_ADDRESS ?></td>
                                     <td><?= $m->MARKETING_PHONE ?></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->PHOTO != null ? $m->PHOTO : '0.png' ?>" /></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $m->SCAN_ID != null ? $m->SCAN_ID : '0.png' ?>" /></td>
                                     <td><?= $m->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>

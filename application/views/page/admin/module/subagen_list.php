@@ -27,8 +27,6 @@
                                 <th>Alamat Sub Agen</th>
                                 <th>No. Telp</th>
                                 <th>Area</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -42,8 +40,6 @@
                                 <th>Alamat Sub Agen</th>
                                 <th>No. Telp</th>
                                 <th>Area</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -59,8 +55,6 @@
                                     <td><?= $sa->SUBAGEN_ADDRESS ?></td>
                                     <td><?= $sa->SUBAGEN_PHONE ?></td>
                                     <td><?= $sa->subdistrict_name ?></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->PHOTO != null ? $sa->PHOTO : '0.png' ?>" /></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $sa->SCAN_ID_CARD != null ? $sa->SCAN_ID_CARD : '0.png' ?>" /></td>
                                     <td><?= $sa->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $sa->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>

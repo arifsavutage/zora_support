@@ -27,8 +27,6 @@
                                 <th>No. Telp</th>
                                 <th>Area</th>
                                 <th>Marketing</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -42,8 +40,6 @@
                                 <th>No. Telp</th>
                                 <th>Area</th>
                                 <th>Marketing</th>
-                                <th>Foto Profile</th>
-                                <th>Scan KTP</th>
                                 <th>Tanggal Join</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
@@ -59,8 +55,6 @@
                                     <td><?= $a->AGEN_PHONE ?></td>
                                     <td><?= $a->city_name ?></td>
                                     <td><?= $a->MARKETING_NAME ?></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $a->PHOTO != null ? $a->PHOTO : '0.png' ?>" /></td>
-                                    <td><img width="100" src="<?= base_url('uploads/') ?><?= $a->SCAN_ID_CARD != null ? $a->SCAN_ID_CARD : '0.png' ?>" /></td>
                                     <td><?= $a->JOIN_DATE ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/agen/edit/') . $a->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>
