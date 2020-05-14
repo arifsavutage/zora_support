@@ -26,22 +26,24 @@ class Selling_model extends CI_Model
 
     public function getAgenName($id)
     {
-        $this->db->select("marketing_agen.AGEN_NAME AS SELLER_NAME");
+        $this->db->select("marketing_agen.AGEN_NAME AS SELLER_NAME, 
+        marketing_agen.AGEN_ADDRESS AS SELLER_ADDRESS, marketing_agen.AGEN_PHONE AS SELLER_PHONE");
         $this->db->from($this->_table);
-        $this->db->from('marketing_agen');
-        //$this->db->join('marketing_agen', 'selling.SELLER_ID = marketing_agen.ID', 'left');
-        $this->db->where('marketing_agen.ID = selling.SELLER_ID');
+        //$this->db->from('marketing_agen');
+        $this->db->join('marketing_agen', 'selling.SELLER_ID = marketing_agen.ID', 'left');
+        //$this->db->where('marketing_agen.ID = selling.SELLER_ID');
         $this->db->where('marketing_agen.ID', $id);
         return $this->db->get()->row();
     }
 
     public function getSubAgenName($id)
     {
-        $this->db->select("marketing_subagen.SUBAGEN_NAME AS SELLER_NAME");
+        $this->db->select("marketing_subagen.SUBAGEN_NAME AS SELLER_NAME, 
+        marketing_subagen.SUBAGEN_ADDRESS AS SELLER_ADDRESS, marketing_subagen.SUBAGEN_PHONE AS SELLER_PHONE");
         $this->db->from($this->_table);
-        $this->db->from('marketing_subagen');
-        //$this->db->join('marketing_subagen', 'selling.SELLER_ID = marketing_subagen.ID', 'left');
-        $this->db->where('marketing_subagen.ID = selling.SELLER_ID');
+        //$this->db->from('marketing_subagen');
+        $this->db->join('marketing_subagen', 'selling.SELLER_ID = marketing_subagen.ID', 'left');
+        //$this->db->where('marketing_subagen.ID = selling.SELLER_ID');
         $this->db->where('marketing_subagen.ID', $id);
         return $this->db->get()->row();
     }
@@ -51,5 +53,15 @@ class Selling_model extends CI_Model
         $this->db->where('TGL_BELI', $date);
         $this->db->order_by('SALE_ID', 'DESC');
         return $this->db->get($this->_table)->result();
+    }
+
+    public function getByInvoice($invoice)
+    {
+        return $this->db->get_where($this->_table, ['INVOICE' => $invoice])->row_array();
+    }
+
+    public function updateByInvoice($data)
+    {
+        return $this->db->update($this->_table, $data, ['INVOICE' => $data['INVOICE']]);
     }
 }

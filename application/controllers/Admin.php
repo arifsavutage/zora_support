@@ -770,4 +770,23 @@ class Admin extends CI_Controller
 
         $this->load->view('index', $data_page);
     }
+
+    public function report($para1 = '', $para2 = '')
+    {
+        switch ($para1) {
+            case 'invoice':
+                if ($para2 == 'print_invoice') {
+                    $invoice = $this->uri->segment(5);
+
+                    $data_page = [
+                        'page_title' => 'Invoice',
+                        'detail'     => $this->selling_model->getByInvoice($invoice),
+                        'page'       => 'page/admin/report/invoice'
+                    ];
+                }
+                break;
+        }
+
+        $this->load->view('page/admin/report/index', $data_page);
+    }
 }

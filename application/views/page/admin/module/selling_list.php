@@ -47,7 +47,7 @@
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td><?= date('d/m/Y', strtotime($row['TGL_BELI'])) ?></td>
-                                    <td><?= $row['INVOICE'] ?></td>
+                                    <td><?= "<strong>#" . $row['INVOICE'] . "</strong>" ?></td>
                                     <td>
                                         <?php
                                         $type = $row['SELLER_TYPE'];
@@ -87,11 +87,74 @@
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-success"><i class="fa fa-file"></i> invoice</a>
+                                        <a href="<?= base_url('index.php/admin/report/invoice/print_invoice/') . $row['INVOICE'] ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file"></i> invoice</a>
+
                                         <?php
                                         if ($row['METODE_BAYAR'] == 'kredit') :
                                         ?>
-                                            <a href="#" class="btn btn-sm btn-info" title="detail cicilan">...</a>
+                                            <!--<a href="#" class="btn btn-sm btn-info" title="detail cicilan">...</a>-->
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#angsuran<?= $no ?>">
+                                                ...
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="angsuran<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="angsuranLabel<?= $no ?>" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="angsuranLabel<?= $no ?>">Tabel Angsuran Invoice #<?= $row['INVOICE'] ?></h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No.</th>
+                                                                        <th>Jatuh Tempo</th>
+                                                                        <th>Tagihan</th>
+                                                                        <th>Tgl. Bayar</th>
+                                                                        <th>Nominal</th>
+                                                                        <th><i class="fa fa-cog"></i></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    $angs_data = $this->installment_model->getByInvoice($row['INVOICE']);
+                                                                    $no = 1;
+                                                                    foreach ($angs_data as $angs) :
+                                                                    ?>
+                                                                        <tr>
+                                                                            <td><?= $no ?></td>
+                                                                            <td><?= date('d/m/Y', strtotime($angs['JATUH_TEMPO'])) ?></td>
+                                                                            <td><?= number_format($angs['TAGIHAN'], 0, ',', '.') ?></td>
+                                                                            <td>
+                                                                                <?php
+                                                                                if ($angs['TGL_BAYAR'] == '0000-00-00') {
+                                                                                    echo '00/00/000';
+                                                                                } else {
+                                                                                    echo date('d/m/Y', strtotime($angs['TGL_BAYAR']));
+                                                                                }
+                                                                                ?>
+                                                                            </td>
+                                                                            <td><?= number_format($angs['NOMINAL'], 0, ',', '.') ?></td>
+                                                                            <td>
+                                                                                <a href="<?= base_url('index.php/installment/bayar_cicilan/') . $angs['INVOICE'] . "/" . $angs['ID'] ?>" class="btn btn-info btn-sm <?php if ($angs['NOMINAL'] > 0) echo "disabled"; ?>">bayar</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                        $no++;
+                                                                    endforeach;
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <?php
                                         endif;
                                         ?>

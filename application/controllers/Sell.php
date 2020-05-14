@@ -91,7 +91,8 @@ class Sell extends CI_Controller
         $type       = $this->input->post('sellertype');
         $metode     = $this->input->post('metode');
         $jmlcicilan = $this->input->post('jmlcicilan');
-        $tglbeli    = date('Y-m-d', strtotime($this->input->post('tglbeli'))); //str d-m-Y
+        //$tglbeli    = date('Y-m-d', strtotime($this->input->post('tglbeli'))); //str d-m-Y
+        $tglbeli    = date('Y-m-d'); //str d-m-Y
         $catatan    = $this->input->post('keterangan');
         $cart       = $this->cart->contents();
         $total      = $this->cart->total();

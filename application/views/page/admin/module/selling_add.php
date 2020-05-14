@@ -249,7 +249,7 @@
 
                     <div class="form-row mb-4">
                         <div class="col-md-12">
-                            <label for="tglbeli">Catatan</label>
+                            <label for="catatan">Catatan</label>
                             <textarea class="form-control" name="keterangan"></textarea>
                         </div>
                     </div>

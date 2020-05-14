@@ -14,4 +14,23 @@ class Installment_model extends CI_Model
     {
         return $this->db->insert($this->_table, $data);
     }
+
+    public function getByInvoice($invoice)
+    {
+        $this->db->order_by('ID', 'ASC');
+        return $this->db->get_where($this->_table, ['INVOICE' => $invoice])->result_array();
+    }
+
+    public function cicilan($id)
+    {
+        //ambil nilai tagihan
+        $tagihan = $this->db->get_where($this->_table, ['ID' => $id])->row_array();
+
+        $data = [
+            'TGL_BAYAR' => date('Y-m-d'),
+            'NOMINAL'   => $tagihan['TAGIHAN']
+        ];
+
+        return $this->db->update($this->_table, $data, ['ID' => $id]);
+    }
 }
