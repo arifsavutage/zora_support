@@ -766,6 +766,61 @@ class Admin extends CI_Controller
                     ];
                 }
                 break;
+            case 'return':
+                $this->load->model('retur_model');
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Daftar Retur Barang',
+                        'card_name'  => 'Tabel Retur',
+                        'returns'    => $this->retur_model->getAlldata(),
+                        'page'       => 'page/admin/module/retur_list',
+                    ];
+                } else if ($para2 == 'add') {
+
+                    $validation = $this->form_validation;
+                    $retur   = $this->retur_model;
+
+                    $validation->set_rules($retur->rules());
+
+                    if ($validation->run()) {
+                        $retur->save();
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Pembuatan Retur Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/return/list'));
+                    }
+                    $data_page = [
+                        'page_title' => 'Tambah Retur Barang',
+                        'card_name'  => 'Form Retur',
+                        'page'       => 'page/admin/module/retur_add',
+                    ];
+                } else if ($para2 == 'edit') {
+
+                    $data = [
+                        'ID'        => $this->input->post('id'),
+                        'STATUS'    => $this->input->post('status'),
+                        'TGL_GANTI' => $this->input->post('tgl_ganti')
+                    ];
+
+                    $this->retur_model->update($data);
+
+                    $this->session->set_flashdata('info', '
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4>Success :</h4> Edit Retur Berhasil...
+                    </div>');
+
+                    redirect(base_url('index.php/admin/master/return/list'));
+                }
+                break;
         }
 
         $this->load->view('index', $data_page);
