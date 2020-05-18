@@ -50,9 +50,18 @@ class Selling_model extends CI_Model
 
     public function getByDate($date)
     {
-        $this->db->where('TGL_BELI', $date);
+        /*$this->db->where('TGL_BELI', $date);
         $this->db->order_by('SALE_ID', 'DESC');
-        return $this->db->get($this->_table)->result();
+        return $this->db->get($this->_table)->result();*/
+        $query = $this->db->query("SELECT * FROM `selling` WHERE DATE_FORMAT(`TGL_BELI`, 'm%Y%') = DATE_FORMAT('$date', 'm%Y%')");
+        return $query->result();
+    }
+
+    public function getDateRange($date1, $date2)
+    {
+        $this->db->where("TGL_BELI BETWEEN '$date1' AND '$date2'");
+        $this->db->order_by('SALE_ID', 'ASC');
+        return $this->db->get($this->_table)->result_array();
     }
 
     public function getByInvoice($invoice)

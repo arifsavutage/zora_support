@@ -9,6 +9,8 @@ class Sell extends CI_Controller
         $this->load->model('produk_model');
         $this->load->model('selling_model');
         $this->load->model('installment_model');
+
+        $this->load->library('cek_transaksi');
     }
 
     public function add_to_cart()
@@ -109,6 +111,7 @@ class Sell extends CI_Controller
             $invoice = date('mY') . "$count";
         }
 
+        $selling_detail   = json_encode($cart);
         if ($metode == 'kredit') {
             $status = 'belum';
 
@@ -128,11 +131,53 @@ class Sell extends CI_Controller
                 ];
                 $this->installment_model->save($data_installment);
             }
+
+            //catat history transaksi kredit
+            /*$ket   = "transaksi penjualan kredit invoice $invoice";
+
+            $data  = json_decode($selling_detail, true);
+
+            $total = 0;
+            foreach ($data as $item) {
+                $total += $item['subtotal'];
+            }
+
+            $trans = [
+                'tgl'           => date('Y-m-d'),
+                'ket'           => $ket,
+                'id_trans'      => $invoice,
+                'trans_type'    => $this->input->post('tipe'),
+                'nominal'       => $total,
+                'kredit'        => 'yes',
+                'debet'         => 'no',
+            ];
+
+            $this->cek_transaksi->transaksi($trans);*/
         } else {
             $status = 'lunas';
-        }
 
-        $selling_detail   = json_encode($cart);
+            //catat history transaksi non kredit
+            $ket   = "transaksi penjualan invoice $invoice";
+
+            $data  = json_decode($selling_detail, true);
+
+            $total = 0;
+            foreach ($data as $item) {
+                $total += $item['subtotal'];
+            }
+
+            $trans = [
+                'tgl'           => date('Y-m-d'),
+                'ket'           => $ket,
+                'id_trans'      => $invoice,
+                'trans_type'    => $this->input->post('tipe'),
+                'nominal'       => $total,
+                'kredit'        => 'no',
+                'debet'         => 'yes',
+            ];
+
+            $this->cek_transaksi->transaksi($trans);
+        }
 
         $datasell   = [
             'INVOICE'       => $invoice,

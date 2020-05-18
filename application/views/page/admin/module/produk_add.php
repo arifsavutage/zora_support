@@ -35,8 +35,9 @@
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" placeholder="stock">
+                        <input type="text" class="form-control" id="stock" name="stock" value="0" readonly="true">
                         <small class="form-text text-danger"><?= form_error('stock') ?></small>
+                        <small class="form-text text-muted">stock akan bertambah ketika membuat PO</small>
                     </div>
                     <div class="form-group">
                         <label for="stocklimit">Stock Limit</label>

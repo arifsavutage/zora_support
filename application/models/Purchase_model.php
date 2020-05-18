@@ -30,6 +30,8 @@ class Purchase_model extends CI_Model
 
     public function save()
     {
+        $this->load->library('cek_transaksi');
+
         $post   = $this->input->post();
 
         $this->SUPLIER_ID       = $post['suplier'];
@@ -42,15 +44,41 @@ class Purchase_model extends CI_Model
 
         $jml    = $this->getDataByDate($this->PURCHASE_DATE)->num_rows();
 
+        $jml    += 1;
         if (strlen($jml) == 1) {
-            $nofak  = "P." . date('dmY') . ".00" . $jml;
+            $nofak  = "P." . date('mY') . ".00" . $jml;
         } else if (strlen($jml) == 2) {
-            $nofak  = "P." . date('dmY') . ".0" . $jml;
+            $nofak  = "P." . date('mY') . ".0" . $jml;
         } else {
-            $nofak  = "P." . date('dmY') . "." . $jml;
+            $nofak  = "P." . date('mY') . "." . $jml;
         }
 
         $this->NOFAKTUR = $nofak;
+
+        //histori transaksi
+        $get_produk = $this->db->get_where('product_item', ['ID' => $post['product']])->row_array();
+
+        $qty     = $post['qty'];
+        $harga   = $post['hargabeli'];
+
+        $nominal = $qty * $harga;
+        $ket     = "Pembelian produk $get_produk[PRODUCT_NAME]";
+
+        $trans = [
+            'tgl'           => date('Y-m-d'),
+            'ket'           => $ket,
+            'id_trans'      => $nofak,
+            'trans_type'    => $post['tipe'],
+            'nominal'       => $nominal,
+            'kredit'        => 'yes',
+            'debet'         => 'no',
+        ];
+
+        $this->cek_transaksi->transaksi($trans);
+
+        //update stock produk
+        $stok = $qty + $get_produk['STOCK'];
+        $this->db->update('product_item', ['STOCK' => $stok], ['ID' => $post['product']]);
 
         return $this->db->insert($this->_table, $this);
     }
@@ -78,7 +106,24 @@ class Purchase_model extends CI_Model
     public function getDataByDate($date)
     {
         //$this->db->where($this->PURCHASE_DATE, $date);
-        return $this->db->get_where($this->_table, ['PURCHASE_DATE' => $date]);
+        //return $this->db->get_where($this->_table, ['PURCHASE_DATE' => $date]);
+        $query = $this->db->query("SELECT * FROM `purchase` WHERE DATE_FORMAT(`PURCHASE_DATE`, 'm%Y%') = DATE_FORMAT('$date', 'm%Y%')");
+        return $query;
+    }
+
+    public function getDateRange($date1, $date2)
+    {
+        //$query = $this->db->query("SELECT * FROM `purchase` WHERE `PURCHASE_DATE` BETWEEN '$date1' AND '$date2' ORDER BY ");
+        //return $query->result_array();
+        $this->db->select("purchase.`NOFAKTUR`, purchase.`SUPLIER_ID`, purchase.`PRODUCT_ID`, 
+        purchase.`QTY`, purchase.`PURCHASE_PRICE`, (purchase.`QTY` * purchase.`PURCHASE_PRICE`) AS SUBTOTAL, 
+        purchase.`PURCHASE_DATE`, suplier.SUPLIER_NAME, product_item.PRODUCT_NAME");
+        $this->db->from($this->_table);
+        $this->db->join('suplier', 'suplier.ID = purchase.SUPLIER_ID', 'left');
+        $this->db->join('product_item', 'product_item.ID = purchase.PRODUCT_ID', 'left');
+        $this->db->where("purchase.`PURCHASE_DATE` BETWEEN '$date1' AND '$date2'");
+
+        return $this->db->get()->result_array();
     }
 
     public function getAll()

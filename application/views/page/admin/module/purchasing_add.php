@@ -14,6 +14,7 @@
             <div class="card-body">
                 <form name="addpurchasing" method="post" action="">
 
+                    <input type="hidden" name="tipe" value="purchasing" />
                     <div class="form-row">
                         <div class="col">
                             <label for="suplier">Suplier</label>

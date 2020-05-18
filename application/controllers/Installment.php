@@ -6,6 +6,7 @@ class Installment extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('cek_transaksi');
     }
 
     public function bayar_cicilan($invoice = null, $id = null)
@@ -30,6 +31,9 @@ class Installment extends CI_Controller
 
             $jmlbulan   = $data['JML_CICILAN'] - 1;
 
+            //jmlcicilan di history
+
+            $ke = $this->db->get_where('trans_history', ['ID_TRANS' => $invoice])->num_rows();
             if ($jmlbulan == 0) {
                 //jadikan lunas
                 $data_up = [
@@ -37,13 +41,33 @@ class Installment extends CI_Controller
                     'STATUS'  => 'lunas',
                     'JML_CICILAN' => $jmlbulan
                 ];
+
+                $ke += 1;
             } else {
                 $data_up = [
                     'INVOICE' => $invoice,
                     'JML_CICILAN' => $jmlbulan
                 ];
+
+                $ke += 1;
             }
             $this->selling_model->updateByInvoice($data_up);
+
+            //catat history transaksi cicilan
+            $ket   = "cicilan invoice $invoice ke-$ke";
+            $get_nominal = $this->db->get_where('installment', ['ID' => $id])->row()->TAGIHAN;
+
+            $trans = [
+                'tgl'           => date('Y-m-d'),
+                'ket'           => $ket,
+                'id_trans'      => $invoice,
+                'trans_type'    => 'selling',
+                'nominal'       => $get_nominal,
+                'kredit'        => 'no',
+                'debet'         => 'yes',
+            ];
+
+            $this->cek_transaksi->transaksi($trans);
 
             $this->session->set_flashdata('info', '
             <div class="alert alert-success alert-dismissible fade show" role="alert">

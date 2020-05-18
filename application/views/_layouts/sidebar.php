@@ -64,13 +64,13 @@
                 <a class="collapse-item <?= $this->uri->segment(3) == 'selling' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/selling/list'); ?>">Penjualan</a>
                 <!--<a class="collapse-item" href="">Konfirmasi Pembayaran</a>-->
                 <a class="collapse-item <?= $this->uri->segment(3) == 'return' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/return/list'); ?>">Retur Barang</a>
-                <a class="collapse-item" href="">Operasional</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'operasional' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/operasional/add'); ?>">Operasional</a>
             </div>
         </div>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href=""><i class="fas fa-fw fa-cash-register"></i><span>Master Biaya</span></a>
+        <a class="nav-link" href="<?= base_url('index.php/admin/master/rekening/list'); ?>"><i class="fas fa-fw fa-cash-register"></i><span>Master Biaya</span></a>
     </li>
 
     <li class="nav-item">
@@ -80,11 +80,14 @@
         </a>
         <div id="masterlaporan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Laporan Kas</a>
-                <a class="collapse-item" href="">Laporan Pembelian</a>
-                <a class="collapse-item" href="">Laporan Penjualan</a>
-                <a class="collapse-item" href="">Laporan Retur Barang</a>
-                <a class="collapse-item" href="">Laporan Biaya</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'kas_harian' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/kas_harian'); ?>">Laporan Kas</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'labarugi' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/labarugi'); ?>">Laba Rugi</a>
+
+                <!--
+                <a class="collapse-item <?= $this->uri->segment(3) == 'l_selling' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/l_selling'); ?>">Laporan Pembelian</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'l_purchase' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/l_purchase'); ?>">Laporan Penjualan</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'l_retur' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/l_retur'); ?>">Laporan Retur Barang</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'l_cost' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/l_cost'); ?>">Laporan Biaya</a>-->
             </div>
         </div>
     </li>
