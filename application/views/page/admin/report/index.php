@@ -8,6 +8,7 @@
         table {
             width: 100%;
             border: 0.1em solid #000000;
+            font-size: 12px;
         }
 
         table tr {
@@ -16,13 +17,13 @@
         }
 
         table tr th {
-            background-color: cornflowerblue;
+            background-color: dimgrey;
             color: white;
-            padding: 10px 15px;
+            padding: 8px 10px;
         }
 
         table tr td {
-            padding: 10px 15px;
+            padding: 8px 10px;
         }
     </style>
 </head>

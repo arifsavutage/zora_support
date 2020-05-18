@@ -188,6 +188,7 @@
 
                 <form name="addsell" method="post" action="<?= base_url('index.php/sell/checkout') ?>">
 
+                    <input type="hidden" name="tipe" value="selling" />
                     <div class="form-row">
                         <div class="col">
                             <label for="idpembeli">ID Pembeli</label>

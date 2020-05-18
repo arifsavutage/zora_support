@@ -4,6 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->library('cek_transaksi');
+    }
     public function index()
     {
         $data_page  = [
@@ -689,6 +695,7 @@ class Admin extends CI_Controller
                     $validation->set_rules($purchase->rules());
 
                     if ($validation->run()) {
+
                         $purchase->save();
 
                         $this->session->set_flashdata('info', '
@@ -743,7 +750,7 @@ class Admin extends CI_Controller
                 break;
             case 'selling':
                 $this->load->model('agen_model');
-                $this->load->model('subagen_model');
+                $this->load->model('SubAgen_model');
                 $this->load->model('produk_model');
                 $this->load->model('selling_model');
 
@@ -760,9 +767,178 @@ class Admin extends CI_Controller
                         'page_title' => 'Pembelian',
                         'card_name'  => 'Form Pembelian',
                         'agen'       => $this->agen_model->getAllAgen(),
-                        'subagen'    => $this->subagen_model->getAllSubAgen(),
+                        'subagen'    => $this->SubAgen_model->getAllSubAgen(),
                         'products'   => $this->produk_model->getAllProduk(),
                         'page'       => 'page/admin/module/selling_add',
+                    ];
+                }
+                break;
+            case 'return':
+                $this->load->model('retur_model');
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Daftar Retur Barang',
+                        'card_name'  => 'Tabel Retur',
+                        'returns'    => $this->retur_model->getAlldata(),
+                        'page'       => 'page/admin/module/retur_list',
+                    ];
+                } else if ($para2 == 'add') {
+
+                    $validation = $this->form_validation;
+                    $retur   = $this->retur_model;
+
+                    $validation->set_rules($retur->rules());
+
+                    if ($validation->run()) {
+                        $retur->save();
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Pembuatan Retur Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/return/list'));
+                    }
+                    $data_page = [
+                        'page_title' => 'Tambah Retur Barang',
+                        'card_name'  => 'Form Retur',
+                        'page'       => 'page/admin/module/retur_add',
+                    ];
+                } else if ($para2 == 'edit') {
+
+                    $data = [
+                        'ID'        => $this->input->post('id'),
+                        'STATUS'    => $this->input->post('status'),
+                        'TGL_GANTI' => $this->input->post('tgl_ganti')
+                    ];
+
+                    $this->retur_model->update($data);
+
+                    $this->session->set_flashdata('info', '
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4>Success :</h4> Edit Retur Berhasil...
+                    </div>');
+
+                    redirect(base_url('index.php/admin/master/return/list'));
+                }
+                break;
+            case 'rekening':
+                $this->load->model('rekening_model');
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Daftar Rekening Operasional',
+                        'card_name'  => 'Tabel Rek. Operasional',
+                        'daftar'    => $this->rekening_model->getAll(),
+                        'page'       => 'page/admin/module/rekening_list',
+                    ];
+                } else if ($para2 == 'add') {
+
+                    $validation = $this->form_validation;
+                    $rekening   = $this->rekening_model;
+
+                    $validation->set_rules($rekening->rules());
+
+                    if ($validation->run()) {
+                        $rekening->save();
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Pembuatan Rekening Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/rekening/list'));
+                    }
+                    $data_page = [
+                        'page_title' => 'Tambah Rekening Operasional',
+                        'card_name'  => 'Form Rek. Operasional',
+                        'page'       => 'page/admin/module/rekening_add',
+                    ];
+                } else if ($para2 == 'edit') {
+
+                    $this->form_validation->set_rules('namapos', 'Nama Rekening', 'required');
+
+                    if ($this->form_validation->run()) {
+                        $data = [
+                            'ID'    => $this->input->post('id'),
+                            'POS_NAME' => $this->input->post('namapos'),
+                            'KETERANGAN' => $this->input->post('keterangan')
+                        ];
+
+                        $this->rekening_model->update($data);
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Edit Rekening Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/rekening/list'));
+                    }
+
+                    $id = $this->uri->segment(5);
+                    $data_page = [
+                        'page_title' => 'Edit Rekening Operasional',
+                        'card_name'  => 'Form Edit Rek. Operasional',
+                        'detail'     => $this->rekening_model->getById($id),
+                        'page'       => 'page/admin/module/rekening_edit',
+                    ];
+                }
+                break;
+            case 'operasional':
+                $this->load->model('rekening_model');
+                $this->load->model('transaksi_model');
+                if ($para2 == 'add') {
+
+                    $this->form_validation->set_rules('rekening', 'Jenis Biaya', 'required');
+                    $this->form_validation->set_rules('nominal', 'Nominal', 'required');
+
+                    if ($this->form_validation->run()) {
+
+                        $trans = [
+                            'tgl'           => date('Y-m-d'),
+                            'ket'           => $this->input->post('keterangan'),
+                            'id_trans'      => $this->input->post('rekening'),
+                            'trans_type'    => $this->input->post('tipe'),
+                            'nominal'       => $this->input->post('nominal'),
+                            'kredit'        => 'yes',
+                            'debet'         => 'no',
+                        ];
+
+                        $this->cek_transaksi->transaksi($trans);
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Penambahan Transaksi Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/operasional/add'));
+                    }
+                    $data_page = [
+                        'page_title' => 'Form Input Biaya Operasional',
+                        'card_name'  => 'Form',
+                        'rekening'   => $this->rekening_model->getAll(),
+                        'page'       => 'page/admin/module/operasional_add',
+                    ];
+                } else if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Biaya Operasional',
+                        'card_name'  => 'Daftar',
+                        'daftar'     => $this->transaksi_model->getListByType('operasional'),
+                        'page'       => 'page/admin/module/operasional_list',
                     ];
                 }
                 break;
@@ -783,10 +959,51 @@ class Admin extends CI_Controller
                         'detail'     => $this->selling_model->getByInvoice($invoice),
                         'page'       => 'page/admin/report/invoice'
                     ];
+                } else if ($para2 == 'print_labarugi') {
+                    $this->load->model('purchase_model');
+                    $this->load->model('kas_model');
+                    $this->load->model('selling_model');
+
+                    $this->form_validation->set_rules('tgl1', 'Tanggal 1', 'required');
+
+                    if ($this->form_validation->run()) {
+                        $date1 = $this->input->post('tgl1');
+                        $date2 = $this->input->post('tgl2');
+
+                        $data_page = [
+                            'page_title'    => 'Laporan Laba Rugi',
+                            'purchase'      => $this->purchase_model->getDateRange($date1, $date2),
+                            'operasional'   => $this->kas_model->getOpDateRange($date1, $date2),
+                            'selling'       => $this->selling_model->getDateRange($date1, $date2),
+                            'page'          => 'page/admin/report/labarugi'
+                        ];
+                    }
                 }
                 break;
         }
 
         $this->load->view('page/admin/report/index', $data_page);
+    }
+
+    public function laporan($para1 = '', $para2 = '')
+    {
+        switch ($para1) {
+            case 'kas_harian':
+                $this->load->model('kas_model');
+                $data_page = [
+                    'page_title' => 'Kas Harian',
+                    'rows'       => $this->kas_model->getAll(),
+                    'page'       => 'page/admin/laporan/kas_harian'
+                ];
+                break;
+            case 'labarugi':
+                $data_page = [
+                    'page_title' => 'Laba Rugi',
+                    'page'       => 'page/admin/laporan/labarugi'
+                ];
+                break;
+        }
+
+        $this->load->view('index', $data_page);
     }
 }
