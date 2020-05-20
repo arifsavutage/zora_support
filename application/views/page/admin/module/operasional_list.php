@@ -29,17 +29,21 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Tgl.</th>
                                 <th>Nama Rek.</th>
                                 <th>Keterangan</th>
-                                <th><i class="fas fa-cog"></i></th>
+                                <th>Nominal</th>
+                                <!--<th><i class="fas fa-cog"></i></th>-->
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No.</th>
+                                <th>Tgl.</th>
                                 <th>Nama Rek.</th>
                                 <th>Keterangan</th>
-                                <th><i class="fas fa-cog"></i></th>
+                                <th>Nominal</th>
+                                <!--<th><i class="fas fa-cog"></i></th>-->
                             </tr>
                         </tfoot>
                         <tbody>
@@ -47,11 +51,13 @@
                             foreach ($daftar as $row) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
+                                    <td><?= date('d/m/Y', strtotime($row['TGL'])) ?></td>
                                     <td><?= $row['POS_NAME'] ?></td>
                                     <td><?= $row['KETERANGAN'] ?></td>
-                                    <td>
-                                        <a title="Edit" href="<?= site_url('admin/master/rekening/edit/') . $row['ID'] ?>" class='btn btn-sm btn-warning'><i class="fas fa-edit"></i></a>
-                                    </td>
+                                    <td><?= number_format($row['KREDIT'], 0, ',', '.') ?></td>
+                                    <!--<td>
+                                        <a title="Edit" href="<?= site_url('admin/master/operasional/edit/') . $row['ID'] ?>" class='btn btn-sm btn-warning'><i class="fas fa-edit"></i></a>
+                                    </td>-->
                                 </tr>
                             <?php $no++;
                             endforeach; ?>

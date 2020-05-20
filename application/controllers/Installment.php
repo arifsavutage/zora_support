@@ -7,6 +7,8 @@ class Installment extends CI_Controller
     {
         parent::__construct();
         $this->load->library('cek_transaksi');
+
+        not_login();
     }
 
     public function bayar_cicilan($invoice = null, $id = null)
