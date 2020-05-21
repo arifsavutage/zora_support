@@ -273,6 +273,79 @@
             });
             return false;
         });
+
+        // Marketing Detail
+        $('#marketingDetail').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var modal = $(this)
+            $.ajax({
+                type: "GET",
+                url: "<?= site_url('admin/master/marketing/detail/') ?>" + id,
+                dataType: "json",
+                success: function(response) {
+                    var photo = (response.PHOTO == '') ? '0.png' : response.PHOTO;
+                    var ktp = (response.SCAN_ID == '') ? '0.png' : response.SCAN_ID;
+                    modal.find('.fotoprofile').attr('src', '<?= base_url('uploads/') ?>' + photo);
+                    modal.find('.nama').text(response.MARKETING_NAME);
+                    modal.find('.noktp').text(response.ID_CARD);
+                    modal.find('.alamat').text(response.MARKETING_ADDRESS);
+                    modal.find('.notelp').text(response.MARKETING_PHONE);
+                    modal.find('.join').text(response.JOIN_DATE);
+                    modal.find('.ktp').attr('src', '<?= base_url('uploads/') ?>' + ktp);
+                }
+            });
+        });
+
+        // Agen Detail
+        $('#agenDetail').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var modal = $(this)
+            $.ajax({
+                type: "GET",
+                url: "<?= site_url('admin/master/agen/detail/') ?>" + id,
+                dataType: "json",
+                success: function(response) {
+                    var photo = (response.PHOTO == '') ? '0.png' : response.PHOTO;
+                    var ktp = (response.SCAN_ID_CARD == '') ? '0.png' : response.SCAN_ID_CARD;
+                    modal.find('.fotoprofile').attr('src', '<?= base_url('uploads/') ?>' + photo);
+                    modal.find('.nama').text(response.AGEN_NAME);
+                    modal.find('.noktp').text(response.ID_CARD);
+                    modal.find('.alamat').text(response.AGEN_ADDRESS);
+                    modal.find('.notelp').text(response.AGEN_PHONE);
+                    modal.find('.join').text(response.JOIN_DATE);
+                    modal.find('.ktp').attr('src', '<?= base_url('uploads/') ?>' + ktp);
+                    modal.find('.area').text(response.AREA);
+                    modal.find('.marketing').text(response.MARKETING_ID);
+                }
+            });
+        });
+
+        // Sub Agen Detail
+        $('#subagenDetail').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var modal = $(this)
+            $.ajax({
+                type: "GET",
+                url: "<?= site_url('admin/master/subagen/detail/') ?>" + id,
+                dataType: "json",
+                success: function(response) {
+                    var photo = (response.PHOTO == '') ? '0.png' : response.PHOTO;
+                    var ktp = (response.SCAN_ID_CARD == '') ? '0.png' : response.SCAN_ID_CARD;
+                    modal.find('.fotoprofile').attr('src', '<?= base_url('uploads/') ?>' + photo);
+                    modal.find('.nama').text(response.SUBAGEN_NAME);
+                    modal.find('.noktp').text(response.ID_CARD);
+                    modal.find('.alamat').text(response.SUBAGEN_ADDRESS);
+                    modal.find('.notelp').text(response.SUBAGEN_PHONE);
+                    modal.find('.join').text(response.JOIN_DATE);
+                    modal.find('.ktp').attr('src', '<?= base_url('uploads/') ?>' + ktp);
+                    modal.find('.area').text(response.AREA);
+                    modal.find('.agen').text(response.AGEN_ID);
+                }
+            });
+        });
     });
 </script>
 </body>

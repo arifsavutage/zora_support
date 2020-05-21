@@ -259,6 +259,11 @@ class Admin extends CI_Controller
                     $id = $this->uri->segment(5);
                     $this->Marketing_model->delMarketing($id);
                     redirect('admin/master/marketing/list');
+                } else if ($para2 == 'detail') {
+                    $id = $this->uri->segment(5);
+                    $marketing = $this->Marketing_model->getMarketingById($id);
+                    echo json_encode($marketing);
+                    exit();
                 }
                 break;
             case 'agen':
@@ -410,6 +415,11 @@ class Admin extends CI_Controller
                     $id = $this->uri->segment(5);
                     $this->Agen_model->delAgen($id);
                     redirect('admin/master/agen/list');
+                } else if ($para2 == 'detail') {
+                    $id = $this->uri->segment(5);
+                    $agen = $this->Agen_model->getAgenById($id);
+                    echo json_encode($agen);
+                    exit();
                 }
                 break;
             case 'subagen':
@@ -563,6 +573,11 @@ class Admin extends CI_Controller
                     $id = $this->uri->segment(5);
                     $this->SubAgen_model->delSubAgen($id);
                     redirect('admin/master/subagen/list');
+                } else if ($para2 == 'detail') {
+                    $id = $this->uri->segment(5);
+                    $subagen = $this->SubAgen_model->getSubAgenById($id);
+                    echo json_encode($subagen);
+                    exit();
                 }
                 break;
             case 'kategori':
