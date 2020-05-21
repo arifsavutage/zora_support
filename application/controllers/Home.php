@@ -12,14 +12,19 @@ class Home extends CI_Controller
         $this->load->model('agen_model');
         $this->load->model('SubAgen_model');
         $this->load->model('account_model');
+        $this->load->model('selling_model');
     }
 
     public function index()
     {
         not_login();
+
         $data_page  = [
             'page_title'    => 'Dashboard',
-            'page'          => 'page/admin/admin_dashboard2'
+            'permonths'     => $this->selling_model->getEarningByMonth(),
+            'peryears'      => $this->selling_model->getEarningByYear(),
+            'tunggakan'     => $this->selling_model->getTunggakanByMonth(),
+            'page'          => 'page/admin/admin_dashboard'
         ];
         $this->load->view('index', $data_page);
     }

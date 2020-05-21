@@ -73,4 +73,25 @@ class Selling_model extends CI_Model
     {
         return $this->db->update($this->_table, $data, ['INVOICE' => $data['INVOICE']]);
     }
+
+    public function getEarningByMonth()
+    {
+        $this->db->where('STATUS', 'lunas');
+        $this->db->where("DATE_FORMAT(`TGL_BELI`, '%M') = DATE_FORMAT(CURRENT_DATE(), '%M')");
+        return $this->db->get($this->_table)->result_array();
+    }
+
+    public function getEarningByYear()
+    {
+        $this->db->where('STATUS', 'lunas');
+        $this->db->where("DATE_FORMAT(`TGL_BELI`, '%Y') = DATE_FORMAT(CURRENT_DATE(), '%Y')");
+        return $this->db->get($this->_table)->result_array();
+    }
+
+    public function getTunggakanByMonth()
+    {
+        $this->db->where('STATUS', 'belum');
+        $this->db->where("DATE_FORMAT(`TGL_BELI`, '%M') = DATE_FORMAT(CURRENT_DATE(), '%M')");
+        return $this->db->get($this->_table)->result_array();
+    }
 }

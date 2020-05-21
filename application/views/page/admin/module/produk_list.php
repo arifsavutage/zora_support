@@ -48,8 +48,8 @@
                                     <td><?= $p->CAT_ID ?></td>
                                     <td><?= $p->PRODUCT_NAME ?></td>
                                     <td><?= $p->SELL_PRICE ?></td>
-                                    <td><?= $p->STOCK ?></td>
-                                    <td><?= $p->STOCK_LIMIT ?></td>
+                                    <td><?= stock($p->STOCK) ?></td>
+                                    <td><?= stock($p->STOCK_LIMIT) ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/produk/edit/') . $p->ID ?>" class='btn btn-warning mr-1'><i class="fas fa-edit"></i></a>
                                         <a title="Hapus" href="<?= site_url('admin/master/produk/del/') . $p->ID ?>" class='btn btn-danger mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>
