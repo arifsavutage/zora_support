@@ -24,6 +24,34 @@
     <!-- DatePicker CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
+
+        #first-name {
+            box-sizing: border-box;
+        }
+
+        #first-name {
+            font-size: 14px;
+            margin: 15px 0
+        }
+
+        #first-name span {
+            background-color: #C273FF;
+            font-family: 'Lobster Two', Arial, Helvetica, sans-serif;
+            color: white;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            display: inline-block;
+            font-size: 28px;
+            padding: 5px;
+            vertical-align: middle;
+            margin: 0 10px 0 0;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">

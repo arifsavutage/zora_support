@@ -64,7 +64,7 @@
                 <a class="collapse-item <?= $this->uri->segment(3) == 'selling' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/selling/list'); ?>">Penjualan</a>
                 <!--<a class="collapse-item" href="">Konfirmasi Pembayaran</a>-->
                 <a class="collapse-item <?= $this->uri->segment(3) == 'return' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/return/list'); ?>">Retur Barang</a>
-                <a class="collapse-item <?= $this->uri->segment(3) == 'operasional' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/operasional/add'); ?>">Operasional</a>
+                <a class="collapse-item <?= $this->uri->segment(3) == 'operasional' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/operasional/list'); ?>">Operasional</a>
             </div>
         </div>
     </li>
@@ -81,6 +81,7 @@
         <div id="masterlaporan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item <?= $this->uri->segment(3) == 'kas_harian' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/kas_harian'); ?>">Laporan Kas</a>
+                <!--<a class="collapse-item <?= $this->uri->segment(3) == 'perform' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/perform'); ?>">Performa</a>-->
                 <a class="collapse-item <?= $this->uri->segment(3) == 'labarugi' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/labarugi'); ?>">Laba Rugi</a>
 
                 <!--
@@ -93,14 +94,14 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href=""><i class="fas fa-fw fa-user-cog"></i><span>Master User</span></a>
+        <a class="nav-link <?= $this->uri->segment(3) == 'useraccount' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/user/account/list'); ?>"><i class="fas fa-fw fa-user-cog"></i><span>Master User</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <li class="nav-item">
-        <a class="nav-link" href=""><i class="fas fa-fw fa-sign-out-alt"></i><span>Logout</span></a>
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-fw fa-sign-out-alt"></i><span>Logout</span></a>
     </li>
 
     <!-- Divider -->

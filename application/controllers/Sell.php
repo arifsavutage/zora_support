@@ -11,6 +11,8 @@ class Sell extends CI_Controller
         $this->load->model('installment_model');
 
         $this->load->library('cek_transaksi');
+
+        not_login();
     }
 
     public function add_to_cart()

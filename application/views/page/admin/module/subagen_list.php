@@ -55,7 +55,7 @@
                                     <td><?= $sa->SUBAGEN_ADDRESS ?></td>
                                     <td><?= $sa->SUBAGEN_PHONE ?></td>
                                     <td><?= $sa->subdistrict_name ?></td>
-                                    <td><?= $sa->JOIN_DATE ?></td>
+                                    <td><?= date('d/m/Y', strtotime($sa->JOIN_DATE)) ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/subagen/edit/') . $sa->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>
                                         <a title="Hapus" href="<?= site_url('admin/master/subagen/del/') . $sa->ID ?>" class='btn btn-danger btn-sm mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?')"><i class="fas fa-trash"></i></a>

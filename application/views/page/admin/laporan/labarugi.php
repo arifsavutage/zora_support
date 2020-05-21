@@ -18,11 +18,11 @@
 
                         <div class="col">
                             <label for="tgl1">Periode</label>
-                            <input type="text" class="form-control date1" name="tgl1" id="tgl1" />
+                            <input type="text" class="form-control date1" name="tgl1" id="tgl1" readonly="true" />
                         </div>
                         <div class="col">
                             <label for="tgl2">Ke</label>
-                            <input type="text" class="form-control date1" name="tgl2" id="tgl2" />
+                            <input type="text" class="form-control date1" name="tgl2" id="tgl2" readonly="true" />
                         </div>
                     </div>
 

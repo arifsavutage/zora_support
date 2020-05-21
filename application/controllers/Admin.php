@@ -9,6 +9,8 @@ class Admin extends CI_Controller
         parent::__construct();
 
         $this->load->library('cek_transaksi');
+
+        not_login();
     }
     public function index()
     {
@@ -925,7 +927,7 @@ class Admin extends CI_Controller
                             <h4>Success :</h4> Penambahan Transaksi Berhasil...
                         </div>');
 
-                        redirect(base_url('index.php/admin/master/operasional/add'));
+                        redirect(base_url('index.php/admin/master/operasional/list'));
                     }
                     $data_page = [
                         'page_title' => 'Form Input Biaya Operasional',
@@ -936,9 +938,39 @@ class Admin extends CI_Controller
                 } else if ($para2 == 'list') {
                     $data_page = [
                         'page_title' => 'Biaya Operasional',
-                        'card_name'  => 'Daftar',
-                        'daftar'     => $this->transaksi_model->getListByType('operasional'),
+                        'card_name'  => 'Daftar Operasional',
+                        'daftar'     => $this->transaksi_model->operationList(),
                         'page'       => 'page/admin/module/operasional_list',
+                    ];
+                } else if ($para2 == 'edit') {
+                    $this->load->model('rekening_model');
+                    $id = $this->uri->segment(5);
+
+                    $this->form_validation->set_rules('rekening', 'Jenis Biaya', 'required');
+                    $this->form_validation->set_rules('nominal', 'Nominal', 'required');
+
+                    if ($this->form_validation->run()) {
+                        $ids     = $this->input->post('id');
+                        $rek     = $this->input->post('rekening');
+                        $nominal = $this->input->post('nominal');
+                        $ket     = $this->input->post('keterangan');
+
+                        //ambil saldo sebelumnya utk rubah pemotongan
+                        if ($ids == 1) {
+                            $saldo = 0;
+                            $newsaldo = $saldo - $nominal;
+                        } else {
+                            $up_id  = $ids - 1;
+                            $saldo = $this->db->get_where('trans_history', ['ID' => $up_id])->row()->SALDO;
+                            $newsaldo = $saldo - $nominal;
+                        }
+                    }
+                    $data_page = [
+                        'page_title' => 'Edit Transaksi Biaya',
+                        'card_name'  => 'Form',
+                        'rek'        => $this->rekening_model->getAll(),
+                        'detail'     => $this->transaksi_model->getById($id),
+                        'page'       => 'page/admin/module/operasional_edit',
                     ];
                 }
                 break;
@@ -970,8 +1002,11 @@ class Admin extends CI_Controller
                         $date1 = $this->input->post('tgl1');
                         $date2 = $this->input->post('tgl2');
 
+                        $periode = "Periode : " . date('d/m/Y', strtotime($date1)) . " s.d " . date('d/m/Y', strtotime($date2));
+
                         $data_page = [
                             'page_title'    => 'Laporan Laba Rugi',
+                            'periode'       => $periode,
                             'purchase'      => $this->purchase_model->getDateRange($date1, $date2),
                             'operasional'   => $this->kas_model->getOpDateRange($date1, $date2),
                             'selling'       => $this->selling_model->getDateRange($date1, $date2),
@@ -1005,5 +1040,193 @@ class Admin extends CI_Controller
         }
 
         $this->load->view('index', $data_page);
+    }
+
+    public function user($para1 = '', $para2 = '')
+    {
+        switch ($para1) {
+            case 'account':
+                $this->load->model('account_model');
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Daftar Akun Pengguna',
+                        'card_name'  => 'Tabel Pengguna',
+                        'lists'      => $this->account_model->getAll(),
+                        'page'       => 'page/admin/module/user_account_list',
+                    ];
+                } else if ($para2 == 'add') {
+                    $randpass = $this->_randomPassword(8, 1, "lower_case,upper_case,numbers,special_symbols");
+                    $level    = ['operator'];
+
+                    $account = $this->account_model;
+                    $validation = $this->form_validation;
+
+                    $validation->set_rules($account->rules());
+                    if ($validation->run()) {
+                        $account->save();
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Penambahan akun berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/user/account/list'));
+                    }
+
+                    $data_page = [
+                        'page_title' => 'Tambah Pengguna',
+                        'card_name'  => 'Form',
+                        'level'      => $level,
+                        'randpass'   => "$randpass[0]",
+                        'page'       => 'page/admin/module/user_account_add',
+                    ];
+                } else if ($para2 == 'edit') {
+                    $id = $this->uri->segment(5);
+                    $randpass = $this->_randomPassword(8, 1, "lower_case,upper_case,numbers,special_symbols");
+                    $level    = ['operator'];
+
+                    $account = $this->account_model;
+                    $validation = $this->form_validation;
+
+                    $validation->set_rules($account->rules());
+                    if ($validation->run()) {
+                        $account->update();
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Ubah akun berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/user/account/list'));
+                    }
+
+                    $data_page = [
+                        'page_title' => 'Edit Pengguna',
+                        'card_name'  => 'Form',
+                        'level'      => $level,
+                        'randpass'   => "$randpass[0]",
+                        'detail'     => $this->account_model->getAccountById($id),
+                        'page'       => 'page/admin/module/user_account_edit',
+                    ];
+                } else if ($para2 == 'delete') {
+                    $id = $this->uri->segment(5);
+                    $this->account_model->delete($id);
+
+                    $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Hapus akun berhasil...
+                        </div>');
+
+                    redirect(base_url('index.php/admin/user/account/list'));
+                } else if ($para2 == 'ubah_password') {
+                    $id = $this->uri->segment(5);
+
+                    $account = $this->account_model;
+                    $validation = $this->form_validation;
+
+                    $validation->set_rules($account->rules_pass());
+                    if ($validation->run()) {
+
+                        $id         = $this->input->post('id');
+                        $oldpass    = $this->input->post('oldpass', true);
+                        $newpass    = $this->input->post('newpass2', true);
+
+                        //cek kesamaan pass
+                        $akun = $this->account_model->getAccountById($id);
+                        if (password_verify($oldpass, $akun['PASSWORD'])) {
+
+                            $data = [
+                                'ID'        => $id,
+                                'PASSWORD'  => password_hash($newpass, PASSWORD_DEFAULT)
+                            ];
+
+                            $account->ubahpass($data);
+
+                            $this->session->set_flashdata('info', '
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4>Success :</h4> Ubah password berhasil...
+                            </div>');
+                            redirect(base_url() . 'index.php/admin/user/account/ubah_password/' . $id);
+                        } else {
+
+                            $this->session->set_flashdata('info', '
+                            <div class="alert alert-warning" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4>Oops :</h4> Password lama salah...
+                            </div>');
+                            redirect(base_url() . 'index.php/admin/user/account/ubah_password/' . $id);
+                        }
+                    }
+
+                    $data_page = [
+                        'page_title' => 'Ubah Password',
+                        'card_name'  => 'Form',
+                        'detail'     => $this->account_model->getAccountById($id),
+                        'page'       => 'page/admin/module/user_account_pass_edit',
+                    ];
+                }
+                break;
+        }
+        $this->load->view('index', $data_page);
+    }
+
+    private function _randomPassword($length, $count, $characters)
+    {
+        // credit : https://www.phpjabbers.com/generate-a-random-password-with-php-php70.html
+        // $length - the length of the generated password
+        // $count - number of passwords to be generated
+        // $characters - types of characters to be used in the password
+
+        // define variables used within the function    
+        $symbols = array();
+        $passwords = array();
+        $used_symbols = '';
+        $pass = '';
+
+        // an array of different character types    
+        $symbols["lower_case"] = 'abcdefghijklmnpqrstuvwxyz';
+        $symbols["upper_case"] = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
+        $symbols["numbers"] = '123456789';
+        $symbols["special_symbols"] = '!@#$';
+
+        $characters = explode(",", $characters); // get characters types to be used for the passsword
+        foreach ($characters as $key => $value) {
+            $used_symbols .= $symbols[$value]; // build a string with all characters
+        }
+        $symbols_length = strlen($used_symbols) - 1; //strlen starts from 0 so to get number of characters deduct 1
+
+        for ($p = 0; $p < $count; $p++) {
+            $pass = '';
+            for ($i = 0; $i < $length; $i++) {
+                $n = rand(0, $symbols_length); // get a random character from the string with all characters
+                $pass .= $used_symbols[$n]; // add the character to the password string
+            }
+            $passwords[] = $pass;
+        }
+
+        return $passwords; // return the generated password
+
+        /*
+            //generate one password using 5 upper and lower case characters
+            randomPassword(5, 1, "lower_case,upper_case");
+
+            // generate three passwords using 10 lower case characters and numbers
+            randomPassword(10, 3, "lower_case,numbers");
+
+            // generate five passwords using 12 lower case and upper case characters, numbers and special symbols
+            randomPassword(12, 5, "lower_case,upper_case,numbers,special_symbols");
+        */
     }
 }

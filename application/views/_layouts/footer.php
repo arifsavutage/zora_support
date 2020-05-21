@@ -8,15 +8,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ingin keluar dari sistem?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">Tekan tombol "Ya" jika ingin benr - benar keluar dari sistem.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                <a class="btn btn-primary" href="<?= base_url() ?>index.php/home/logout">Ya</a>
             </div>
         </div>
     </div>
@@ -107,6 +107,16 @@
                 $('#jmlcicilan').attr("readonly", false);
                 $('#jmlcicilan').val('');
             }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#first-name').each(function() {
+            var str = $(this).text();
+            var matches = str.match(/\b(\w)/g);
+            var acronym = matches.join('');
+            $(this).prepend('<span style="background-color:<?= $this->session->userdata('color') ?>;">' + acronym + '</span>')
         });
     });
 </script>

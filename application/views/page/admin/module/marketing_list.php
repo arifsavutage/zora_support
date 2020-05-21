@@ -49,7 +49,7 @@
                                     <td><?= $m->MARKETING_NAME ?></td>
                                     <td><?= $m->MARKETING_ADDRESS ?></td>
                                     <td><?= $m->MARKETING_PHONE ?></td>
-                                    <td><?= $m->JOIN_DATE ?></td>
+                                    <td><?= date('d/m/Y', strtotime($m->JOIN_DATE)) ?></td>
                                     <td>
                                         <a title="Edit" href="<?= site_url('admin/master/marketing/edit/') . $m->ID ?>" class='btn btn-warning btn-sm mr-1'><i class="fas fa-edit"></i></a>
                                         <a title="Hapus" href="<?= site_url('admin/master/marketing/del/') . $m->ID ?>" class='btn btn-danger btn-sm mr-1' onclick="return confirm('Anda yakin akan menghapus data ini ?\nJika anda menghapus data ini, pastikan anda mengubah data agen yang terkait dengan marketing ini.')"><i class="fas fa-trash"></i></a>

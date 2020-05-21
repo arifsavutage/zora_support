@@ -25,7 +25,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" style="font-size: 12px;" id="example" width="100%" cellspacing="0">
+                    <table class="table table-bordered" style="font-size: 12px;" id="export" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -124,11 +124,11 @@
                                                                 <tbody>
                                                                     <?php
                                                                     $angs_data = $this->installment_model->getByInvoice($row['INVOICE']);
-                                                                    $no = 1;
+                                                                    $xx = 1;
                                                                     foreach ($angs_data as $angs) :
                                                                     ?>
                                                                         <tr>
-                                                                            <td><?= $no ?></td>
+                                                                            <td><?= $xx ?></td>
                                                                             <td><?= date('d/m/Y', strtotime($angs['JATUH_TEMPO'])) ?></td>
                                                                             <td><?= number_format($angs['TAGIHAN'], 0, ',', '.') ?></td>
                                                                             <td>
@@ -146,7 +146,7 @@
                                                                             </td>
                                                                         </tr>
                                                                     <?php
-                                                                        $no++;
+                                                                        $xx++;
                                                                     endforeach;
                                                                     ?>
                                                                 </tbody>
