@@ -1,0 +1,64 @@
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><?php if (isset($page_title)) echo $page_title; ?></h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><?php if (isset($card_name)) echo $card_name; ?></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <form name="addapotik" method="post" action="">
+                    <small class="form-text text-danger"><?= isset($errors) ? $errors : '' ?></small>
+                    <div class="form-group">
+                        <label for="marketingid">Marketing</label>
+                        <select class="form-control" id="marketingid" name="marketingid">
+                            <option value="">Marketing</option>
+                            <?php foreach ($marketing as $m) : ?>
+                                <option <?= set_select('marketingid', $m->ID) ?> value="<?= $m->ID ?>"><?= $m->MARKETING_NAME ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <small class="form-text text-danger"><?= form_error('marketingid') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="namaapotik">Nama Apotik</label>
+                        <input type="text" value="<?= set_value('namaapotik') ?>" class="form-control" id="namaapotik" name="namaapotik" placeholder="Nama Apotik">
+                        <small class="form-text text-danger"><?= form_error('namaapotik') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="apoteker">Apoteker</label>
+                        <input type="text" value="<?= set_value('apoteker') ?>" class="form-control" id="apoteker" name="apoteker" placeholder="Apoteker">
+                        <small class="form-text text-danger"><?= form_error('apoteker') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamatapotik">Alamat Apotik</label>
+                        <textarea class="form-control" name="alamatapotik" placeholder="Alamat Apotik"><?= set_value('alamatapotik') ?></textarea>
+                        <small class="form-text text-danger"><?= form_error('alamatapotik') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="telp">No. Telp</label>
+                        <input type="text" value="<?= set_value('telp') ?>" class="form-control" id="telp" name="telp" placeholder="No. Telp">
+                        <small class="form-text text-danger"><?= form_error('telp') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="hp">No. HP</label>
+                        <input type="text" value="<?= set_value('hp') ?>" class="form-control" id="hp" name="hp" placeholder="No. HP">
+                        <small class="form-text text-danger"><?= form_error('hp') ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" value="<?= set_value('email') ?>" class="form-control" id="email" name="email" placeholder="Email">
+                        <small class="form-text text-danger"><?= form_error('email') ?></small>
+                    </div>
+                    <a href="<?= site_url('admin/master/marketing/list') ?>" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-primary float-right">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

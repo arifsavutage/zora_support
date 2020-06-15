@@ -27,15 +27,16 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link <?= in_array($this->uri->segment(3), array("marketing", "agen", "subagen")) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#masterseller" aria-expanded="true" aria-controls="masterseller">
+            <a class="nav-link <?= in_array($this->uri->segment(3), array("marketing", "agen", "subagen", "apotik")) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#masterseller" aria-expanded="true" aria-controls="masterseller">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Master Seller</span>
             </a>
-            <div id="masterseller" class="collapse <?= in_array($this->uri->segment(3), array("marketing", "agen", "subagen")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="masterseller" class="collapse <?= in_array($this->uri->segment(3), array("marketing", "agen", "subagen", "apotik")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item <?= $this->uri->segment(3) == 'marketing' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/marketing/list'); ?>">Data Marketing</a>
                     <a class="collapse-item <?= $this->uri->segment(3) == 'agen' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/agen/list'); ?>">Data Agen</a>
                     <a class="collapse-item <?= $this->uri->segment(3) == 'subagen' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/subagen/list'); ?>">Data Subagen</a>
+                    <a class="collapse-item <?= $this->uri->segment(3) == 'apotik' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/apotik/list'); ?>">Data Apotik</a>
                 </div>
             </div>
         </li>

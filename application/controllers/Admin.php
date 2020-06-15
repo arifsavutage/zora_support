@@ -580,6 +580,91 @@ class Admin extends CI_Controller
                     exit();
                 }
                 break;
+            case 'apotik':
+                $this->load->model('Apotik_model');
+                $this->load->model('Marketing_model');
+                if ($para2 == 'list') {
+                    $data_page = [
+                        'page_title' => 'Apotik',
+                        'card_name'  => 'Apotik List',
+                        'page'       => 'page/admin/module/apotik_list',
+                        'apotik'     => $this->Apotik_model->getAllApotik()
+                    ];
+                } else if ($para2 == 'add') {
+                    $data_page = [
+                        'page_title' => 'Apotik',
+                        'card_name'  => 'Apotik Add',
+                        'page'       => 'page/admin/module/apotik_add',
+                        'marketing'  => $this->Marketing_model->getAllMarketing()
+                    ];
+                    $this->load->library('form_validation');
+                    $this->form_validation->set_rules('marketingid', 'Marketing', 'required');
+                    $this->form_validation->set_rules('namaapotik', 'Nama Apotik', 'required');
+                    $this->form_validation->set_rules('apoteker', 'Apoteker', 'required');
+                    $this->form_validation->set_rules('alamatapotik', 'Alamat Apotik', 'required');
+                    $this->form_validation->set_rules('telp', 'No telp', 'required');
+                    $this->form_validation->set_rules('hp', 'No HP', 'required');
+                    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+                    if ($this->form_validation->run() == FALSE) {
+                        // tetap disini
+                        $data_page['page'] = 'page/admin/module/apotik_add';
+                    } else {
+                        // ambil data dari form post
+                        $data = array(
+                            "MARKETING_ID"      => $this->input->post('marketingid', true),
+                            "APOTIK_NAME"       => $this->input->post('namaapotik', true),
+                            "APOTEKER_NAME"     => $this->input->post('apoteker', true),
+                            "APOTIK_ADDRESS"    => $this->input->post('alamatapotik', true),
+                            "APOTIK_PHONE"      => $this->input->post('telp', true),
+                            "APOTIK_MOBILE"     => $this->input->post('hp', true),
+                            "APOTIK_EMAIL"      => $this->input->post('email', true)
+                        );
+                        // simpan ke db
+                        $this->Apotik_model->addApotik($data);
+                        redirect('admin/master/apotik/list');
+                    }
+                } else if ($para2 == 'edit') {
+                    $id = $this->uri->segment(5);
+                    $data_page = [
+                        'page_title' => 'Apotik',
+                        'card_name'  => 'Apotik Edit',
+                        'page'       => 'page/admin/module/apotik_edit',
+                        'apotik'     => $this->Apotik_model->getApotikById($id),
+                        'marketing'  => $this->Marketing_model->getAllMarketing()
+                    ];
+                    $this->load->library('form_validation');
+                    $this->form_validation->set_rules('marketingid', 'Marketing', 'required');
+                    $this->form_validation->set_rules('namaapotik', 'Nama Apotik', 'required');
+                    $this->form_validation->set_rules('apoteker', 'Apoteker', 'required');
+                    $this->form_validation->set_rules('alamatapotik', 'Alamat Apotik', 'required');
+                    $this->form_validation->set_rules('telp', 'No telp', 'required');
+                    $this->form_validation->set_rules('hp', 'No HP', 'required');
+                    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+                    if ($this->form_validation->run() == FALSE) {
+                        // tetap disini
+                        $data_page['page'] = 'page/admin/module/apotik_edit';
+                    } else {
+                        // ambil data dari form post
+                        $data = array(
+                            "ID"                => $this->input->post('id', true),
+                            "MARKETING_ID"      => $this->input->post('marketingid', true),
+                            "APOTIK_NAME"       => $this->input->post('namaapotik', true),
+                            "APOTEKER_NAME"     => $this->input->post('apoteker', true),
+                            "APOTIK_ADDRESS"    => $this->input->post('alamatapotik', true),
+                            "APOTIK_PHONE"      => $this->input->post('telp', true),
+                            "APOTIK_MOBILE"     => $this->input->post('hp', true),
+                            "APOTIK_EMAIL"      => $this->input->post('email', true)
+                        );
+                        // simpan ke db
+                        $this->Apotik_model->editApotik($data);
+                        redirect('admin/master/apotik/list');
+                    }
+                } else if ($para2 == 'del') {
+                    $id = $this->uri->segment(5);
+                    $this->Apotik_model->delApotik($id);
+                    redirect('admin/master/apotik/list');
+                }
+                break;
             case 'kategori':
                 $this->load->model('Kategori_model');
                 if ($para2 == 'list') {
