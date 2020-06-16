@@ -111,6 +111,55 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#apotik">
+                            Apotik
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="apotik" tabindex="-1" role="dialog" aria-labelledby="apotikLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="apotikLabel">Daftar Apotik</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered" id="examplessss">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nama Apotik</th>
+                                                    <th>Type</th>
+                                                    <th><i class="fa fa-cog"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                foreach ($apotik as $apt) :
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $apt->ID ?></td>
+                                                        <td><?= $apt->APOTIK_NAME ?></td>
+                                                        <td>apt</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-danger select">Pilih</button>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                endforeach;
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row mb-4">

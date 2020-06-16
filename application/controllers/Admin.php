@@ -16,7 +16,7 @@ class Admin extends CI_Controller
     {
         $data_page  = [
             'page_title'    => 'Dashboard',
-            'page'          => 'page/admin/admin_dashboard'
+            'page'          => 'page/admin/admin_dashboard2'
         ];
         $this->load->view('index', $data_page);
     }
@@ -855,6 +855,7 @@ class Admin extends CI_Controller
                 $this->load->model('SubAgen_model');
                 $this->load->model('produk_model');
                 $this->load->model('selling_model');
+                $this->load->model('apotik_model');
 
                 if ($para2 == 'list') {
                     $data_page = [
@@ -870,6 +871,7 @@ class Admin extends CI_Controller
                         'card_name'  => 'Form Pembelian',
                         'agen'       => $this->agen_model->getAllAgen(),
                         'subagen'    => $this->SubAgen_model->getAllSubAgen(),
+                        'apotik'     => $this->apotik_model->getAllApotik(),
                         'products'   => $this->produk_model->getAllProduk(),
                         'page'       => 'page/admin/module/selling_add',
                     ];

@@ -54,9 +54,9 @@
                                             <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
-                                        <a href="#" class="btn btn-danger btn-user btn-block">
+                                        <!--<a href="#" class="btn btn-danger btn-user btn-block">
                                             Register
-                                        </a>
+                                        </a>-->
                                     </form>
                                     <hr>
                                     <div class="text-center">

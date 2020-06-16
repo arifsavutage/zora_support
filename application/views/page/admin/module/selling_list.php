@@ -55,6 +55,9 @@
                                             $seller = $this->selling_model->getAgenName($row['SELLER_ID']);
                                             echo ucwords($seller->SELLER_NAME);
                                             //echo "ini agen";
+                                        } else if ($type == 'apt') {
+                                            $seller = $this->selling_model->getApotikName($row['SELLER_ID']);
+                                            echo ucwords($seller->SELLER_NAME);
                                         } else {
                                             $seller = $this->selling_model->getSubAgenName($row['SELLER_ID']);
                                             echo ucwords($seller->SELLER_NAME);

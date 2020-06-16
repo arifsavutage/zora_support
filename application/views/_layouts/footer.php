@@ -152,6 +152,22 @@
 
             alert("Pembeli sudah dipilih");
         });
+
+        //apotik
+        $('#examplessss').on('click', '.select', function() {
+            var currentRow = $(this).closest('tr');
+
+            var col1 = currentRow.find("td:eq(0)").text();
+            var col2 = currentRow.find("td:eq(1)").text();
+            var col3 = currentRow.find("td:eq(2)").text();
+
+            //var data = col1 + "\n" + col2;
+            $('#idpembeli').val(col1);
+            $('#namapembeli').val(col2);
+            $('#sellertype').val(col3);
+
+            alert("Pembeli sudah dipilih");
+        });
     });
 </script>
 <script>
@@ -202,6 +218,7 @@
         $('#examples').DataTable();
         $('#exampless').DataTable();
         $('#examplesss').DataTable();
+        $('#examplessss').DataTable();
 
         $('#provinsi').change(function() {
             var id = $(this).val();
