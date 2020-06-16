@@ -24,7 +24,7 @@ class Home extends CI_Controller
             'permonths'     => $this->selling_model->getEarningByMonth(),
             'peryears'      => $this->selling_model->getEarningByYear(),
             'tunggakan'     => $this->selling_model->getTunggakanByMonth(),
-            'page'          => 'page/admin/admin_dashboard'
+            'page'          => 'page/admin/admin_dashboards'
         ];
         $this->load->view('index', $data_page);
     }

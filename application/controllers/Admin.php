@@ -16,7 +16,7 @@ class Admin extends CI_Controller
     {
         $data_page  = [
             'page_title'    => 'Dashboard',
-            'page'          => 'page/admin/admin_dashboard2'
+            'page'          => 'page/admin/admin_dashboards'
         ];
         $this->load->view('index', $data_page);
     }
