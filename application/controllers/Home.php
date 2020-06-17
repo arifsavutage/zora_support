@@ -13,20 +13,48 @@ class Home extends CI_Controller
         $this->load->model('SubAgen_model');
         $this->load->model('account_model');
         $this->load->model('selling_model');
+        $this->load->model('apotik_model');
     }
 
     public function index()
     {
         not_login();
 
+        if ($this->session->userdata('role') == 'superadmin') {
+            $pages = 'page/admin/admin_dashboard';
+        } else {
+            $pages = 'page/admin/admin_dashboards';
+        }
+
         $data_page  = [
             'page_title'    => 'Dashboard',
             'permonths'     => $this->selling_model->getEarningByMonth(),
             'peryears'      => $this->selling_model->getEarningByYear(),
             'tunggakan'     => $this->selling_model->getTunggakanByMonth(),
-            'page'          => 'page/admin/admin_dashboards'
+            'chart_data'    => $this->grafikpenjualan(),
+            'page'          => $pages
         ];
         $this->load->view('index', $data_page);
+    }
+
+    function grafikpenjualan()
+    {
+        $year  = date('Y');
+        $query = $this->db->query("SELECT DATE_FORMAT(TGL, '%M') AS PERIODE, SUM(`DEBET`) AS HASIL FROM `trans_history` WHERE `TRANS_TYPE` = 'selling' AND TGL LIKE '%$year%' GROUP BY DATE_FORMAT(TGL, '%M %Y') ORDER BY `ID` ASC");
+        $data = $query->result_array();
+
+        $x = [];
+
+        $i = 0;
+        foreach ($data as $row) {
+            $x['label'][] = $row['PERIODE'];
+            $x['value'][] = (int) $row['HASIL'];
+            $i++;
+        }
+
+        $x  = json_encode($x);
+
+        return $x;
     }
 
     public function forgot_password()
@@ -109,21 +137,62 @@ class Home extends CI_Controller
             if ($user) {
                 if (password_verify($pass, $user['PASSWORD'])) {
 
-                    if ($user['USER_TYPE'] == 'marketing') {
+                    /*if ($user['USER_TYPE'] == 'marketing') {
                         $get_data   = $this->marketing_model->getMarketingById($user['ID_USER']);
                         $exname = explode(" ", $get_data->MARKETING_NAME);
-                        $nama   = $exname[0] . " " . $exname[1];
+
+                        if (count($exname) > 1) {
+                            $nama   = $exname[0] . " " . $exname[1];
+                        } else {
+                            $nama   = $get_data->MARKETING_NAME;
+                        }
                     } else if ($user['USER_TYPE'] == 'agen') {
                         $get_data   = $this->agen_model->getAgenById($user['ID_USER']);
                         $exname = explode(" ", $get_data->AGEN_NAME);
-                        $nama   = $exname[0] . " " . $exname[1];
+
+                        if (count($exname) > 1) {
+                            $nama   = $exname[0] . " " . $exname[1];
+                        } else {
+                            $nama   = $get_data->AGEN_NAME;
+                        }
                     } else if ($user['USER_TYPE'] == 'sub') {
                         $get_data   = $this->subAgen_model->getSubAgenById($user['ID_USER']);
                         $exname = explode(" ", $get_data->SUBAGEN_NAME);
-                        $nama   = $exname[0] . " " . $exname[1];
+                        //$nama   = $exname[0] . " " . $exname[1];
+
+                        if (count($exname) > 1) {
+                            $nama   = $exname[0] . " " . $exname[1];
+                        } else {
+                            $nama   = $get_data->SUBAGEN_NAME;
+                        }
+                    } else if ($user['USER_TYPE'] == 'apotik') {
+                        $get_data   = $this->apotik_model->getApotikById($user['ID_USER']);
+                        $exname = explode(" ", $get_data->SUBAGEN_NAMEAPOTIK_NAME);
+                        //$nama   = $exname[0] . " " . $exname[1];
+
+                        if (count($exname) > 1) {
+                            $nama   = $exname[0] . " " . $exname[1];
+                        } else {
+                            $nama   = $get_data->SUBAGEN_NAME;
+                        }
                     } else {
                         $exname = explode(" ", $user['USERNAME']);
-                        $nama = $exname[0] . " " . $exname[1];
+                        //$nama = $exname[0] . " " . $exname[1];
+
+                        if (count($exname) > 1) {
+                            $nama   = $exname[0] . " " . $exname[1];
+                        } else {
+                            $nama   = $user['USERNAME'];
+                        }
+                    }*/
+
+                    $exname = explode(" ", $user['USERNAME']);
+                    //$nama = $exname[0] . " " . $exname[1];
+
+                    if (count($exname) > 1) {
+                        $nama   = $exname[0] . " " . $exname[1];
+                    } else {
+                        $nama   = $user['USERNAME'];
                     }
 
                     $data = [

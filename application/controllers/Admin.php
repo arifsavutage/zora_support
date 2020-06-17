@@ -14,9 +14,15 @@ class Admin extends CI_Controller
     }
     public function index()
     {
+        if ($this->session->userdata('role') == 'superadmin') {
+            $pages = 'page/admin/admin_dashboard';
+        } else {
+            $pages = 'page/admin/admin_dashboards';
+        }
+
         $data_page  = [
             'page_title'    => 'Dashboard',
-            'page'          => 'page/admin/admin_dashboards'
+            'page'          => $pages
         ];
         $this->load->view('index', $data_page);
     }

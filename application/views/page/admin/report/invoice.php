@@ -17,6 +17,11 @@
         $seller_addr = ucwords($seller->SELLER_ADDRESS);
         $seller_hp   = $seller->SELLER_PHONE;
         //echo "ini agen";
+    } else if ($type == 'apt') {
+        $seller = $this->selling_model->getApotikName($detail['SELLER_ID']);
+        $seller_name = ucwords($seller->SELLER_NAME);
+        $seller_addr = ucwords($seller->SELLER_ADDRESS);
+        $seller_hp   = $seller->SELLER_PHONE;
     } else {
         $seller = $this->selling_model->getSubAgenName($detail['SELLER_ID']);
         $seller_name = ucwords($seller->SELLER_NAME);

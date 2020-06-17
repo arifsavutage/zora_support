@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Jun 15, 2020 at 06:37 AM
--- Server version: 8.0.20
--- PHP Version: 7.4.5
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 16 Jun 2020 pada 14.04
+-- Versi server: 10.1.37-MariaDB
+-- Versi PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,36 +25,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `apotik`
+-- Struktur dari tabel `apotik`
 --
 
 CREATE TABLE `apotik` (
-  `ID` int NOT NULL,
-  `MARKETING_ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `MARKETING_ID` int(11) NOT NULL,
   `APOTIK_NAME` varchar(100) NOT NULL,
   `APOTEKER_NAME` varchar(100) NOT NULL,
   `APOTIK_ADDRESS` text NOT NULL,
   `APOTIK_PHONE` varchar(13) NOT NULL,
   `APOTIK_MOBILE` varchar(13) NOT NULL,
   `APOTIK_EMAIL` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `apotik`
+--
+
+INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APOTIK_ADDRESS`, `APOTIK_PHONE`, `APOTIK_MOBILE`, `APOTIK_EMAIL`) VALUES
+(1, 4, 'Sinta Indira', 'Deni Susanto, Apt.', 'Ngaliyan Semarang', '0241234567', '081324123456', 'apotik.sintaindira@gmail.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `a_city`
+-- Struktur dari tabel `a_city`
 --
 
 CREATE TABLE `a_city` (
-  `id` int NOT NULL,
-  `province_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `province_id` int(11) NOT NULL,
   `city_name` varchar(250) NOT NULL,
   `type` varchar(50) NOT NULL,
   `postal_code` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `a_city`
+-- Dumping data untuk tabel `a_city`
 --
 
 INSERT INTO `a_city` (`id`, `province_id`, `city_name`, `type`, `postal_code`) VALUES
@@ -562,16 +570,16 @@ INSERT INTO `a_city` (`id`, `province_id`, `city_name`, `type`, `postal_code`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `a_province`
+-- Struktur dari tabel `a_province`
 --
 
 CREATE TABLE `a_province` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `province_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `a_province`
+-- Dumping data untuk tabel `a_province`
 --
 
 INSERT INTO `a_province` (`id`, `province_name`) VALUES
@@ -613,17 +621,17 @@ INSERT INTO `a_province` (`id`, `province_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `a_subdistrict`
+-- Struktur dari tabel `a_subdistrict`
 --
 
 CREATE TABLE `a_subdistrict` (
-  `id` int NOT NULL,
-  `city_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
   `subdistrict_name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `a_subdistrict`
+-- Dumping data untuk tabel `a_subdistrict`
 --
 
 INSERT INTO `a_subdistrict` (`id`, `city_id`, `subdistrict_name`) VALUES
@@ -7628,23 +7636,24 @@ INSERT INTO `a_subdistrict` (`id`, `city_id`, `subdistrict_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `installment`
+-- Struktur dari tabel `installment`
 --
 
 CREATE TABLE `installment` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `INVOICE` longtext NOT NULL,
   `JATUH_TEMPO` date NOT NULL,
-  `TAGIHAN` int NOT NULL,
+  `TAGIHAN` int(11) NOT NULL,
   `TGL_BAYAR` date NOT NULL,
-  `NOMINAL` int NOT NULL
+  `NOMINAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `installment`
+-- Dumping data untuk tabel `installment`
 --
 
 INSERT INTO `installment` (`ID`, `INVOICE`, `JATUH_TEMPO`, `TAGIHAN`, `TGL_BAYAR`, `NOMINAL`) VALUES
+(0, '062020014', '2020-07-10', 11000000, '2020-06-16', 11000000),
 (1, '052020002', '2020-06-10', 2625000, '2020-05-17', 2625000),
 (2, '052020002', '2020-07-10', 2625000, '2020-05-17', 2625000),
 (3, '052020003', '2020-06-10', 2750000, '2020-05-17', 2750000),
@@ -7653,11 +7662,11 @@ INSERT INTO `installment` (`ID`, `INVOICE`, `JATUH_TEMPO`, `TAGIHAN`, `TGL_BAYAR
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marketing`
+-- Struktur dari tabel `marketing`
 --
 
 CREATE TABLE `marketing` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ID_CARD` varchar(100) NOT NULL,
   `MARKETING_NAME` varchar(150) NOT NULL,
   `MARKETING_ADDRESS` text NOT NULL,
@@ -7668,7 +7677,7 @@ CREATE TABLE `marketing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `marketing`
+-- Dumping data untuk tabel `marketing`
 --
 
 INSERT INTO `marketing` (`ID`, `ID_CARD`, `MARKETING_NAME`, `MARKETING_ADDRESS`, `MARKETING_PHONE`, `PHOTO`, `SCAN_ID`, `JOIN_DATE`) VALUES
@@ -7679,24 +7688,24 @@ INSERT INTO `marketing` (`ID`, `ID_CARD`, `MARKETING_NAME`, `MARKETING_ADDRESS`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marketing_agen`
+-- Struktur dari tabel `marketing_agen`
 --
 
 CREATE TABLE `marketing_agen` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ID_CARD` varchar(100) NOT NULL,
   `AGEN_NAME` varchar(150) NOT NULL,
   `AGEN_ADDRESS` text NOT NULL,
   `AGEN_PHONE` varchar(25) NOT NULL,
   `JOIN_DATE` date NOT NULL,
   `AREA` text NOT NULL,
-  `MARKETING_ID` int NOT NULL,
+  `MARKETING_ID` int(11) NOT NULL,
   `PHOTO` text NOT NULL,
   `SCAN_ID_CARD` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `marketing_agen`
+-- Dumping data untuk tabel `marketing_agen`
 --
 
 INSERT INTO `marketing_agen` (`ID`, `ID_CARD`, `AGEN_NAME`, `AGEN_ADDRESS`, `AGEN_PHONE`, `JOIN_DATE`, `AREA`, `MARKETING_ID`, `PHOTO`, `SCAN_ID_CARD`) VALUES
@@ -7709,12 +7718,12 @@ INSERT INTO `marketing_agen` (`ID`, `ID_CARD`, `AGEN_NAME`, `AGEN_ADDRESS`, `AGE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marketing_subagen`
+-- Struktur dari tabel `marketing_subagen`
 --
 
 CREATE TABLE `marketing_subagen` (
-  `ID` int NOT NULL,
-  `AGEN_ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `AGEN_ID` int(11) NOT NULL,
   `ID_CARD` varchar(100) NOT NULL,
   `SUBAGEN_NAME` varchar(250) NOT NULL,
   `SUBAGEN_ADDRESS` text NOT NULL,
@@ -7726,7 +7735,7 @@ CREATE TABLE `marketing_subagen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `marketing_subagen`
+-- Dumping data untuk tabel `marketing_subagen`
 --
 
 INSERT INTO `marketing_subagen` (`ID`, `AGEN_ID`, `ID_CARD`, `SUBAGEN_NAME`, `SUBAGEN_ADDRESS`, `SUBAGEN_PHONE`, `AREA`, `JOIN_DATE`, `PHOTO`, `SCAN_ID_CARD`) VALUES
@@ -7736,13 +7745,13 @@ INSERT INTO `marketing_subagen` (`ID`, `AGEN_ID`, `ID_CARD`, `SUBAGEN_NAME`, `SU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `op_payment`
+-- Struktur dari tabel `op_payment`
 --
 
 CREATE TABLE `op_payment` (
-  `ID` int NOT NULL,
-  `POS_ID` int NOT NULL,
-  `NOMINAL` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `POS_ID` int(11) NOT NULL,
+  `NOMINAL` int(11) NOT NULL,
   `TGL_TRANSAKSI` date NOT NULL,
   `KETERANGAN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -7750,18 +7759,18 @@ CREATE TABLE `op_payment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `op_pos`
+-- Struktur dari tabel `op_pos`
 --
 
 CREATE TABLE `op_pos` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `POS_NAME` varchar(100) NOT NULL,
   `POSITION` text NOT NULL,
   `KETERANGAN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `op_pos`
+-- Dumping data untuk tabel `op_pos`
 --
 
 INSERT INTO `op_pos` (`ID`, `POS_NAME`, `POSITION`, `KETERANGAN`) VALUES
@@ -7774,16 +7783,16 @@ INSERT INTO `op_pos` (`ID`, `POS_NAME`, `POSITION`, `KETERANGAN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_category`
+-- Struktur dari tabel `product_category`
 --
 
 CREATE TABLE `product_category` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `CATEGORY_NAME` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product_category`
+-- Dumping data untuk tabel `product_category`
 --
 
 INSERT INTO `product_category` (`ID`, `CATEGORY_NAME`) VALUES
@@ -7794,63 +7803,66 @@ INSERT INTO `product_category` (`ID`, `CATEGORY_NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_item`
+-- Struktur dari tabel `product_item`
 --
 
 CREATE TABLE `product_item` (
-  `ID` int NOT NULL,
-  `CAT_ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `CAT_ID` int(11) NOT NULL,
   `PRODUCT_NAME` varchar(150) NOT NULL,
-  `SELL_PRICE` int NOT NULL,
-  `STOCK` int NOT NULL,
-  `STOCK_LIMIT` int NOT NULL
+  `SELL_PRICE` int(11) NOT NULL,
+  `STOCK` int(11) NOT NULL,
+  `STOCK_LIMIT` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product_item`
+-- Dumping data untuk tabel `product_item`
 --
 
 INSERT INTO `product_item` (`ID`, `CAT_ID`, `PRODUCT_NAME`, `SELL_PRICE`, `STOCK`, `STOCK_LIMIT`) VALUES
-(2, 1, 'Alboost', 200000, 0, 1),
-(3, 1, 'Albumin Pro Imun', 350000, 0, 1),
+(2, 1, 'Alboost', 200000, 5, 1),
+(3, 1, 'Albumin Pro Imun', 350000, 20, 1),
 (4, 1, 'Vidoran smart', 100000, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchase`
+-- Struktur dari tabel `purchase`
 --
 
 CREATE TABLE `purchase` (
   `NOFAKTUR` varchar(14) NOT NULL,
-  `SUPLIER_ID` int NOT NULL,
-  `PRODUCT_ID` int NOT NULL,
-  `QTY` int NOT NULL,
-  `PURCHASE_PRICE` int NOT NULL,
+  `SUPLIER_ID` int(11) NOT NULL,
+  `PRODUCT_ID` int(11) NOT NULL,
+  `QTY` int(11) NOT NULL,
+  `PURCHASE_PRICE` int(11) NOT NULL,
   `PURCHASE_DATE` date NOT NULL,
   `DELIVERY_DATE` date NOT NULL,
   `ARRIVAL_DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `purchase`
+-- Dumping data untuk tabel `purchase`
 --
 
 INSERT INTO `purchase` (`NOFAKTUR`, `SUPLIER_ID`, `PRODUCT_ID`, `QTY`, `PURCHASE_PRICE`, `PURCHASE_DATE`, `DELIVERY_DATE`, `ARRIVAL_DATE`) VALUES
 ('P.052020.001', 9, 2, 50, 150000, '2020-05-17', '2020-05-17', '2020-05-17'),
-('P.052020.002', 9, 3, 50, 200000, '2020-05-17', '2020-05-17', '2020-05-17');
+('P.052020.002', 9, 3, 50, 200000, '2020-05-17', '2020-05-17', '2020-05-17'),
+('P.062020.003', 9, 2, 25, 150000, '2020-06-16', '2020-06-16', '2020-06-16'),
+('P.062020.004', 12, 3, 25, 200000, '2020-06-16', '2020-06-16', '2020-06-16'),
+('P.062020.005', 12, 3, 50, 200000, '2020-06-16', '2020-06-16', '2020-06-16');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `return`
+-- Struktur dari tabel `return`
 --
 
 CREATE TABLE `return` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `INVOICE` longtext NOT NULL,
   `TGL_RETUR` date NOT NULL,
-  `QTY` int NOT NULL,
+  `QTY` int(11) NOT NULL,
   `KETERANGAN` text NOT NULL,
   `STATUS` varchar(20) NOT NULL,
   `TGL_GANTI` date NOT NULL
@@ -7859,24 +7871,24 @@ CREATE TABLE `return` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `selling`
+-- Struktur dari tabel `selling`
 --
 
 CREATE TABLE `selling` (
-  `SALE_ID` int NOT NULL,
+  `SALE_ID` int(11) NOT NULL,
   `INVOICE` longtext NOT NULL,
-  `SELLER_ID` int NOT NULL,
+  `SELLER_ID` int(11) NOT NULL,
   `SELLER_TYPE` longtext NOT NULL,
   `PRODUCT_DETAIL` longtext NOT NULL,
   `METODE_BAYAR` enum('tunai','kredit') NOT NULL,
-  `JML_CICILAN` int NOT NULL,
+  `JML_CICILAN` int(11) NOT NULL,
   `STATUS` enum('lunas','belum') NOT NULL,
   `TGL_BELI` date NOT NULL,
   `KETERANGAN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `selling`
+-- Dumping data untuk tabel `selling`
 --
 
 INSERT INTO `selling` (`SALE_ID`, `INVOICE`, `SELLER_ID`, `SELLER_TYPE`, `PRODUCT_DETAIL`, `METODE_BAYAR`, `JML_CICILAN`, `STATUS`, `TGL_BELI`, `KETERANGAN`) VALUES
@@ -7892,23 +7904,26 @@ INSERT INTO `selling` (`SALE_ID`, `INVOICE`, `SELLER_ID`, `SELLER_TYPE`, `PRODUC
 (10, '062020010', 6, 'agen', '{\"c81e728d9d4c2f636f067f89cc14862c\":{\"id\":\"2\",\"name\":\"Alboost\",\"price\":200000,\"qty\":1,\"rowid\":\"c81e728d9d4c2f636f067f89cc14862c\",\"subtotal\":200000}}', 'tunai', 0, 'lunas', '2020-06-10', 'sdfs'),
 (11, '062020011', 6, 'agen', '{\"c81e728d9d4c2f636f067f89cc14862c\":{\"id\":\"2\",\"name\":\"Alboost\",\"price\":200000,\"qty\":1,\"rowid\":\"c81e728d9d4c2f636f067f89cc14862c\",\"subtotal\":200000}}', 'tunai', 0, 'lunas', '2020-06-10', 'ljkn'),
 (12, '062020012', 5, 'agen', '{\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":1,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":350000}}', '', 0, 'lunas', '2020-06-10', ''),
-(13, '062020013', 4, 'sub', '{\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":1,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":350000}}', 'tunai', 0, 'lunas', '2020-06-10', '');
+(13, '062020013', 4, 'sub', '{\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":1,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":350000}}', 'tunai', 0, 'lunas', '2020-06-10', ''),
+(14, '062020014', 1, 'apt', '{\"c81e728d9d4c2f636f067f89cc14862c\":{\"id\":\"2\",\"name\":\"Alboost\",\"price\":200000,\"qty\":20,\"rowid\":\"c81e728d9d4c2f636f067f89cc14862c\",\"subtotal\":4000000},\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":20,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":7000000}}', 'kredit', 0, 'lunas', '2020-06-16', 'Cicilan 1 bulan'),
+(15, '062020015', 4, 'agen', '{\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":20,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":7000000}}', 'tunai', 0, 'lunas', '2020-06-16', 'tunai'),
+(16, '062020016', 4, 'sub', '{\"eccbc87e4b5ce2fe28308fd9f2a7baf3\":{\"id\":\"3\",\"name\":\"Albumin Pro Imun\",\"price\":350000,\"qty\":15,\"rowid\":\"eccbc87e4b5ce2fe28308fd9f2a7baf3\",\"subtotal\":5250000}}', 'tunai', 0, 'lunas', '2020-06-16', 'tunai');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suplier`
+-- Struktur dari tabel `suplier`
 --
 
 CREATE TABLE `suplier` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `SUPLIER_NAME` varchar(150) NOT NULL,
   `SUPLIER_ADDRESS` text NOT NULL,
   `SUPLIER_PHONE` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `suplier`
+-- Dumping data untuk tabel `suplier`
 --
 
 INSERT INTO `suplier` (`ID`, `SUPLIER_NAME`, `SUPLIER_ADDRESS`, `SUPLIER_PHONE`) VALUES
@@ -7918,12 +7933,12 @@ INSERT INTO `suplier` (`ID`, `SUPLIER_NAME`, `SUPLIER_ADDRESS`, `SUPLIER_PHONE`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ticket`
+-- Struktur dari tabel `ticket`
 --
 
 CREATE TABLE `ticket` (
-  `ID` int NOT NULL,
-  `USER_ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
   `TICKET_DATE` date NOT NULL,
   `IMAGE` text NOT NULL,
   `KETERANGAN` text NOT NULL,
@@ -7933,22 +7948,22 @@ CREATE TABLE `ticket` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trans_history`
+-- Struktur dari tabel `trans_history`
 --
 
 CREATE TABLE `trans_history` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `TGL` date NOT NULL,
   `KETERANGAN` longtext NOT NULL,
   `ID_TRANS` longtext NOT NULL,
   `TRANS_TYPE` longtext NOT NULL,
-  `KREDIT` int NOT NULL,
-  `DEBET` int NOT NULL,
-  `SALDO` int NOT NULL
+  `KREDIT` int(11) NOT NULL,
+  `DEBET` int(11) NOT NULL,
+  `SALDO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `trans_history`
+-- Dumping data untuk tabel `trans_history`
 --
 
 INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`, `KREDIT`, `DEBET`, `SALDO`) VALUES
@@ -7971,17 +7986,23 @@ INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`
 (17, '2020-06-10', 'transaksi penjualan invoice 062020010', '062020010', 'selling', 0, 200000, 2950000),
 (18, '2020-06-10', 'transaksi penjualan invoice 062020011', '062020011', 'selling', 0, 200000, 3150000),
 (19, '2020-06-10', 'transaksi penjualan invoice 062020012', '062020012', 'selling', 0, 350000, 3500000),
-(20, '2020-06-10', 'transaksi penjualan invoice 062020013', '062020013', 'selling', 0, 350000, 3850000);
+(20, '2020-06-10', 'transaksi penjualan invoice 062020013', '062020013', 'selling', 0, 350000, 3850000),
+(21, '2020-06-16', 'Pembelian produk Alboost', 'P.062020.003', 'purchasing', 3750000, 0, 100000),
+(22, '2020-06-16', 'Pembelian produk Albumin Pro Imun', 'P.062020.004', 'purchasing', 5000000, 0, -4900000),
+(23, '2020-06-16', 'cicilan invoice 062020014 ke-1', '062020014', 'selling', 0, 11000000, 6100000),
+(24, '2020-06-16', 'Pembelian produk Albumin Pro Imun', 'P.062020.005', 'purchasing', 10000000, 0, -3900000),
+(25, '2020-06-16', 'transaksi penjualan invoice 062020015', '062020015', 'selling', 0, 7000000, 3100000),
+(26, '2020-06-16', 'transaksi penjualan invoice 062020016', '062020016', 'selling', 0, 5250000, 8350000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_account`
+-- Struktur dari tabel `user_account`
 --
 
 CREATE TABLE `user_account` (
-  `ID` int NOT NULL,
-  `ID_USER` int DEFAULT NULL,
+  `ID` int(11) NOT NULL,
+  `ID_USER` int(11) DEFAULT NULL,
   `USER_TYPE` longtext,
   `USERNAME` varchar(200) NOT NULL,
   `EMAIL` longtext NOT NULL,
@@ -7990,7 +8011,7 @@ CREATE TABLE `user_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_account`
+-- Dumping data untuk tabel `user_account`
 --
 
 INSERT INTO `user_account` (`ID`, `ID_USER`, `USER_TYPE`, `USERNAME`, `EMAIL`, `PASSWORD`, `LEVEL`) VALUES
@@ -8004,271 +8025,185 @@ INSERT INTO `user_account` (`ID`, `ID_USER`, `USER_TYPE`, `USERNAME`, `EMAIL`, `
 --
 
 --
--- Indexes for table `apotik`
+-- Indeks untuk tabel `apotik`
 --
 ALTER TABLE `apotik`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `MARKETING_ID` (`MARKETING_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `a_city`
+-- Indeks untuk tabel `a_city`
 --
 ALTER TABLE `a_city`
   ADD PRIMARY KEY (`id`),
   ADD KEY `province_id` (`province_id`);
 
 --
--- Indexes for table `a_province`
+-- Indeks untuk tabel `a_province`
 --
 ALTER TABLE `a_province`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `a_subdistrict`
+-- Indeks untuk tabel `a_subdistrict`
 --
 ALTER TABLE `a_subdistrict`
   ADD PRIMARY KEY (`id`),
   ADD KEY `city_id` (`city_id`);
 
 --
--- Indexes for table `installment`
+-- Indeks untuk tabel `installment`
 --
 ALTER TABLE `installment`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `marketing`
+-- Indeks untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `marketing_agen`
+-- Indeks untuk tabel `marketing_agen`
 --
 ALTER TABLE `marketing_agen`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `MARKETING_ID` (`MARKETING_ID`);
 
 --
--- Indexes for table `marketing_subagen`
+-- Indeks untuk tabel `marketing_subagen`
 --
 ALTER TABLE `marketing_subagen`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `AGEN_ID` (`AGEN_ID`);
-
---
--- Indexes for table `op_payment`
---
-ALTER TABLE `op_payment`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `op_pos`
+-- Indeks untuk tabel `op_pos`
 --
 ALTER TABLE `op_pos`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `product_category`
+-- Indeks untuk tabel `product_category`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `product_item`
+-- Indeks untuk tabel `product_item`
 --
 ALTER TABLE `product_item`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `CAT_ID` (`CAT_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `purchase`
+-- Indeks untuk tabel `purchase`
 --
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`NOFAKTUR`);
 
 --
--- Indexes for table `return`
+-- Indeks untuk tabel `return`
 --
 ALTER TABLE `return`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `selling`
+-- Indeks untuk tabel `selling`
 --
 ALTER TABLE `selling`
-  ADD PRIMARY KEY (`SALE_ID`),
-  ADD KEY `SELLER_ID` (`SELLER_ID`);
+  ADD PRIMARY KEY (`SALE_ID`);
 
 --
--- Indexes for table `suplier`
+-- Indeks untuk tabel `suplier`
 --
 ALTER TABLE `suplier`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `ticket`
+-- Indeks untuk tabel `ticket`
 --
 ALTER TABLE `ticket`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `trans_history`
+-- Indeks untuk tabel `trans_history`
 --
 ALTER TABLE `trans_history`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `user_account`
+-- Indeks untuk tabel `user_account`
 --
 ALTER TABLE `user_account`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `apotik`
+-- AUTO_INCREMENT untuk tabel `apotik`
 --
 ALTER TABLE `apotik`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `a_city`
---
-ALTER TABLE `a_city`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=502;
-
---
--- AUTO_INCREMENT for table `a_province`
---
-ALTER TABLE `a_province`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `a_subdistrict`
---
-ALTER TABLE `a_subdistrict`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6995;
-
---
--- AUTO_INCREMENT for table `installment`
---
-ALTER TABLE `installment`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `marketing`
---
-ALTER TABLE `marketing`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `marketing_agen`
---
-ALTER TABLE `marketing_agen`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `marketing_subagen`
+-- AUTO_INCREMENT untuk tabel `marketing_subagen`
 --
 ALTER TABLE `marketing_subagen`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `op_payment`
---
-ALTER TABLE `op_payment`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `op_pos`
+-- AUTO_INCREMENT untuk tabel `op_pos`
 --
 ALTER TABLE `op_pos`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `product_category`
+-- AUTO_INCREMENT untuk tabel `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `product_item`
+-- AUTO_INCREMENT untuk tabel `product_item`
 --
 ALTER TABLE `product_item`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `return`
+-- AUTO_INCREMENT untuk tabel `return`
 --
 ALTER TABLE `return`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `selling`
+-- AUTO_INCREMENT untuk tabel `selling`
 --
 ALTER TABLE `selling`
-  MODIFY `SALE_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `SALE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `suplier`
+-- AUTO_INCREMENT untuk tabel `suplier`
 --
 ALTER TABLE `suplier`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `ticket`
+-- AUTO_INCREMENT untuk tabel `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `trans_history`
+-- AUTO_INCREMENT untuk tabel `trans_history`
 --
 ALTER TABLE `trans_history`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `user_account`
+-- AUTO_INCREMENT untuk tabel `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `a_city`
---
-ALTER TABLE `a_city`
-  ADD CONSTRAINT `a_city_ibfk_1` FOREIGN KEY (`province_id`) REFERENCES `a_province` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
---
--- Constraints for table `a_subdistrict`
---
-ALTER TABLE `a_subdistrict`
-  ADD CONSTRAINT `a_subdistrict_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `a_city` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
---
--- Constraints for table `marketing_agen`
---
-ALTER TABLE `marketing_agen`
-  ADD CONSTRAINT `marketing_agen_ibfk_1` FOREIGN KEY (`MARKETING_ID`) REFERENCES `marketing` (`ID`);
-
---
--- Constraints for table `marketing_subagen`
---
-ALTER TABLE `marketing_subagen`
-  ADD CONSTRAINT `marketing_subagen_ibfk_1` FOREIGN KEY (`AGEN_ID`) REFERENCES `marketing_agen` (`ID`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
---
--- Constraints for table `product_item`
---
-ALTER TABLE `product_item`
-  ADD CONSTRAINT `product_item_ibfk_1` FOREIGN KEY (`CAT_ID`) REFERENCES `product_category` (`ID`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

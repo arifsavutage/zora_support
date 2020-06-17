@@ -51,7 +51,7 @@ class Selling_model extends CI_Model
     public function getApotikName($id)
     {
         $this->db->select("apotik.`ID`, apotik.`MARKETING_ID`, apotik.`APOTIK_NAME` AS SELLER_NAME, apotik.`APOTEKER_NAME`, 
-        apotik.`APOTIK_ADDRESS`, apotik.`APOTIK_PHONE` AS SELLER_PHONE, apotik.`APOTIK_MOBILE`, apotik.`APOTIK_EMAIL`");
+        apotik.`APOTIK_ADDRESS` AS SELLER_ADDRESS, apotik.`APOTIK_PHONE` AS SELLER_PHONE, apotik.`APOTIK_MOBILE`, apotik.`APOTIK_EMAIL`");
         $this->db->from($this->_table);
         $this->db->join('apotik', 'selling.SELLER_ID = apotik.ID', 'left');
         $this->db->where('apotik.ID', $id);
