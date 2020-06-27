@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2020 pada 07.08
--- Versi server: 10.1.37-MariaDB
--- Versi PHP: 7.3.0
+-- Host: localhost:3306
+-- Waktu pembuatan: 27 Jun 2020 pada 12.40
+-- Versi server: 10.3.23-MariaDB
+-- Versi PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_zora_support`
+-- Database: `zlasuppo_aplikasi`
 --
 
 -- --------------------------------------------------------
@@ -36,22 +36,21 @@ CREATE TABLE `apotik` (
   `APOTIK_ADDRESS` text NOT NULL,
   `APOTIK_PHONE` varchar(13) NOT NULL,
   `APOTIK_MOBILE` varchar(13) NOT NULL,
-  `APOTIK_EMAIL` text NOT NULL,
-  `DIKTER_PRAKTEK` varchar(400) NOT NULL
+  `APOTIK_EMAIL` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `apotik`
 --
 
-INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APOTIK_ADDRESS`, `APOTIK_PHONE`, `APOTIK_MOBILE`, `APOTIK_EMAIL`, `DIKTER_PRAKTEK`) VALUES
-(1, 1, 'JATI WALUYA', 'DR. ANDY OKTAMA', 'SOLO', '0271714741', '082235182115', 'slimfit354@yahoo.com', ''),
-(2, 1, 'KONDANG WARAS', 'Dr. BIMO SURYANTORO', 'SOLO', '089526100031', '089526100031', 'slimfit354@yahoo.com', ''),
-(3, 1, 'KIMIA FARMA YOSODIPURA', 'ATUT', 'SOLO', '082141527266', '082141527266', 'slimfit354@yahoo.com', ''),
-(4, 1, 'KIMIA FARMA GENTAN', 'SISKA', 'SOLO', '087862006211', '087862006211', 'slimfit354@yahoo.com', ''),
-(5, 1, 'KIMIA FARMA SOLO BARU', 'DIKA', 'SOLO BARU', '085642321643', '085642321643', 'slimfit354@yahoo.com', ''),
-(6, 1, 'RS PKU MUH. SOLO', 'FIKA', 'SOLO', '085728843780', '085728843780', 'slimfit354@yahoo.com', ''),
-(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com', '');
+INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APOTIK_ADDRESS`, `APOTIK_PHONE`, `APOTIK_MOBILE`, `APOTIK_EMAIL`) VALUES
+(1, 1, 'JATI WALUYA', 'DR. ANDY OKTAMA', 'SOLO', '0271714741', '082235182115', 'slimfit354@yahoo.com'),
+(2, 1, 'KONDANG WARAS', 'Dr. BIMO SURYANTORO', 'SOLO', '089526100031', '089526100031', 'slimfit354@yahoo.com'),
+(3, 1, 'KIMIA FARMA YOSODIPURA', 'ATUT', 'SOLO', '082141527266', '082141527266', 'slimfit354@yahoo.com'),
+(4, 1, 'KIMIA FARMA GENTAN', 'SISKA', 'SOLO', '087862006211', '087862006211', 'slimfit354@yahoo.com'),
+(5, 1, 'KIMIA FARMA SOLO BARU', 'DIKA', 'SOLO BARU', '085642321643', '085642321643', 'slimfit354@yahoo.com'),
+(6, 1, 'RS PKU MUH. SOLO', 'FIKA', 'SOLO', '085728843780', '085728843780', 'slimfit354@yahoo.com'),
+(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -7911,7 +7910,7 @@ CREATE TABLE `trans_history` (
 CREATE TABLE `user_account` (
   `ID` int(11) NOT NULL,
   `ID_USER` int(11) DEFAULT NULL,
-  `USER_TYPE` longtext,
+  `USER_TYPE` longtext DEFAULT NULL,
   `USERNAME` varchar(200) NOT NULL,
   `EMAIL` longtext NOT NULL,
   `PASSWORD` varchar(256) NOT NULL,
