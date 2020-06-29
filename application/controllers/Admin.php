@@ -865,16 +865,16 @@ class Admin extends CI_Controller
 
                 if ($para2 == 'list') {
                     $data_page = [
-                        'page_title' => 'Daftar Pembelian',
-                        'card_name'  => 'Daftar Pembelian',
+                        'page_title' => 'Daftar Penjualan',
+                        'card_name'  => 'Daftar Penjualan',
                         'penjualan'  => $this->selling_model->getAll(),
                         'page'       => 'page/admin/module/selling_list',
                     ];
                 } else if ($para2 == 'add') {
 
                     $data_page = [
-                        'page_title' => 'Pembelian',
-                        'card_name'  => 'Form Pembelian',
+                        'page_title' => 'Penjualan',
+                        'card_name'  => 'Form Penjualan',
                         'agen'       => $this->agen_model->getAllAgen(),
                         'subagen'    => $this->SubAgen_model->getAllSubAgen(),
                         'apotik'     => $this->apotik_model->getAllApotik(),
@@ -1117,6 +1117,7 @@ class Admin extends CI_Controller
                             'periode'       => $periode,
                             'purchase'      => $this->purchase_model->getDateRange($date1, $date2),
                             'operasional'   => $this->kas_model->getOpDateRange($date1, $date2),
+                            'opgroup'       => $this->kas_model->getOpGroup($date1, $date2),
                             'selling'       => $this->selling_model->getDateRange($date1, $date2),
                             'page'          => 'page/admin/report/labarugi'
                         ];

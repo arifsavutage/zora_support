@@ -35,11 +35,6 @@
 <!-- Page level plugins -->
 <script src="<?= base_url(); ?>template/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<!--<script src="<?= base_url(); ?>template/js/demo/chart-area-demo.js"></script>-->
-<script src="<?= base_url(); ?>template/js/demo/chart-pie-demo.js"></script>
-
-
 <!-- Page level plugins -->
 <script src="<?= base_url(); ?>template/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url(); ?>template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -94,8 +89,8 @@
             //labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             labels: cData.label,
             datasets: [{
-                label: "Earnings",
-                lineTension: 0.3,
+                label: "Pendapatan",
+                //lineTension: 0.3,
                 backgroundColor: "rgba(78, 115, 223, 0.05)",
                 borderColor: "rgba(78, 115, 223, 1)",
                 pointRadius: 3,
@@ -104,10 +99,25 @@
                 pointHoverRadius: 3,
                 pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
                 pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                pointHitRadius: 10,
+                pointHitRadius: 3,
                 pointBorderWidth: 2,
                 //data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
                 data: cData.value,
+            }, {
+                label: "Pengeluaran",
+                lineTension: 0.3,
+                backgroundColor: "rgba(248, 108, 108, 0.05)",
+                borderColor: "rgba(248, 108, 108, 1)",
+                pointRadius: 3,
+                pointBackgroundColor: "rgba(248, 108, 108, 1)",
+                pointBorderColor: "rgba(248, 108, 108, 1)",
+                pointHoverRadius: 3,
+                pointHoverBackgroundColor: "rgba(248, 108, 108, 1)",
+                pointHoverBorderColor: "rgba(248, 108, 108, 1)",
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                //data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+                data: cData.spending,
             }],
         },
         options: {
@@ -152,7 +162,7 @@
                 }],
             },
             legend: {
-                display: false
+                display: true
             },
             tooltips: {
                 backgroundColor: "rgb(255,255,255)",

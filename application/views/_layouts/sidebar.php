@@ -67,6 +67,7 @@
                     <!--<a class="collapse-item" href="">Konfirmasi Pembayaran</a>-->
                     <a class="collapse-item <?= $this->uri->segment(3) == 'return' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/return/list'); ?>">Retur Barang</a>
                     <a class="collapse-item <?= $this->uri->segment(3) == 'operasional' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/operasional/list'); ?>">Operasional</a>
+
                 </div>
             </div>
         </li>

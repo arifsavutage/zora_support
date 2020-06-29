@@ -173,7 +173,7 @@
                     </div>
                     <div class="col-md-3">
                         <label for="harga">Harga</label>
-                        <input type="text" class="form-control" name="harga" id="harga" value="" readonly="true" />
+                        <input type="text" class="form-control" name="harga" id="harga" value="" />
                     </div>
                     <div class="col-md-1">
                         <label for="qty">Qty</label>

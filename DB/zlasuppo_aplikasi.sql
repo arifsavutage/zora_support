@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 27 Jun 2020 pada 12.40
+-- Waktu pembuatan: 29 Jun 2020 pada 17.47
 -- Versi server: 10.3.23-MariaDB
 -- Versi PHP: 7.3.6
 
@@ -50,7 +50,7 @@ INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APO
 (4, 1, 'KIMIA FARMA GENTAN', 'SISKA', 'SOLO', '087862006211', '087862006211', 'slimfit354@yahoo.com'),
 (5, 1, 'KIMIA FARMA SOLO BARU', 'DIKA', 'SOLO BARU', '085642321643', '085642321643', 'slimfit354@yahoo.com'),
 (6, 1, 'RS PKU MUH. SOLO', 'FIKA', 'SOLO', '085728843780', '085728843780', 'slimfit354@yahoo.com'),
-(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com');
+(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH + Dr. DIMAS', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -7697,6 +7697,13 @@ CREATE TABLE `marketing_agen` (
   `SCAN_ID_CARD` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `marketing_agen`
+--
+
+INSERT INTO `marketing_agen` (`ID`, `ID_CARD`, `AGEN_NAME`, `AGEN_ADDRESS`, `AGEN_PHONE`, `JOIN_DATE`, `AREA`, `MARKETING_ID`, `PHOTO`, `SCAN_ID_CARD`) VALUES
+(1, '0000000000000000', 'ZAIN', 'KADIPIRO', '085799563554', '2020-06-27', '445', 1, '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -7715,6 +7722,13 @@ CREATE TABLE `marketing_subagen` (
   `PHOTO` text NOT NULL,
   `SCAN_ID_CARD` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `marketing_subagen`
+--
+
+INSERT INTO `marketing_subagen` (`ID`, `AGEN_ID`, `ID_CARD`, `SUBAGEN_NAME`, `SUBAGEN_ADDRESS`, `SUBAGEN_PHONE`, `AREA`, `JOIN_DATE`, `PHOTO`, `SCAN_ID_CARD`) VALUES
+(1, 1, '0000000000000000', 'Rohman', 'KADIPIRO', '082133086563', '6162', '2020-06-27', '', '');
 
 -- --------------------------------------------------------
 
@@ -7752,7 +7766,11 @@ INSERT INTO `op_pos` (`ID`, `POS_NAME`, `POSITION`, `KETERANGAN`) VALUES
 (2, 'Beban Pembelian ATK', '', 'Pembelian alat tulis kantor'),
 (3, 'Beban Telpon, Listrik, Air & Internet', '', 'Beban pembayaran Telpon, Listrik, Air & Internet'),
 (4, 'Beban Transportasi', '', 'Beban Transportasi'),
-(5, 'Biaya Iklan', '', 'Biaya untuk iklan');
+(5, 'Biaya Iklan', '', 'Biaya untuk iklan'),
+(6, 'BEBAN AKUNTAX', '', 'AKUNTAX'),
+(7, 'Fee', '', 'Fee dokter'),
+(8, 'Lain-lain', '', ''),
+(9, 'Fee Marketing', '', '');
 
 -- --------------------------------------------------------
 
@@ -7793,8 +7811,8 @@ CREATE TABLE `product_item` (
 --
 
 INSERT INTO `product_item` (`ID`, `CAT_ID`, `PRODUCT_NAME`, `SELL_PRICE`, `STOCK`, `STOCK_LIMIT`) VALUES
-(1, 1, 'ALBOOST EKSTRAK IKAN GABUS', 100, 0, 40),
-(2, 2, 'ALBOOST PRO IMUN', 85, 0, 50);
+(1, 1, 'ALBOOST EKSTRAK IKAN GABUS', 100000, 573, 40),
+(2, 2, 'ALBOOST PRO IMUN', 85000, 500, 50);
 
 -- --------------------------------------------------------
 
@@ -7812,6 +7830,16 @@ CREATE TABLE `purchase` (
   `DELIVERY_DATE` date NOT NULL,
   `ARRIVAL_DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `purchase`
+--
+
+INSERT INTO `purchase` (`NOFAKTUR`, `SUPLIER_ID`, `PRODUCT_ID`, `QTY`, `PURCHASE_PRICE`, `PURCHASE_DATE`, `DELIVERY_DATE`, `ARRIVAL_DATE`) VALUES
+('P.062020.001', 1, 1, 200, 40000, '2020-01-27', '2020-01-27', '2020-01-27'),
+('P.062020.002', 1, 1, 200, 40000, '2020-03-30', '2020-03-30', '2020-03-30'),
+('P.062020.003', 1, 1, 200, 40000, '2020-05-28', '2020-05-28', '2020-05-28'),
+('P.062020.004', 1, 2, 500, 25000, '2020-05-28', '2020-05-28', '2020-05-28');
 
 -- --------------------------------------------------------
 
@@ -7847,6 +7875,15 @@ CREATE TABLE `selling` (
   `TGL_BELI` date NOT NULL,
   `KETERANGAN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `selling`
+--
+
+INSERT INTO `selling` (`SALE_ID`, `INVOICE`, `SELLER_ID`, `SELLER_TYPE`, `PRODUCT_DETAIL`, `METODE_BAYAR`, `JML_CICILAN`, `STATUS`, `TGL_BELI`, `KETERANGAN`) VALUES
+(1, '062020001', 1, 'sub', '[]', 'tunai', 0, 'lunas', '2020-06-27', ''),
+(2, '062020002', 1, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1000000}}', 'tunai', 0, 'lunas', '2020-06-27', ''),
+(3, '062020003', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":17,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1700000}}', 'tunai', 0, 'lunas', '2020-06-29', '');
 
 -- --------------------------------------------------------
 
@@ -7900,6 +7937,51 @@ CREATE TABLE `trans_history` (
   `DEBET` int(11) NOT NULL,
   `SALDO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `trans_history`
+--
+
+INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`, `KREDIT`, `DEBET`, `SALDO`) VALUES
+(1, '2020-01-27', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.062020.001', 'purchasing', 8000000, 0, -8000000),
+(2, '2020-03-30', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.062020.002', 'purchasing', 8000000, 0, -16000000),
+(3, '2020-05-28', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.062020.003', 'purchasing', 8000000, 0, -24000000),
+(4, '2020-05-28', 'Pembelian produk ALBOOST PRO IMUN', 'P.062020.004', 'purchasing', 12500000, 0, -36500000),
+(5, '2020-06-27', 'KIRIM APOTIK JATI WALUYA', '4', 'operasional', 25000, 0, -36525000),
+(6, '2020-01-03', 'Gaji Diana ', '1', 'operasional', 1250000, 0, -37775000),
+(7, '2020-01-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -38975000),
+(8, '2020-01-03', 'dr Andi', '7', 'operasional', 850000, 0, -39825000),
+(9, '2020-01-03', 'Gaji Diana', '1', 'operasional', 1250000, 0, -41075000),
+(10, '2020-01-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -42275000),
+(11, '2020-02-09', 'dr Dimas', '7', 'operasional', 2000000, 0, -44275000),
+(12, '2020-02-09', 'dr Andi', '7', 'operasional', 800000, 0, -45075000),
+(13, '2020-02-20', 'disain forimmun', '5', 'operasional', 700000, 0, -45775000),
+(14, '2020-03-03', 'Gaji Diana', '1', 'operasional', 1250000, 0, -47025000),
+(15, '2020-03-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -48225000),
+(16, '2020-06-27', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -49425000),
+(17, '2020-03-13', 'dr Dimas', '7', 'operasional', 2000000, 0, -51425000),
+(18, '2020-03-13', 'dr Andi', '7', 'operasional', 600000, 0, -52025000),
+(19, '2020-03-04', 'Gaji Diana', '1', 'operasional', 1750000, 0, -53775000),
+(20, '2020-04-04', 'Gaji Arsy', '1', 'operasional', 1250000, 0, -55025000),
+(21, '2020-04-10', 'Uang muka Web mas Arif', '2', 'operasional', 4000000, 0, -59025000),
+(22, '2020-04-28', 'dr Dimas', '7', 'operasional', 2400000, 0, -61425000),
+(23, '2020-04-28', 'dr Andi', '7', 'operasional', 600000, 0, -62025000),
+(24, '2020-05-01', 'Gaji Diana', '1', 'operasional', 1250000, 0, -63275000),
+(25, '2020-05-01', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -64475000),
+(26, '2020-05-18', 'THR Diana', '1', 'operasional', 1000000, 0, -65475000),
+(27, '2020-05-18', 'THR Arsy', '1', 'operasional', 1000000, 0, -66475000),
+(28, '2020-05-23', 'Zakat Tijaroh', '8', 'operasional', 5000000, 0, -71475000),
+(29, '2020-05-28', 'Laboratorium POM', '8', 'operasional', 8500000, 0, -79975000),
+(30, '2020-06-04', 'Gaji Diana', '1', 'operasional', 1250000, 0, -81225000),
+(31, '2020-06-04', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -82425000),
+(32, '2020-06-04', 'dr Dimas', '7', 'operasional', 2000000, 0, -84425000),
+(33, '2020-06-04', 'dr Andi', '7', 'operasional', 800000, 0, -85225000),
+(34, '2020-06-06', 'SPT Tahunan', '6', 'operasional', 1500000, 0, -86725000),
+(35, '2020-06-06', 'Agung Jambi', '9', 'operasional', 270000, 0, -86995000),
+(36, '2020-06-23', 'Heri', '4', 'operasional', 1500000, 0, -88495000),
+(37, '2020-06-27', 'transaksi penjualan invoice 062020001', '062020001', 'selling', 0, 0, -88495000),
+(38, '2020-06-27', 'transaksi penjualan invoice 062020002', '062020002', 'selling', 0, 1000000, -87495000),
+(39, '2020-06-29', 'transaksi penjualan invoice 062020003', '062020003', 'selling', 0, 1700000, -85795000);
 
 -- --------------------------------------------------------
 
@@ -8086,13 +8168,13 @@ ALTER TABLE `marketing`
 -- AUTO_INCREMENT untuk tabel `marketing_agen`
 --
 ALTER TABLE `marketing_agen`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing_subagen`
 --
 ALTER TABLE `marketing_subagen`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `op_payment`
@@ -8104,7 +8186,7 @@ ALTER TABLE `op_payment`
 -- AUTO_INCREMENT untuk tabel `op_pos`
 --
 ALTER TABLE `op_pos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `product_category`
@@ -8116,7 +8198,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT untuk tabel `product_item`
 --
 ALTER TABLE `product_item`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `return`
@@ -8128,7 +8210,7 @@ ALTER TABLE `return`
 -- AUTO_INCREMENT untuk tabel `selling`
 --
 ALTER TABLE `selling`
-  MODIFY `SALE_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `SALE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `suplier`
@@ -8146,7 +8228,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT untuk tabel `trans_history`
 --
 ALTER TABLE `trans_history`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_account`
