@@ -606,6 +606,7 @@ class Admin extends CI_Controller
                     $this->load->library('form_validation');
                     $this->form_validation->set_rules('marketingid', 'Marketing', 'required');
                     $this->form_validation->set_rules('namaapotik', 'Nama Apotik', 'required');
+                    $this->form_validation->set_rules('dokterpraktek', 'Dokter Praktek', 'required');
                     $this->form_validation->set_rules('apoteker', 'Apoteker', 'required');
                     $this->form_validation->set_rules('alamatapotik', 'Alamat Apotik', 'required');
                     $this->form_validation->set_rules('telp', 'No telp', 'required');
@@ -619,6 +620,7 @@ class Admin extends CI_Controller
                         $data = array(
                             "MARKETING_ID"      => $this->input->post('marketingid', true),
                             "APOTIK_NAME"       => $this->input->post('namaapotik', true),
+                            "DOKTER_PRAKTEK"    => $this->input->post('dokterpraktek', true),
                             "APOTEKER_NAME"     => $this->input->post('apoteker', true),
                             "APOTIK_ADDRESS"    => $this->input->post('alamatapotik', true),
                             "APOTIK_PHONE"      => $this->input->post('telp', true),
@@ -641,6 +643,7 @@ class Admin extends CI_Controller
                     $this->load->library('form_validation');
                     $this->form_validation->set_rules('marketingid', 'Marketing', 'required');
                     $this->form_validation->set_rules('namaapotik', 'Nama Apotik', 'required');
+                    $this->form_validation->set_rules('dokterpraktek', 'Dokter Praktek', 'required');
                     $this->form_validation->set_rules('apoteker', 'Apoteker', 'required');
                     $this->form_validation->set_rules('alamatapotik', 'Alamat Apotik', 'required');
                     $this->form_validation->set_rules('telp', 'No telp', 'required');
@@ -655,6 +658,7 @@ class Admin extends CI_Controller
                             "ID"                => $this->input->post('id', true),
                             "MARKETING_ID"      => $this->input->post('marketingid', true),
                             "APOTIK_NAME"       => $this->input->post('namaapotik', true),
+                            "DOKTER_PRAKTEK"    => $this->input->post('dokterpraktek', true),
                             "APOTEKER_NAME"     => $this->input->post('apoteker', true),
                             "APOTIK_ADDRESS"    => $this->input->post('alamatapotik', true),
                             "APOTIK_PHONE"      => $this->input->post('telp', true),

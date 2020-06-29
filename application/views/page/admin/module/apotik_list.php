@@ -22,6 +22,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Apotik</th>
+                                <th>Dokter Praktek</th>
                                 <th>Nama Apoteker</th>
                                 <th>Marketing</th>
                                 <th>Alamat</th>
@@ -35,6 +36,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Apotik</th>
+                                <th>Dokter Praktek</th>
                                 <th>Nama Apoteker</th>
                                 <th>Marketing</th>
                                 <th>Alamat</th>
@@ -50,6 +52,7 @@
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td><?= $m->APOTIK_NAME ?></td>
+                                    <td><?= $m->DOKTER_PRAKTEK ?></td>
                                     <td><?= $m->APOTEKER_NAME ?></td>
                                     <td><?= $m->MARKETING_NAME ?></td>
                                     <td><?= $m->APOTIK_ADDRESS ?></td>
