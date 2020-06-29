@@ -56,11 +56,11 @@
     <?php endif; ?>
     <?php if (in_array($this->session->userdata['role'], ['superadmin', 'operator'])) : ?>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mastertransaksi" aria-expanded="true" aria-controls="mastertransaksi">
+            <a class="nav-link <?= in_array($this->uri->segment(3), array("purchasing", "selling", "return", "operasional")) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#mastertransaksi" aria-expanded="true" aria-controls="mastertransaksi">
                 <i class="fas fa-fw fa-store"></i>
                 <span>Master Transaksi</span>
             </a>
-            <div id="mastertransaksi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="mastertransaksi" class="collapse <?= in_array($this->uri->segment(3), array("purchasing", "selling", "return", "operasional")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item <?= $this->uri->segment(3) == 'purchasing' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/purchasing/list'); ?>">Pemesanan</a>
                     <a class="collapse-item <?= $this->uri->segment(3) == 'selling' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/selling/list'); ?>">Penjualan</a>
@@ -78,11 +78,11 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masterlaporan" aria-expanded="true" aria-controls="masterlaporan">
+            <a class="nav-link <?= in_array($this->uri->segment(3), array("kas_harian", "labarugi")) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#masterlaporan" aria-expanded="true" aria-controls="masterlaporan">
                 <i class="fas fa-fw fa-folder-open"></i>
                 <span>Master Laporan</span>
             </a>
-            <div id="masterlaporan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="masterlaporan" class="collapse <?= in_array($this->uri->segment(3), array("kas_harian", "labarugi")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item <?= $this->uri->segment(3) == 'kas_harian' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/kas_harian'); ?>">Laporan Kas</a>
                     <!--<a class="collapse-item <?= $this->uri->segment(3) == 'perform' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/laporan/perform'); ?>">Performa</a>-->

@@ -31,6 +31,11 @@
                         <small class="form-text text-danger"><?= form_error('namaapotik') ?></small>
                     </div>
                     <div class="form-group">
+                        <label for="dokterpraktek">Dokter Praktek</label>
+                        <input type="text" value="<?= $apotik->DOKTER_PRAKTEK ?>" class="form-control" id="dokterpraktek" name="dokterpraktek" placeholder="Dokter Praktek">
+                        <small class="form-text text-danger"><?= form_error('dokterpraktek') ?></small>
+                    </div>
+                    <div class="form-group">
                         <label for="apoteker">Apoteker</label>
                         <input type="text" value="<?= $apotik->APOTEKER_NAME ?>" class="form-control" id="apoteker" name="apoteker" placeholder="Apoteker">
                         <small class="form-text text-danger"><?= form_error('apoteker') ?></small>
