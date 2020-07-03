@@ -72,6 +72,7 @@ class Sell extends CI_Controller
                         </button>
                     </div>';
                     $message .= '</td></tr>';
+                    echo $message;
                 }
             }
         }
