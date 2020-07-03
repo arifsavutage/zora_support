@@ -24,12 +24,11 @@ class Sell extends CI_Controller
         //cek
         $detail    = $this->produk_model->getProdukById($id);
 
-        if ($detail->STOCK < $qty) {
-
+        if (empty($detail) || $qty <= 0) {
             $message = '';
             $message .= '<tr><td colspan="5">';
             $message .= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Maaf, </strong> stok ' . $name . ' hanya ' . $detail->STOCK . '.
+                <strong>Maaf, </strong> Item produk belum di pilih atau qty kurang dari 1
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,14 +37,43 @@ class Sell extends CI_Controller
 
             echo $message;
         } else {
-            $data = array(
-                'id' => $id,
-                'name' => $name,
-                'price' => $this->input->post('product_price'),
-                'qty' => $qty,
-            );
-            $this->cart->insert($data);
-            echo $this->show_cart();
+            if ($detail->STOCK < $qty) {
+
+                $message = '';
+                $message .= '<tr><td colspan="5">';
+                $message .= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Maaf, </strong> stok ' . $name . ' hanya ' . $detail->STOCK . '.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+                $message .= '</td></tr>';
+
+                echo $message;
+            } else {
+                $price = $this->input->post('product_price');
+
+                if ($price > 0) {
+                    $data = array(
+                        'id' => $id,
+                        'name' => $name,
+                        'price' => $this->input->post('product_price'),
+                        'qty' => $qty,
+                    );
+                    $this->cart->insert($data);
+                    echo $this->show_cart();
+                } else {
+                    $message = '';
+                    $message .= '<tr><td colspan="5">';
+                    $message .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>ERROR, </strong> transaksi tidak tersimpan, silahkan masukkan harga dengan benar...!!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>';
+                    $message .= '</td></tr>';
+                }
+            }
         }
     }
 
@@ -95,8 +123,8 @@ class Sell extends CI_Controller
         $type       = $this->input->post('sellertype');
         $metode     = $this->input->post('metode');
         $jmlcicilan = $this->input->post('jmlcicilan');
-        //$tglbeli    = date('Y-m-d', strtotime($this->input->post('tglbeli'))); //str d-m-Y
-        $tglbeli    = date('Y-m-d'); //str d-m-Y
+        $tglbeli    = date('Y-m-d', strtotime($this->input->post('tglbeli'))); //str d/m/Y
+        //$tglbeli    = date('Y-m-d'); //str d-m-Y
         $catatan    = $this->input->post('keterangan');
         $cart       = $this->cart->contents();
         $total      = $this->cart->total();
@@ -117,25 +145,52 @@ class Sell extends CI_Controller
         if ($metode == 'kredit') {
             $status = 'belum';
 
-            $jatuhtempo = date('Y') . "-" . date('m') . "-10"; // dibuat pertgl 10
-            $tagihan = $total / $jmlcicilan;
+            if ($jmlcicilan <= 0) {
 
-            for ($i = 1; $i <= $jmlcicilan; $i++) {
-                $create_date = date('Y-m-d', strtotime("+$i months", strtotime($jatuhtempo)));
+                $this->cart->destroy();
+                $this->session->set_flashdata('info', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>WARNING, </strong> transaksi tidak tersimpan, jumlah cicilan tidak di isi dengan benar ...!!!! 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>');
 
-                //save to installment
-                $data_installment  = [
-                    'INVOICE'       => $invoice,
-                    'JATUH_TEMPO'   => $create_date,
-                    'TAGIHAN'       => $tagihan,
-                    'TGL_BAYAR'     => '0000-00-00',
-                    'NOMINAL'       => 0
-                ];
-                $this->installment_model->save($data_installment);
-            }
+                redirect(base_url('index.php/admin/master/selling/add'));
+            } else {
+                //$jatuhtempo = date('Y') . "-" . date('m') . "-10"; // dibuat pertgl 10
+                $tagihan = $total / $jmlcicilan;
 
-            //catat history transaksi kredit
-            /*$ket   = "transaksi penjualan kredit invoice $invoice";
+                for ($i = 1; $i <= $jmlcicilan; $i++) {
+
+                    $create_date = date('Y-m-d', strtotime("+$i month", strtotime($tglbeli)));
+
+                    /*if (date('m', strtotime($create_date)) == 2) {
+                    if (date('d', strtotime($tglbeli)) == 30 || date('d', strtotime($tglbeli)) == 31) {
+                        //cek hari jatuh tempo di bln februari
+                        //$hari   = cal_days_in_month(CAL_GREGORIAN, date('m', strtotime($create_date)), date('Y', strtotime($create_date)));
+                        $hari   = date('t', mktime(0, 0, 0, date('m', strtotime($create_date)), 1, date('Y', strtotime($create_date))));
+                        $jatuhtempo = date('Y', strtotime($create_date)) . "-" . date('m', strtotime($create_date)) . "-" . $hari;
+                    }
+                } else {
+                    $jatuhtempo = date('Y-m-d', strtotime("+$i months", strtotime($tglbeli)));
+                }*/
+
+
+                    //save to installment
+                    $data_installment  = [
+                        'INVOICE'       => $invoice,
+                        'JATUH_TEMPO'   => $create_date,
+                        //'JATUH_TEMPO'   => $jatuhtempo,
+                        'TAGIHAN'       => $tagihan,
+                        'TGL_BAYAR'     => '0000-00-00',
+                        'NOMINAL'       => 0
+                    ];
+                    $this->installment_model->save($data_installment);
+                }
+
+                //catat history transaksi kredit
+                /*$ket   = "transaksi penjualan kredit invoice $invoice";
 
             $data  = json_decode($selling_detail, true);
 
@@ -155,6 +210,7 @@ class Sell extends CI_Controller
             ];
 
             $this->cek_transaksi->transaksi($trans);*/
+            }
         } else {
             $status = 'lunas';
 
@@ -169,7 +225,7 @@ class Sell extends CI_Controller
             }
 
             $trans = [
-                'tgl'           => date('Y-m-d'),
+                'tgl'           => $tglbeli,
                 'ket'           => $ket,
                 'id_trans'      => $invoice,
                 'trans_type'    => $this->input->post('tipe'),

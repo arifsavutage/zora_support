@@ -32,6 +32,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="tgl">Tgl. Pembiayaan</label>
+                        <input type="text" value="<?= date('Y-m-d'); ?>" class="form-control date1" id="tgl" name="tgl" readonly="true">
+                    </div>
+                    <div class="form-group">
                         <label for="nominal">Nominal</label>
                         <input type="text" class="form-control" id="nominal" name="nominal">
                     </div>

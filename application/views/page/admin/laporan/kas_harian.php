@@ -34,7 +34,7 @@
                                 <th>Kredit</th>
                                 <th>Debet</th>
                                 <th>Saldo</th>
-                                <th><i class="fas fa-cog"></i></th>
+                                <!--<th><i class="fas fa-cog"></i></th>-->
                             </tr>
                         </thead>
                         <tfoot>
@@ -47,7 +47,7 @@
                                 <th>Kredit</th>
                                 <th>Debet</th>
                                 <th>Saldo</th>
-                                <th><i class="fas fa-cog"></i></th>
+                                <!--<th><i class="fas fa-cog"></i></th>-->
                             </tr>
                         </tfoot>
                         <tbody>
@@ -64,9 +64,9 @@
                                     <td><?= number_format($row['KREDIT'], 0, ',', '.') ?></td>
                                     <td><?= number_format($row['DEBET'], 0, ',', '.') ?></td>
                                     <td><?= number_format($row['SALDO'], 0, ',', '.') ?></td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-danger" title="koreksi"><i class="fas fa-edit"></i></a>
-                                    </td>
+                                    <!--<td>
+                                        <a href="<?= base_url() . "index.php/admin/koreksi/" . $row['ID']; ?>" class="btn btn-sm btn-danger" title="koreksi"><i class="fas fa-edit"></i></a>
+                                    </td>-->
                                 </tr>
                             <?php
                                 $no++;

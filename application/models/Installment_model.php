@@ -21,16 +21,21 @@ class Installment_model extends CI_Model
         return $this->db->get_where($this->_table, ['INVOICE' => $invoice])->result_array();
     }
 
-    public function cicilan($id)
+    public function cicilan($id, $tglbyr)
     {
         //ambil nilai tagihan
         $tagihan = $this->db->get_where($this->_table, ['ID' => $id])->row_array();
 
         $data = [
-            'TGL_BAYAR' => date('Y-m-d'),
+            'TGL_BAYAR' => $tglbyr,
             'NOMINAL'   => $tagihan['TAGIHAN']
         ];
 
         return $this->db->update($this->_table, $data, ['ID' => $id]);
+    }
+
+    public function detailcicilan($id)
+    {
+        return $this->db->get_where($this->_table, ['ID' => $id])->row_array();
     }
 }

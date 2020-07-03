@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Jun 2020 pada 15.51
+-- Waktu pembuatan: 01 Jul 2020 pada 09.29
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -45,7 +45,7 @@ CREATE TABLE `apotik` (
 --
 
 INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APOTIK_ADDRESS`, `APOTIK_PHONE`, `APOTIK_MOBILE`, `APOTIK_EMAIL`, `DOKTER_PRAKTEK`) VALUES
-(1, 1, 'JATI WALUYA', 'DR. ANDY OKTAMA', 'SOLO', '0271714741', '082235182115', 'slimfit354@yahoo.com', ''),
+(1, 1, 'JATI WALUYA', 'DR. ANDY OKTAMA', 'SOLO', '0271714741', '082235182115', 'slimfit354@yahoo.com', 'Dr. Slum'),
 (2, 1, 'KONDANG WARAS', 'Dr. BIMO SURYANTORO', 'SOLO', '089526100031', '089526100031', 'slimfit354@yahoo.com', ''),
 (3, 1, 'KIMIA FARMA YOSODIPURA', 'ATUT', 'SOLO', '082141527266', '082141527266', 'slimfit354@yahoo.com', ''),
 (4, 1, 'KIMIA FARMA GENTAN', 'SISKA', 'SOLO', '087862006211', '087862006211', 'slimfit354@yahoo.com', ''),
@@ -7655,6 +7655,21 @@ CREATE TABLE `installment` (
   `NOMINAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `installment`
+--
+
+INSERT INTO `installment` (`ID`, `INVOICE`, `JATUH_TEMPO`, `TAGIHAN`, `TGL_BAYAR`, `NOMINAL`) VALUES
+(1, '062020001', '2020-07-10', 300000, '2020-06-30', 300000),
+(2, '062020004', '2020-07-10', 500000, '0000-00-00', 0),
+(3, '062020006', '2020-07-10', 1000000, '0000-00-00', 0),
+(4, '062020007', '2020-07-10', 4000000, '2020-06-30', 4000000),
+(5, '072020029', '2020-08-10', 0, '2020-07-01', 0),
+(6, '072020030', '2020-08-10', 1500000, '2020-07-01', 1500000),
+(7, '072020031', '2020-08-10', 750000, '2020-07-01', 750000),
+(8, '072020032', '2020-08-10', 750000, '2020-07-01', 750000),
+(9, '072020033', '2020-08-10', 100000, '0000-00-00', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -7677,7 +7692,8 @@ CREATE TABLE `marketing` (
 --
 
 INSERT INTO `marketing` (`ID`, `ID_CARD`, `MARKETING_NAME`, `MARKETING_ADDRESS`, `MARKETING_PHONE`, `PHOTO`, `SCAN_ID`, `JOIN_DATE`) VALUES
-(1, '3372011010740004', 'Dr. OKTORA ', 'MANAHAN, SOLO', '085290071925', '', '', '2020-06-27');
+(1, '3372011010740004', 'Dr. OKTORA ', 'MANAHAN, SOLO', '085290071925', '', '', '2020-06-27'),
+(2, '0000000000000001', 'ADI', 'CARUBAN', '08123412237', '', '', '2020-06-30');
 
 -- --------------------------------------------------------
 
@@ -7703,7 +7719,10 @@ CREATE TABLE `marketing_agen` (
 --
 
 INSERT INTO `marketing_agen` (`ID`, `ID_CARD`, `AGEN_NAME`, `AGEN_ADDRESS`, `AGEN_PHONE`, `JOIN_DATE`, `AREA`, `MARKETING_ID`, `PHOTO`, `SCAN_ID_CARD`) VALUES
-(1, '0000000000000000', 'ZAIN', 'KADIPIRO', '085799563554', '2020-06-27', '445', 1, '', '');
+(1, '0000000000000000', 'ZAIN', 'KADIPIRO', '085799563554', '2020-06-27', '445', 1, '', ''),
+(3, '0000000000000001', 'HARIYONO', 'jakarta', '081314444626', '2020-07-01', '151', 1, '', ''),
+(4, '0000000000000002', 'NUR ', 'solo', '000', '2020-07-01', '169', 1, '', ''),
+(5, '0000000000000004', 'FENCY', 'MADIUN', '0000', '2020-07-01', '427', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -8145,19 +8164,19 @@ ALTER TABLE `a_subdistrict`
 -- AUTO_INCREMENT untuk tabel `installment`
 --
 ALTER TABLE `installment`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing_agen`
 --
 ALTER TABLE `marketing_agen`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing_subagen`
@@ -8217,7 +8236,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT untuk tabel `trans_history`
 --
 ALTER TABLE `trans_history`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_account`

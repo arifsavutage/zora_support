@@ -173,7 +173,7 @@
                     </div>
                     <div class="col-md-3">
                         <label for="harga">Harga</label>
-                        <input type="text" class="form-control" name="harga" id="harga" value="" />
+                        <input type="number" class="form-control" name="harga" id="harga" value="" required="" />
                     </div>
                     <div class="col-md-1">
                         <label for="qty">Qty</label>
@@ -281,7 +281,7 @@
                     <div class="form-row mb-4">
                         <div class="col-md-4">
                             <label for="metode">Metode Byr.</label>
-                            <select class="form-control" name="metode" id="metode">
+                            <select class="form-control" name="metode" id="metode" required="">
                                 <option value="">Pilih</option>
                                 <option value="tunai">Tunai</option>
                                 <option value="kredit">Kredit</option>
@@ -293,7 +293,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="tglbeli">Tgl. Transaksi</label>
-                            <input class="form-control" type="text" name="tglbeli" id="tglbeli" value="<?= date('d/m/Y'); ?>" readonly="true" />
+                            <input class="form-control date1" type="text" name="tglbeli" id="tglbeli" value="<?= date('d/m/Y'); ?>" readonly="true" />
                         </div>
                     </div>
 
