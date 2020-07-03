@@ -1020,7 +1020,7 @@ class Admin extends CI_Controller
                     if ($this->form_validation->run()) {
 
                         $trans = [
-                            'tgl'           => date('Y-m-d'),
+                            'tgl'           => $this->input->post('tgl'),
                             'ket'           => $this->input->post('keterangan'),
                             'id_trans'      => $this->input->post('rekening'),
                             'trans_type'    => $this->input->post('tipe'),
@@ -1086,6 +1086,24 @@ class Admin extends CI_Controller
                     ];
                 }
                 break;
+        }
+
+        $this->load->view('index', $data_page);
+    }
+
+    public function koreksi($id = null)
+    {
+        $this->load->model('kas_model');
+
+        if ($id == null) {
+            redirect(base_url() . "index.php/admin/laporan/kas_harian");
+        } else {
+            $data_page = [
+                'page_title' => 'Form Koreksi Transaksi',
+                'card_name'  => 'Form',
+                'detail'     => $this->kas_model->getById($id),
+                'page'       => 'page/admin/module/koreksi_history',
+            ];
         }
 
         $this->load->view('index', $data_page);

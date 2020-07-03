@@ -44,4 +44,9 @@ class Kas_model extends CI_Model
         $query = $this->db->query("SELECT trans_history.ID_TRANS, op_pos.POS_NAME FROM `trans_history` LEFT JOIN op_pos ON op_pos.ID = trans_history.ID_TRANS WHERE trans_history.TRANS_TYPE = 'operasional' AND trans_history.TGL BETWEEN '$date1' AND '$date2' GROUP BY trans_history.ID_TRANS");
         return $query->result_array();
     }
+
+    public function getById($id)
+    {
+        return $this->db->get_where($this->_table, ['ID' => $id])->row_array();
+    }
 }

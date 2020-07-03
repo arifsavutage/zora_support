@@ -74,7 +74,17 @@
     <?php endif; ?>
     <?php if (in_array($this->session->userdata['role'], ['superadmin'])) : ?>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('index.php/admin/master/rekening/list'); ?>"><i class="fas fa-fw fa-cash-register"></i><span>Master Biaya</span></a>
+            <a class="nav-link <?= in_array($this->uri->segment(3), array("biaya", "pendapatan", "koreksi")) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#transaksilain" aria-expanded="true" aria-controls="transaksilain">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Transaksi Lain</span>
+            </a>
+            <div id="transaksilain" class="collapse <?= in_array($this->uri->segment(3), array("biaya", "pendapatan", "koreksi")) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item <?= $this->uri->segment(3) == 'biaya' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/master/rekening/list'); ?>">Beban & Biaya</a>
+                    <!--<a class="collapse-item <?= $this->uri->segment(3) == 'koreksi' ? 'active' : '' ?>" href="<?= base_url('index.php/admin/koreksi'); ?>">Koreksi Beban & Biaya</a>-->
+                </div>
+            </div>
+
         </li>
 
         <li class="nav-item">
