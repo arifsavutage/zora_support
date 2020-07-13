@@ -24,14 +24,19 @@
 
             <!-- Card Body -->
             <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 datesearchbox"></div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" style="font-size: 12px;" id="export" width="100%" cellspacing="0">
+                    <table class="table table-bordered" style="font-size: 11px;" id="daterange" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Tgl. Belanja</th>
                                 <th>Invoice</th>
+                                <th>Marketing</th>
                                 <th>Pembeli</th>
+                                <th>Tipe Seller</th>
                                 <th>Total</th>
                                 <th>Metode Bayar</th>
                                 <th>Cicilan</th>
@@ -39,7 +44,23 @@
                                 <th><i class="fa fa-cog"></i></th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Tgl. Belanja</th>
+                                <th>Invoice</th>
+                                <th>Marketing</th>
+                                <th>Pembeli</th>
+                                <th>Tipe Seller</th>
+                                <th>Total</th>
+                                <th>Metode Bayar</th>
+                                <th>Cicilan</th>
+                                <th>Status</th>
+                                <th><i class="fa fa-cog"></i></th>
+                            </tr>
+                        </tfoot>
                         <tbody>
+
                             <?php
                             $no = 1;
                             foreach ($penjualan as $row) :
@@ -48,6 +69,22 @@
                                     <td><?= $no ?></td>
                                     <td><?= date('d/m/Y', strtotime($row['TGL_BELI'])) ?></td>
                                     <td><?= "<strong>#" . $row['INVOICE'] . "</strong>" ?></td>
+                                    <td>
+                                        <?php
+                                        $type = $row['SELLER_TYPE'];
+                                        if ($type == 'agen') {
+                                            $marketing = $this->selling_model->getMarketing($type, $row['SELLER_ID']);
+                                            echo ucwords($marketing['MARKETING_NAME']);
+                                        } else if ($type == 'apt') {
+                                            $marketing = $this->selling_model->getMarketing($type, $row['SELLER_ID']);
+                                            echo ucwords($marketing['MARKETING_NAME']);
+                                        } else {
+                                            $marketing = $this->selling_model->getMarketing($type, $row['SELLER_ID']);
+                                            echo ucwords($marketing['MARKETING_NAME']);
+                                        }
+                                        //echo $type;
+                                        ?>
+                                    </td>
                                     <td>
                                         <?php
                                         $type = $row['SELLER_TYPE'];
@@ -68,6 +105,21 @@
                                     </td>
                                     <td>
                                         <?php
+                                        $type = $row['SELLER_TYPE'];
+                                        if ($type == 'agen') {
+                                            echo "<br/> <span class='badge badge-info'>Agen</span>";
+                                            //echo "ini agen";
+                                        } else if ($type == 'apt') {
+                                            echo "<br/> <span class='badge badge-success'>Apotik</span>";
+                                        } else {
+                                            echo "<br/> <span class='badge badge-secondary'>Sub Agen</span>";
+                                            //echo "ini sub";
+                                        }
+                                        //echo $type;
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
                                         $detail = json_decode($row['PRODUCT_DETAIL'], true);
                                         //print_r(var_dump($detail));
                                         $total = 0;
@@ -75,7 +127,7 @@
                                             $total += $item['subtotal'];
                                         }
 
-                                        echo number_format($total, 0, ',', '.');
+                                        echo number_format($total, 0, '.', ',');
                                         ?>
                                     </td>
                                     <td><?= $row['METODE_BAYAR'] ?></td>
@@ -90,7 +142,7 @@
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url('index.php/admin/report/invoice/print_invoice/') . $row['INVOICE'] ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file"></i> invoice</a>
+                                        <a href="<?= base_url('index.php/admin/report/invoice/print_invoice/') . $row['INVOICE'] ?>" target="_blank" class="btn btn-sm btn-success" title="invoice"><i class="fa fa-file"></i></a>
 
                                         <?php
                                         if ($row['METODE_BAYAR'] == 'kredit') :
@@ -168,19 +220,7 @@
                             endforeach;
                             ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Tgl. Belanja</th>
-                                <th>Invoice</th>
-                                <th>Pembeli</th>
-                                <th>Total</th>
-                                <th>Metode Bayar</th>
-                                <th>Cicilan</th>
-                                <th>Status</th>
-                                <th><i class="fa fa-cog"></i></th>
-                            </tr>
-                        </tfoot>
+
                     </table>
                 </div>
             </div>

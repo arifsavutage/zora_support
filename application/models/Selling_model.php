@@ -20,7 +20,7 @@ class Selling_model extends CI_Model
 
     public function getAll()
     {
-        $this->db->order_by('selling.SALE_ID', 'DESC');
+        $this->db->order_by('selling.TGL_BELI', 'DESC');
         return $this->db->get($this->_table)->result_array();
     }
 
@@ -103,5 +103,23 @@ class Selling_model extends CI_Model
         $this->db->where('STATUS', 'belum');
         $this->db->where("DATE_FORMAT(`TGL_BELI`, '%M') = DATE_FORMAT(CURRENT_DATE(), '%M')");
         return $this->db->get($this->_table)->result_array();
+    }
+
+    public function getMarketing($type, $transid)
+    {
+        if ($type == 'agen') {
+            $this->db->join('marketing_agen', 'marketing_agen.MARKETING_ID = marketing.ID');
+            $this->db->where('marketing_agen.ID', $transid);
+            return $this->db->get('marketing')->row_array();
+        } else if ($type == 'sub') {
+            $this->db->join('marketing_agen', 'marketing_agen.MARKETING_ID = marketing.ID', 'left');
+            $this->db->join('marketing_subagen', 'marketing_subagen.AGEN_ID = marketing_agen.ID', 'left');
+            $this->db->where('marketing_subagen.ID', $transid);
+            return $this->db->get('marketing')->row_array();
+        } else {
+            $this->db->join('apotik', 'apotik.MARKETING_ID = marketing.ID');
+            $this->db->where('apotik.ID', $transid);
+            return $this->db->get('marketing')->row_array();
+        }
     }
 }

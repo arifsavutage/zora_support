@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 03 Jul 2020 pada 17.21
+-- Waktu pembuatan: 12 Jul 2020 pada 21.21
 -- Versi server: 10.3.23-MariaDB
 -- Versi PHP: 7.3.6
 
@@ -51,7 +51,11 @@ INSERT INTO `apotik` (`ID`, `MARKETING_ID`, `APOTIK_NAME`, `APOTEKER_NAME`, `APO
 (4, 1, 'KIMIA FARMA GENTAN', 'SISKA', 'SOLO', '087862006211', '087862006211', 'slimfit354@yahoo.com', ''),
 (5, 1, 'KIMIA FARMA SOLO BARU', 'DIKA', 'SOLO BARU', '085642321643', '085642321643', 'slimfit354@yahoo.com', ''),
 (6, 1, 'RS PKU MUH. SOLO', 'FIKA', 'SOLO', '085728843780', '085728843780', 'slimfit354@yahoo.com', ''),
-(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH + Dr. DIMAS', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com', '');
+(7, 1, 'RS PKU MUH. SAMPANGAN', 'RATIH ', 'SEMANGGI', '08170441206', '08170441206', 'slimfit354@yahoo.com', 'Dr. DIMAS'),
+(8, 1, 'KIMIA FARMA ADI SUCIPTO', 'Bu Ana', 'Jalan Adi Sucipto, Kerten', ' 081295382578', '081295382578', 'slimfit354@yahoo.com', 'Dr. AJI'),
+(9, 1, 'SANY FARMA', 'DWI SUGIHARTOMO', 'BAKI, SUKOHARJO', '081578028176', '0895387231357', 'slimfit354@yahoo.com', 'PRAKTEK DOKTER BERSAMA'),
+(10, 1, 'TULUNG ', 'Ibu GALUH/ Mas DENI', 'Area Sawah, Tulung, Kec. Tulung, Kabupaten Klaten, Jawa Tengah 57482', '081393811899', '081393811899', 'slimfit354@yahoo.com', 'PRAKTEK DOKTER BERSAMA'),
+(11, 1, 'Apotik Assalaam 2', 'Ibu RISMA/ Mas DENI', ' Jl. Garuda No.8, Sidoharjo, Banaran, Kec. Boyolali, Kabupaten Boyolali, Jawa Tengah 57313', '081393811899', '081393811899', 'slimfit354@yahoo.com', 'PRAKTEK DOKTER BERSAMA');
 
 -- --------------------------------------------------------
 
@@ -7680,11 +7684,23 @@ INSERT INTO `installment` (`ID`, `INVOICE`, `JATUH_TEMPO`, `TAGIHAN`, `TGL_BAYAR
 (18, '072020013', '2020-03-02', 1800000, '2020-07-02', 1800000),
 (19, '072020005', '2020-01-24', 600000, '2020-07-02', 600000),
 (20, '072020015', '2020-03-26', 6000000, '2020-07-03', 6000000),
-(21, '072020016', '2020-03-26', 1800000, '0000-00-00', 0),
+(21, '072020016', '2020-03-26', 1800000, '2020-03-12', 1800000),
 (22, '072020006', '2020-01-17', 600000, '2020-07-02', 600000),
 (23, '072020018', '2020-02-10', 600000, '2020-07-02', 600000),
 (24, '072020019', '2020-02-15', 1500000, '2020-07-02', 1500000),
-(25, '072020021', '2020-03-27', 1500000, '2020-07-02', 1500000);
+(25, '072020021', '2020-03-27', 1500000, '2020-07-02', 1500000),
+(26, '072020056', '2020-06-13', 4000000, '2020-06-18', 4000000),
+(27, '072020057', '2020-07-18', 4000000, '2020-07-15', 4000000),
+(28, '072020060', '2020-07-26', 300000, '0000-00-00', 0),
+(29, '072020061', '2020-06-23', 300000, '0000-00-00', 0),
+(30, '072020065', '2020-08-07', 1400000, '0000-00-00', 0),
+(31, '072020066', '2020-08-04', 1500000, '0000-00-00', 0),
+(32, '072020067', '2020-07-04', 1500000, '0000-00-00', 0),
+(33, '072020068', '2020-07-04', 750000, '0000-00-00', 0),
+(34, '072020069', '2020-07-04', 700000, '0000-00-00', 0),
+(35, '072020073', '2020-07-01', 640000, '0000-00-00', 0),
+(36, '072020074', '2020-07-17', 300000, '0000-00-00', 0),
+(37, '072020075', '2020-07-17', 300000, '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -7736,7 +7752,7 @@ CREATE TABLE `marketing_agen` (
 INSERT INTO `marketing_agen` (`ID`, `ID_CARD`, `AGEN_NAME`, `AGEN_ADDRESS`, `AGEN_PHONE`, `JOIN_DATE`, `AREA`, `MARKETING_ID`, `PHOTO`, `SCAN_ID_CARD`) VALUES
 (1, '0000000000000000', 'ZAIN', 'KADIPIRO', '085799563554', '2020-06-27', '445', 1, '', ''),
 (3, '0000000000000001', 'HARIYONO', 'jakarta', '081314444626', '2020-07-01', '151', 1, '', ''),
-(6, '3372011010740004', 'dr. OKTORA', 'MANAHAN', '08122626354', '2020-07-01', '248', 1, '', '');
+(6, '3372011010740004', 'dr. OKTORA', 'MANAHAN', '08122626354', '2020-07-01', '445', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -7762,7 +7778,7 @@ CREATE TABLE `marketing_subagen` (
 --
 
 INSERT INTO `marketing_subagen` (`ID`, `AGEN_ID`, `ID_CARD`, `SUBAGEN_NAME`, `SUBAGEN_ADDRESS`, `SUBAGEN_PHONE`, `AREA`, `JOIN_DATE`, `PHOTO`, `SCAN_ID_CARD`) VALUES
-(1, 1, '0000000000000000', 'Rohman', 'KADIPIRO', '082133086563', '6162', '2020-06-27', '', ''),
+(1, 6, '0000000000000000', 'Rohman', 'KADIPIRO', '082133086563', '6162', '2020-06-27', '', ''),
 (2, 6, '3372011010740004', 'Dr. OKTORA', 'MANAHAN', '08122626354', '3510', '2020-07-01', '', ''),
 (3, 6, '0000000000000002', 'Adi', 'Madiun', '08123412237', '3508', '2020-07-02', '', '');
 
@@ -7803,7 +7819,7 @@ INSERT INTO `op_pos` (`ID`, `POS_NAME`, `POSITION`, `KETERANGAN`) VALUES
 (3, 'Beban Telpon, Listrik, Air & Internet', '', 'Beban pembayaran Telpon, Listrik, Air & Internet'),
 (4, 'Beban Transportasi', '', 'Beban Transportasi'),
 (5, 'Biaya Iklan', '', 'Biaya untuk iklan'),
-(6, 'BEBAN AKUNTAX', '', 'AKUNTAX'),
+(6, 'Beban Akuntax', '', 'PPh, SPT, administrasi'),
 (7, 'Fee', '', 'Fee dokter'),
 (8, 'Lain-lain', '', ''),
 (9, 'Fee Marketing', '', '');
@@ -7847,8 +7863,8 @@ CREATE TABLE `product_item` (
 --
 
 INSERT INTO `product_item` (`ID`, `CAT_ID`, `PRODUCT_NAME`, `SELL_PRICE`, `STOCK`, `STOCK_LIMIT`) VALUES
-(1, 1, 'ALBOOST EKSTRAK IKAN GABUS', 100000, 1, 40),
-(2, 2, 'ALBOOST PRO IMUN', 85000, 385, 50);
+(1, 1, 'ALBOOST EKSTRAK IKAN GABUS', 100000, 204, 40),
+(2, 2, 'ALBOOST PRO IMUN', 70000, 335, 50);
 
 -- --------------------------------------------------------
 
@@ -7875,7 +7891,10 @@ INSERT INTO `purchase` (`NOFAKTUR`, `SUPLIER_ID`, `PRODUCT_ID`, `QTY`, `PURCHASE
 ('P.062020.001', 1, 1, 200, 40000, '2020-01-27', '2020-01-27', '2020-01-27'),
 ('P.062020.002', 1, 1, 200, 40000, '2020-03-30', '2020-03-30', '2020-03-30'),
 ('P.062020.003', 1, 1, 200, 40000, '2020-05-28', '2020-05-28', '2020-05-28'),
-('P.062020.004', 1, 2, 500, 25000, '2020-05-28', '2020-05-28', '2020-05-28');
+('P.062020.004', 1, 2, 500, 25000, '2020-05-28', '2020-05-28', '2020-05-28'),
+('P.072020.005', 1, 1, 100, 40000, '2020-01-01', '2020-01-01', '2020-01-01'),
+('P.072020.006', 1, 1, 150, 40000, '2020-01-01', '2020-01-01', '2020-01-01'),
+('P.072020.007', 1, 1, 200, 40000, '2020-07-07', '2020-07-07', '2020-07-07');
 
 -- --------------------------------------------------------
 
@@ -7937,7 +7956,7 @@ INSERT INTO `selling` (`SALE_ID`, `INVOICE`, `SELLER_ID`, `SELLER_TYPE`, `PRODUC
 (18, '072020014', 1, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1000000}}', 'tunai', 0, 'lunas', '2020-02-10', 'No. 29'),
 (19, '072020005', 2, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":4,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":600000}}', 'kredit', -1, 'belum', '2019-12-24', 'No. 08'),
 (20, '072020015', 6, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":40,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":6000000}}', 'kredit', 0, 'lunas', '2020-02-26', ''),
-(21, '072020016', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":12,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1800000}}', 'kredit', 1, 'belum', '2020-02-26', 'No. 06'),
+(21, '072020016', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":12,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1800000}}', 'kredit', 0, 'lunas', '2020-02-26', 'No. 06'),
 (22, '072020017', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":1,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":100000}}', 'tunai', 0, 'lunas', '2020-02-27', ''),
 (23, '072020006', 4, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":120000,\"qty\":5,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":600000}}', 'kredit', 0, 'lunas', '2019-12-17', 'NO. 23'),
 (24, '072020018', 5, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":120000,\"qty\":5,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":600000}}', 'kredit', 0, 'lunas', '2020-01-10', 'NO. 24'),
@@ -7977,7 +7996,27 @@ INSERT INTO `selling` (`SALE_ID`, `INVOICE`, `SELLER_ID`, `SELLER_TYPE`, `PRODUC
 (58, '072020052', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":5,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":500000}}', 'tunai', 0, 'lunas', '2020-06-04', 'Bp. Dwi'),
 (59, '072020053', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":20,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":2000000}}', 'tunai', 0, 'lunas', '2020-06-05', 'Bp. Sumadi'),
 (60, '072020054', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":1,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":150000}}', 'tunai', 0, 'lunas', '2020-06-17', 'Deny (Marketing)'),
-(61, '072020055', 1, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1000000}}', 'tunai', 0, 'lunas', '2020-06-17', 'No. 35');
+(61, '072020055', 1, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1000000}}', 'tunai', 0, 'lunas', '2020-06-17', 'No. 35'),
+(62, '072020056', 6, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":40,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":4000000}}', 'kredit', 0, 'lunas', '2020-05-13', ''),
+(63, '072020057', 6, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":40,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":4000000}}', 'kredit', 0, 'lunas', '2020-06-18', ''),
+(64, '072020058', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":13,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1950000}}', 'tunai', 0, 'lunas', '2020-06-18', 'no. 10'),
+(65, '072020059', 7, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":175000,\"qty\":6,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1050000}}', 'tunai', 0, 'lunas', '2020-06-18', ''),
+(66, '072020060', 2, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":2,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":300000}}', 'kredit', 1, 'belum', '2020-06-26', 'no. 10'),
+(67, '072020061', 2, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":2,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":300000}}', 'kredit', 1, 'belum', '2020-05-23', 'no. 09'),
+(68, '072020062', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":17,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":2550000}}', 'tunai', 0, 'lunas', '2020-06-29', 'no. 11'),
+(69, '072020063', 1, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":20,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":3000000}}', 'tunai', 0, 'lunas', '2020-07-08', 'no. 12'),
+(70, '072020064', 7, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":175000,\"qty\":3,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":525000}}', 'tunai', 0, 'lunas', '2020-07-07', 'no. 03'),
+(71, '072020065', 7, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":175000,\"qty\":8,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1400000}}', 'kredit', 1, 'belum', '2020-07-07', 'no 04'),
+(72, '072020066', 8, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1500000}}', 'kredit', 1, 'belum', '2020-07-04', 'no. 30'),
+(73, '072020067', 3, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":10,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":1500000}}', 'kredit', 1, 'belum', '2020-06-04', 'no. 28'),
+(74, '072020068', 4, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":5,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":750000}}', 'kredit', 1, 'belum', '2020-06-04', 'no. 29'),
+(75, '072020069', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":100000,\"qty\":7,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":700000}}', 'kredit', 1, 'belum', '2020-06-04', 'Bp. Dwi'),
+(76, '072020070', 1, 'agen', '{\"c81e728d9d4c2f636f067f89cc14862c\":{\"id\":\"2\",\"name\":\"ALBOOST PRO IMUN\",\"price\":85000,\"qty\":50,\"rowid\":\"c81e728d9d4c2f636f067f89cc14862c\",\"subtotal\":4250000}}', 'tunai', 0, 'lunas', '2020-05-10', 'no. 01'),
+(77, '072020071', 2, 'sub', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":80000,\"qty\":55,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":4400000}}', 'tunai', 0, 'lunas', '2020-07-01', 'Jaka Ambari Bojonegoro'),
+(78, '072020072', 9, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":160000,\"qty\":1,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":160000}}', 'tunai', 0, 'lunas', '2020-06-01', 'no. 01'),
+(79, '072020073', 9, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":160000,\"qty\":4,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":640000}}', 'kredit', 1, 'belum', '2020-06-01', 'no. 02'),
+(80, '072020074', 10, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":2,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":300000}}', 'kredit', 1, 'belum', '2020-06-17', 'NO. 01'),
+(81, '072020075', 11, 'apt', '{\"c4ca4238a0b923820dcc509a6f75849b\":{\"id\":\"1\",\"name\":\"ALBOOST EKSTRAK IKAN GABUS\",\"price\":150000,\"qty\":2,\"rowid\":\"c4ca4238a0b923820dcc509a6f75849b\",\"subtotal\":300000}}', 'kredit', 1, 'belum', '2020-06-17', 'NO. 01');
 
 -- --------------------------------------------------------
 
@@ -8042,11 +8081,10 @@ INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`
 (3, '2020-05-28', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.062020.003', 'purchasing', 8000000, 0, -24000000),
 (4, '2020-05-28', 'Pembelian produk ALBOOST PRO IMUN', 'P.062020.004', 'purchasing', 12500000, 0, -36500000),
 (5, '2020-06-27', 'KIRIM APOTIK JATI WALUYA', '4', 'operasional', 25000, 0, -36525000),
-(6, '2020-01-03', 'Gaji Diana ', '1', 'operasional', 1250000, 0, -37775000),
-(7, '2020-01-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -38975000),
+(6, '2020-02-03', 'Gaji Diana ', '1', 'operasional', 1250000, 0, -37775000),
+(7, '2020-02-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -38975000),
 (8, '2020-01-03', 'dr Andi', '7', 'operasional', 850000, 0, -39825000),
 (9, '2020-01-03', 'Gaji Diana', '1', 'operasional', 1250000, 0, -41075000),
-(10, '2020-01-03', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -42275000),
 (11, '2020-02-09', 'dr Dimas', '7', 'operasional', 2000000, 0, -44275000),
 (12, '2020-02-09', 'dr Andi', '7', 'operasional', 800000, 0, -45075000),
 (13, '2020-02-20', 'disain forimmun', '5', 'operasional', 700000, 0, -45775000),
@@ -8055,7 +8093,7 @@ INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`
 (16, '2020-06-27', 'Gaji Arsy', '1', 'operasional', 1200000, 0, -49425000),
 (17, '2020-03-13', 'dr Dimas', '7', 'operasional', 2000000, 0, -51425000),
 (18, '2020-03-13', 'dr Andi', '7', 'operasional', 600000, 0, -52025000),
-(19, '2020-03-04', 'Gaji Diana', '1', 'operasional', 1750000, 0, -53775000),
+(19, '2020-04-04', 'Gaji Diana', '1', 'operasional', 1750000, 0, -53775000),
 (20, '2020-04-04', 'Gaji Arsy', '1', 'operasional', 1250000, 0, -55025000),
 (21, '2020-04-10', 'Uang muka Web mas Arif', '2', 'operasional', 4000000, 0, -59025000),
 (22, '2020-04-28', 'dr Dimas', '7', 'operasional', 2400000, 0, -61425000),
@@ -8130,7 +8168,23 @@ INSERT INTO `trans_history` (`ID`, `TGL`, `KETERANGAN`, `ID_TRANS`, `TRANS_TYPE`
 (122, '2020-06-04', 'transaksi penjualan invoice 072020052', '072020052', 'selling', 0, 500000, -10245000),
 (123, '2020-06-05', 'transaksi penjualan invoice 072020053', '072020053', 'selling', 0, 2000000, -8245000),
 (124, '2020-06-17', 'transaksi penjualan invoice 072020054', '072020054', 'selling', 0, 150000, -8095000),
-(125, '2020-06-17', 'transaksi penjualan invoice 072020055', '072020055', 'selling', 0, 1000000, -7095000);
+(125, '2020-06-17', 'transaksi penjualan invoice 072020055', '072020055', 'selling', 0, 1000000, -7095000),
+(126, '2020-07-06', 'dr Andi', '7', 'operasional', 1500000, 0, -8595000),
+(127, '2020-07-06', 'dr Dimas', '7', 'operasional', 2300000, 0, -9695000),
+(128, '2020-07-09', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.072020.005', 'purchasing', 4000000, 0, -13695000),
+(129, '2020-06-18', 'cicilan invoice 072020056 ke-1', '072020056', 'selling', 0, 4000000, -9695000),
+(130, '2020-06-18', 'transaksi penjualan invoice 072020058', '072020058', 'selling', 0, 1950000, -7745000),
+(131, '2020-07-15', 'cicilan invoice 072020057 ke-1', '072020057', 'selling', 0, 4000000, -3745000),
+(132, '2020-06-18', 'transaksi penjualan invoice 072020059', '072020059', 'selling', 0, 1050000, -2695000),
+(133, '2020-07-09', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.072020.006', 'purchasing', 6000000, 0, -8695000),
+(134, '2020-03-12', 'cicilan invoice 072020016 ke-1', '072020016', 'selling', 0, 1800000, -6895000),
+(135, '2020-06-29', 'transaksi penjualan invoice 072020062', '072020062', 'selling', 0, 2550000, -4345000),
+(136, '2020-07-08', 'transaksi penjualan invoice 072020063', '072020063', 'selling', 0, 3000000, -1345000),
+(137, '2020-07-07', 'transaksi penjualan invoice 072020064', '072020064', 'selling', 0, 525000, -820000),
+(138, '2020-05-10', 'transaksi penjualan invoice 072020070', '072020070', 'selling', 0, 4250000, 3430000),
+(139, '2020-07-01', 'transaksi penjualan invoice 072020071', '072020071', 'selling', 0, 4400000, 7830000),
+(140, '2020-06-01', 'transaksi penjualan invoice 072020072', '072020072', 'selling', 0, 160000, 7990000),
+(141, '2020-07-10', 'Pembelian produk ALBOOST EKSTRAK IKAN GABUS', 'P.072020.007', 'purchasing', 8000000, 0, -10000);
 
 -- --------------------------------------------------------
 
@@ -8281,7 +8335,7 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT untuk tabel `apotik`
 --
 ALTER TABLE `apotik`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `a_city`
@@ -8305,7 +8359,7 @@ ALTER TABLE `a_subdistrict`
 -- AUTO_INCREMENT untuk tabel `installment`
 --
 ALTER TABLE `installment`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -8359,7 +8413,7 @@ ALTER TABLE `return`
 -- AUTO_INCREMENT untuk tabel `selling`
 --
 ALTER TABLE `selling`
-  MODIFY `SALE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `SALE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT untuk tabel `suplier`
@@ -8377,7 +8431,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT untuk tabel `trans_history`
 --
 ALTER TABLE `trans_history`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_account`

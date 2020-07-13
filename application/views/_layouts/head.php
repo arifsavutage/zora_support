@@ -24,6 +24,9 @@
     <!-- DatePicker CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <!-- DateRangePicker CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
 

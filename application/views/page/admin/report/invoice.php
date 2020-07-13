@@ -75,3 +75,6 @@
         </tr>
     </tbody>
 </table>
+<br />
+<h6>Keterangan :</h6>
+<p><?= $detail['KETERANGAN']; ?></p>
