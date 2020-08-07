@@ -293,7 +293,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="tglbeli">Tgl. Transaksi</label>
-                            <input class="form-control date1" type="text" name="tglbeli" id="tglbeli" value="<?= date('d/m/Y'); ?>" readonly="true" />
+                            <input class="form-control date1" type="text" name="tglbeli" id="tglbeli" value="<?= date('Y-m-d'); ?>" readonly="true" />
                         </div>
                     </div>
 

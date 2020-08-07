@@ -124,7 +124,8 @@ class Sell extends CI_Controller
         $type       = $this->input->post('sellertype');
         $metode     = $this->input->post('metode');
         $jmlcicilan = $this->input->post('jmlcicilan');
-        $tglbeli    = date('Y-m-d', strtotime($this->input->post('tglbeli'))); //str d/m/Y
+        $posttgl    = $this->input->post('tglbeli');
+        $tglbeli    = date('Y-m-d', strtotime($posttgl)); //str d/m/Y
         //$tglbeli    = date('Y-m-d'); //str d-m-Y
         $catatan    = $this->input->post('keterangan');
         $cart       = $this->cart->contents();
@@ -277,5 +278,80 @@ class Sell extends CI_Controller
         </div>');
 
         redirect(base_url('index.php/admin/master/selling/list'));
+    }
+
+    function hapus_penjualan($invoice = null)
+    {
+        if ($invoice == null) {
+            redirect(base_url());
+        } else {
+            //ambil data produk yg di beli
+            $barang = $this->selling_model->getByInvoice($invoice);
+
+            $details = json_decode($barang['PRODUCT_DETAIL'], true);
+            //print_r(var_dump($details));
+
+            //looping array barang
+            $rp_pendapatan = 0;
+            foreach ($details as $list) {
+                //echo "Id : $list[id], name : $list[name], price : $list[price], qty: $list[qty], subtotal: $list[subtotal]";
+
+                $getstock   = $this->produk_model->getProdukById($list['id']);
+                $newstock   = $list['qty'] + $getstock->STOCK;
+
+                //update stok barang
+                $produk_update = [
+                    'ID'    => $list['id'],
+                    'STOCK' => $newstock
+                ];
+                $this->produk_model->updateStock($produk_update);
+
+                //akumulasi subtotal untung pengurangan pendapatan
+                $rp_pendapatan += $list['subtotal'];
+            }
+
+            //mengurangi pendapatan penjualan
+            $getsaldo   = $this->transaksi_model->getLastTrans();
+            $lastsaldo  = $getsaldo['SALDO'];
+            $newsaldo   = $lastsaldo - $rp_pendapatan;
+
+            $update_transaksi   = [
+                'TGL'           => date('Y-m-d'),
+                'KETERANGAN'    => "pembatalan penjualan invoice #$invoice",
+                'ID_TRANS'      => 0,
+                'TRANS_TYPE'    => 'pembatalan',
+                'KREDIT'        => $rp_pendapatan,
+                'DEBET'         => 0,
+                'SALDO'         => $newsaldo
+            ];
+            $this->transaksi_model->save($update_transaksi);
+
+            //hapus transaksi penjualan
+            $hapus = $this->selling_model->delete($invoice);
+
+            if ($hapus) {
+                //echo "terhapus";
+                $this->session->set_flashdata('info', '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Succses, </strong> data terhapus ... 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+
+                redirect(base_url('index.php/admin/master/selling/list'));
+            } else {
+                //echo "gagal";
+                $this->session->set_flashdata('info', '
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning, </strong> data gagal terhapus ... 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+
+                redirect(base_url('index.php/admin/master/selling/list'));
+            }
+        }
     }
 }

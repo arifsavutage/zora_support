@@ -122,4 +122,10 @@ class Selling_model extends CI_Model
             return $this->db->get('marketing')->row_array();
         }
     }
+
+    public function delete($invoice)
+    {
+        $this->db->where('INVOICE', $invoice);
+        return $this->db->delete($this->_table);
+    }
 }
