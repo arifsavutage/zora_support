@@ -39,9 +39,27 @@ class Kas_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function getKorDateRange($date1, $date2)
+    {
+        $this->db->select("trans_history.`ID`, trans_history.`TGL`, trans_history.`KETERANGAN`, 
+        trans_history.`ID_TRANS`, trans_history.`TRANS_TYPE`, trans_history.`KREDIT`, trans_history.`DEBET`, 
+        trans_history.`SALDO`, op_pos.POS_NAME");
+        $this->db->from($this->_table);
+        $this->db->join('op_pos', 'op_pos.ID = trans_history.ID_TRANS', 'left');
+        $this->db->where('trans_history.TRANS_TYPE', "koreksi");
+        $this->db->where("trans_history.TGL BETWEEN '$date1' AND '$date2'");
+        return $this->db->get()->result_array();
+    }
+
     public function getOpGroup($date1, $date2)
     {
         $query = $this->db->query("SELECT trans_history.ID_TRANS, op_pos.POS_NAME FROM `trans_history` LEFT JOIN op_pos ON op_pos.ID = trans_history.ID_TRANS WHERE trans_history.TRANS_TYPE = 'operasional' AND trans_history.TGL BETWEEN '$date1' AND '$date2' GROUP BY trans_history.ID_TRANS");
+        return $query->result_array();
+    }
+
+    public function getKoreksiGroup($date1, $date2)
+    {
+        $query = $this->db->query("SELECT trans_history.ID_TRANS, op_pos.POS_NAME FROM `trans_history` LEFT JOIN op_pos ON op_pos.ID = trans_history.ID_TRANS WHERE trans_history.TRANS_TYPE = 'koreksi' AND trans_history.TGL BETWEEN '$date1' AND '$date2' GROUP BY trans_history.ID_TRANS");
         return $query->result_array();
     }
 

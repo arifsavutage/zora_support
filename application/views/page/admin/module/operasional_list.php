@@ -9,6 +9,9 @@
         <a href="<?= site_url('admin/master/operasional/add'); ?>" class="btn btn-primary btn-sm mb-2">
             Tambah Operasional
         </a>
+        <a href="<?= site_url('admin/master/operasional/koreksi'); ?>" class="btn btn-danger btn-sm mb-2">
+            Koreksi Operasional
+        </a>
         <?php
         if ($this->session->flashdata('info')) {
             echo "<br/>";

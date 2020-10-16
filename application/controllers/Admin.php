@@ -1063,19 +1063,31 @@ class Admin extends CI_Controller
 
                     if ($this->form_validation->run()) {
                         $ids     = $this->input->post('id');
+                        $tgl     = $this->input->post('tgl');
                         $rek     = $this->input->post('rekening');
                         $nominal = $this->input->post('nominal');
                         $ket     = $this->input->post('keterangan');
 
                         //ambil saldo sebelumnya utk rubah pemotongan
                         if ($ids == 1) {
-                            $saldo = 0;
-                            $newsaldo = $saldo - $nominal;
+                            //$saldo = 0;
+                            $newsaldo = 0;
                         } else {
                             $up_id  = $ids - 1;
                             $saldo = $this->db->get_where('trans_history', ['ID' => $up_id])->row()->SALDO;
                             $newsaldo = $saldo - $nominal;
                         }
+
+                        $update = [
+                            'ID'    => $ids,
+                            'TGL'   => $tgl,
+                            'KETERANGAN' => $ket,
+                            'ID_TRANS'  => $rek,
+                            'TRANS_TYPE' => 'operasional',
+                            'KREDIT' => $nominal,
+                            'DEBET' => 0,
+                            'SALDO' => $newsaldo
+                        ];
                     }
                     $data_page = [
                         'page_title' => 'Edit Transaksi Biaya',
@@ -1083,6 +1095,40 @@ class Admin extends CI_Controller
                         'rek'        => $this->rekening_model->getAll(),
                         'detail'     => $this->transaksi_model->getById($id),
                         'page'       => 'page/admin/module/operasional_edit',
+                    ];
+                } else if ($para2 == 'koreksi') {
+                    $this->form_validation->set_rules('rekening', 'Jenis Biaya', 'required');
+                    $this->form_validation->set_rules('nominal', 'Nominal', 'required');
+
+                    if ($this->form_validation->run()) {
+
+                        $trans = [
+                            'tgl'           => $this->input->post('tgl'),
+                            'ket'           => $this->input->post('keterangan'),
+                            'id_trans'      => $this->input->post('rekening'),
+                            'trans_type'    => $this->input->post('tipe'),
+                            'nominal'       => $this->input->post('nominal'),
+                            'kredit'        => 'no',
+                            'debet'         => 'yes',
+                        ];
+
+                        $this->cek_transaksi->transaksi($trans);
+
+                        $this->session->set_flashdata('info', '
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4>Success :</h4> Koreksi Transaksi Berhasil...
+                        </div>');
+
+                        redirect(base_url('index.php/admin/master/operasional/list'));
+                    }
+                    $data_page = [
+                        'page_title' => 'Form Koreksi Operasional',
+                        'card_name'  => 'Form',
+                        'rekening'   => $this->rekening_model->getAll(),
+                        'page'       => 'page/admin/module/operasional_koreksi',
                     ];
                 }
                 break;
@@ -1139,6 +1185,8 @@ class Admin extends CI_Controller
                             'periode'       => $periode,
                             'purchase'      => $this->purchase_model->getDateRange($date1, $date2),
                             'operasional'   => $this->kas_model->getOpDateRange($date1, $date2),
+                            'koreksi'       => $this->kas_model->getKorDateRange($date1, $date2),
+                            'korgroup'       => $this->kas_model->getKoreksiGroup($date1, $date2),
                             'opgroup'       => $this->kas_model->getOpGroup($date1, $date2),
                             'selling'       => $this->selling_model->getDateRange($date1, $date2),
                             'page'          => 'page/admin/report/labarugi'

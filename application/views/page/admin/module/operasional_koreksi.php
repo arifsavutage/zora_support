@@ -19,34 +19,30 @@
                 }
                 #echo $this->db->last_query();
                 ?>
-                <form name="editoperasional" method="post" action="">
-                    <input type="hidden" name="id" value="<?= $detail['ID'] ?>" />
+                <form name="addoperasional" method="post" action="">
                     <div class="form-group">
-                        <label for="tgl">Tanggal Transaksi</label>
-                        <input type="text" name="tgl" class="form-control date1" value="<?= $detail['TGL'] ?>" />
-                    </div>
-                    <div class="form-group">
-
                         <label for="rekening">Jenis Biaya</label>
                         <select name="rekening" class="form-control">
                             <option value="">Pilih</option>
                             <?php
-                            foreach ($rek as $row) {
-                                echo "<option value='" . $row['ID'] . "' ";
-                                if ($row['ID'] == $detail['ID_TRANS']) echo "selected";
-                                echo ">$row[POS_NAME]</option>";
+                            foreach ($rekening as $row) {
+                                echo "<option value='" . $row['ID'] . "'>$row[POS_NAME]</option>";
                             }
                             ?>
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="tgl">Tgl. Pembiayaan</label>
+                        <input type="text" value="<?= date('Y-m-d'); ?>" class="form-control date1" id="tgl" name="tgl" readonly="true">
+                    </div>
+                    <div class="form-group">
                         <label for="nominal">Nominal</label>
-                        <input type="text" class="form-control" id="nominal" name="nominal" value="<?= $detail['KREDIT'] ?>">
+                        <input type="text" class="form-control" id="nominal" name="nominal">
                     </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $detail['KETERANGAN'] ?>">
-                        <input type="hidden" name="tipe" value="operasional" />
+                        <input type="text" class="form-control" id="keterangan" name="keterangan">
+                        <input type="hidden" name="tipe" value="koreksi" />
                     </div>
 
                     <a href="<?= site_url() ?>" class="btn btn-secondary">Back</a>

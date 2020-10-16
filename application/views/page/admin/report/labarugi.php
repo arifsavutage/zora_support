@@ -29,6 +29,26 @@
                 ?>
                 <span class="float-right"><?= number_format($total, 0, ',', '.') ?></span>
 
+                <?php
+                $n = 1;
+                foreach ($korgroup as $rwkorgrp) :
+                    $total_koreksi = 0;
+                    echo "<li>" . ucwords(strtolower($rwkorgrp['POS_NAME'])) . "";
+                    echo "<ul style='list-style:none;'>";
+                    foreach ($koreksi as $rowkoreksi) :
+                        if ($rwkorgrp['ID_TRANS'] == $rowkoreksi['ID_TRANS'])
+                            echo "<li><span class='font-italic' style='font-size:13px;'>" . ucwords(strtolower($rowkoreksi['KETERANGAN'])) . "</span>
+                    <span class='float-right'>" . number_format($rowkoreksi['DEBET'], 0, ',', '.') . "</span>
+                    </li>";
+                        $total_koreksi += $rowkoreksi['DEBET'];
+                        $n++;
+                    endforeach;
+                    echo "</ul>";
+                    echo "</li>";
+                endforeach;
+                //$total_bb   = $total_ops + $total_purchase;
+                //$labarugi   = $total - $total_bb;
+                ?>
             </li>
         </ul>
         <!--
@@ -142,7 +162,7 @@
                 echo "</li>";
             endforeach;
             $total_bb   = $total_ops + $total_purchase;
-            $labarugi   = $total - $total_bb;
+            $labarugi   = ($total + $total_koreksi) - $total_bb;
             ?>
 
             <li>
@@ -184,27 +204,3 @@
         <span class="float-right"><strong><?= number_format($labarugi, 0, ',', '.') ?></strong></span>
     </li>
 </ol>
-
-<?php
-$pengeluaran = $total_ops + $total_purchase;
-$laba   = $total - $pengeluaran;
-?>
-
-<!--<ul>
-    <li style="list-style: none;">
-        <table class="table table-border">
-            <tr>
-                <td widd="30%">Total Penjualan</td>
-                <td><span class="float-right"><?= number_format($total, 0, ',', '.') ?></span></td>
-            </tr>
-            <tr>
-                <td>Total Pengeluaran</td>
-                <td><span class="float-right"><?= number_format($pengeluaran, 0, ',', '.') ?></span></td>
-            </tr>
-            <tr>
-                <td>Keuntungan</td>
-                <td><span class="float-right"><?= number_format($laba, 0, ',', '.') ?></span></td>
-            </tr>
-        </table>
-    </li>
-</ul>-->
