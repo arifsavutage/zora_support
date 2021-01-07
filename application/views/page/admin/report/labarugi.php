@@ -31,8 +31,9 @@
 
                 <?php
                 $n = 1;
+                $total_koreksi = 0;
                 foreach ($korgroup as $rwkorgrp) :
-                    $total_koreksi = 0;
+
                     echo "<li>" . ucwords(strtolower($rwkorgrp['POS_NAME'])) . "";
                     echo "<ul style='list-style:none;'>";
                     foreach ($koreksi as $rowkoreksi) :
@@ -146,8 +147,9 @@
             </li>
             <?php
             $n = 1;
+            $total_ops = 0;
             foreach ($opgroup as $rwopgrp) :
-                $total_ops = 0;
+
                 echo "<li>" . ucwords(strtolower($rwopgrp['POS_NAME'])) . "";
                 echo "<ul style='list-style:none;'>";
                 foreach ($operasional as $row2) :
