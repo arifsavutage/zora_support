@@ -148,21 +148,22 @@
             <?php
             $n = 1;
             $total_ops = 0;
-            foreach ($opgroup as $rwopgrp) :
+            $total_bb = 0;
+            /*foreach ($opgroup as $rwopgrp) :
 
                 echo "<li>" . ucwords(strtolower($rwopgrp['POS_NAME'])) . "";
-                echo "<ul style='list-style:none;'>";
-                foreach ($operasional as $row2) :
-                    if ($rwopgrp['ID_TRANS'] == $row2['ID_TRANS'])
-                        echo "<li><span class='font-italic' style='font-size:13px;'>" . ucwords(strtolower($row2['KETERANGAN'])) . "</span>
+                echo "<ul style='list-style:none;'>";*/
+            foreach ($operasional as $row2) :
+                //if ($rwopgrp['ID_TRANS'] == $row2['ID_TRANS'])
+                echo "<li><span class='font-italic' style='font-size:13px;'>" . ucwords(strtolower($row2['KETERANGAN'])) . "</span>
                     <span class='float-right'>" . number_format($row2['KREDIT'], 0, ',', '.') . "</span>
                     </li>";
-                    $total_ops += $row2['KREDIT'];
-                    $n++;
-                endforeach;
-                echo "</ul>";
-                echo "</li>";
+                $total_ops += $row2['KREDIT'];
+                $n++;
             endforeach;
+            /*echo "</ul>";
+                echo "</li>";
+            endforeach;*/
             $total_bb   = $total_ops + $total_purchase;
             $labarugi   = ($total + $total_koreksi) - $total_bb;
             ?>
