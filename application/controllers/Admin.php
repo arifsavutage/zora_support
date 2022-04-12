@@ -897,6 +897,8 @@ class Admin extends CI_Controller
                         'page'       => 'page/admin/module/retur_list',
                     ];
                 } else if ($para2 == 'add') {
+                    $this->load->model('produk_model');
+                    $this->load->model('selling_model');
 
                     $validation = $this->form_validation;
                     $retur   = $this->retur_model;
@@ -904,21 +906,39 @@ class Admin extends CI_Controller
                     $validation->set_rules($retur->rules());
 
                     if ($validation->run()) {
-                        $retur->save();
 
-                        $this->session->set_flashdata('info', '
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4>Success :</h4> Pembuatan Retur Berhasil...
-                        </div>');
+                        //cek keberadaan invoice
+                        $invoice = $this->input->post('invoice');
+                        $seek_invoice = $this->selling_model->seekInvoice($invoice);
 
-                        redirect(base_url('index.php/admin/master/return/list'));
+                        if ($seek_invoice > 0) {
+                            $retur->save();
+
+                            $this->session->set_flashdata('info', '
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4>Success :</h4> Pembuatan Retur Berhasil...
+                            </div>');
+
+                            redirect(base_url('index.php/admin/master/return/list'));
+                        } else {
+                            $this->session->set_flashdata('info', '
+                            <div class="alert alert-warning" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4>OOps</h4> Invoice transaksi tidak ditemukan, pastikan no. invoice ada di tabel penjualan...
+                            </div>');
+
+                            redirect(base_url('index.php/admin/master/return/add'));
+                        }
                     }
                     $data_page = [
                         'page_title' => 'Tambah Retur Barang',
                         'card_name'  => 'Form Retur',
+                        'items'      => $this->produk_model->getAllProduk(),
                         'page'       => 'page/admin/module/retur_add',
                     ];
                 } else if ($para2 == 'edit') {

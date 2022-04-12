@@ -32,21 +32,21 @@
                 <?php
                 $n = 1;
                 $total_koreksi = 0;
-                foreach ($korgroup as $rwkorgrp) :
+                /*foreach ($korgroup as $rwkorgrp) :
 
                     echo "<li>" . ucwords(strtolower($rwkorgrp['POS_NAME'])) . "";
-                    echo "<ul style='list-style:none;'>";
-                    foreach ($koreksi as $rowkoreksi) :
-                        if ($rwkorgrp['ID_TRANS'] == $rowkoreksi['ID_TRANS'])
-                            echo "<li><span class='font-italic' style='font-size:13px;'>" . ucwords(strtolower($rowkoreksi['KETERANGAN'])) . "</span>
+                    echo "<ul style='list-style:none;'>";*/
+                foreach ($koreksi as $rowkoreksi) :
+                    //if ($rwkorgrp['ID_TRANS'] == $rowkoreksi['ID_TRANS'])
+                    echo "<li><span class='font-italic' style='font-size:13px;'>" . ucwords(strtolower($rowkoreksi['KETERANGAN'])) . "</span>
                     <span class='float-right'>" . number_format($rowkoreksi['DEBET'], 0, ',', '.') . "</span>
                     </li>";
-                        $total_koreksi += $rowkoreksi['DEBET'];
-                        $n++;
-                    endforeach;
-                    echo "</ul>";
-                    echo "</li>";
+                    $total_koreksi += $rowkoreksi['DEBET'];
+                    $n++;
                 endforeach;
+                /*echo "</ul>";
+                    echo "</li>";
+                endforeach;*/
                 //$total_bb   = $total_ops + $total_purchase;
                 //$labarugi   = $total - $total_bb;
                 ?>

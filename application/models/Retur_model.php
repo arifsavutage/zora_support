@@ -5,8 +5,10 @@ class Retur_model extends CI_Model
     private $_table = 'return';
 
     public $INVOICE;
+    public $ITEM_ID;
     public $TGL_RETUR;
     public $QTY;
+    public $KONDISI;
     public $KETERANGAN;
     public $STATUS; // value ex ('sudah diganti', 'belum diganti')
     public $TGL_GANTI;
@@ -37,10 +39,12 @@ class Retur_model extends CI_Model
         $post = $this->input->post();
 
         $this->INVOICE    = $post['invoice'];
+        $this->ITEM_ID    = $post['item'];
         $this->TGL_RETUR  = $post['tglretur'];
         $this->QTY        = $post['qty'];
+        $this->KONDISI    = $post['kondisi'];
         $this->KETERANGAN = $post['keterangan'];
-        $this->STATUS     = "belum";
+        $this->STATUS     = "NO ACTION";
         $this->TGL_GANTI  = "0000-00-00";
 
         return $this->db->insert($this->_table, $this);

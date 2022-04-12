@@ -79,6 +79,11 @@ class Selling_model extends CI_Model
         return $this->db->get_where($this->_table, ['INVOICE' => $invoice])->row_array();
     }
 
+    public function seekInvoice($invoice)
+    {
+        return $this->db->get_where($this->_table, ['INVOICE' => $invoice])->num_rows();
+    }
+
     public function updateByInvoice($data)
     {
         return $this->db->update($this->_table, $data, ['INVOICE' => $data['INVOICE']]);

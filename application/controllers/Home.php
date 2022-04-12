@@ -222,12 +222,12 @@ class Home extends CI_Controller
                 }
             } else {
                 $this->session->set_flashdata('info', '
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                Email belum terdaftar ...
-            </div>');
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    Email belum terdaftar ...
+                </div>');
 
                 redirect(base_url() . 'index.php/home/login');
             }
